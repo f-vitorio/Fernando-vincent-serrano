@@ -1,0 +1,23 @@
+---
+interface Props {
+  children: any;
+  class?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+}
+
+const { children, class: className = '', size = 'lg' } = Astro.props;
+
+const sizeClasses = {
+  sm: 'max-w-3xl',
+  md: 'max-w-5xl',
+  lg: 'max-w-6xl',
+  xl: 'max-w-7xl',
+  full: 'max-w-full',
+};
+
+const classes = `container-custom ${sizeClasses[size]} ${className}`;
+---
+
+<div class={classes}>
+  <slot>{children}</slot>
+</div>

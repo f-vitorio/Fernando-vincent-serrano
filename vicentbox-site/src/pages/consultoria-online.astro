@@ -1,0 +1,134 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { siteConfig, featuresConsultoria, faqConsultoria } from '@types';
+import Hero from '@components/sections/Hero.astro';
+import Features from '@components/sections/Features.astro';
+import SocialProof from '@components/sections/SocialProof.astro';
+import Offer from '@components/sections/Offer.astro';
+import FAQ from '@components/sections/FAQ.astro';
+import CTA from '@components/sections/CTA.astro';
+import LeadForm from '@components/forms/LeadForm.astro';
+import Container from '@components/ui/Container.astro';
+import Smartphone from '@components/ui/icons/Smartphone.astro';
+import Video from '@components/ui/icons/Video.astro';
+import TrendingUp from '@components/ui/icons/TrendingUp.astro';
+import MessageCircle from '@components/ui/icons/MessageCircle.astro';
+import BarChart from '@components/ui/icons/BarChart.astro';
+import Dumbbell from '@components/ui/icons/Dumbbell.astro';
+import ShieldCheck from '@components/ui/icons/ShieldCheck.astro';
+import { generateServiceJSONLD, generateProductJSONLD, generateFAQPageJSONLD } from '@utils/jsonld';
+
+const service = {
+  name: 'Consultoria Online / App',
+  description: 'Treino personalizado no app com videos, progressao semanal, chat com professor e relatorios mensais.',
+  price: '39.90',
+  url: '/consultoria-online',
+};
+
+const product = {
+  name: 'Consultoria Online / App VicentBOX',
+  description: 'Aplicativo web (PWA) com treinos personalizados, videos explicativos, progressao inteligente, chat com professor e relatorios mensais.',
+  price: 39.90,
+  url: '/consultoria-online',
+};
+
+const serviceJsonLd = generateServiceJSONLD(service);
+const productJsonLd = generateProductJSONLD(product);
+const faqJsonLd = generateFAQPageJSONLD(faqConsultoria);
+---
+
+<Layout
+  title="Consultoria Online / App | Treino Personalizado na Palma da Mao | VicentBOX"
+  description="Treino personalizado onde e quando quiser: app com videos, progressao semanal, chat com professor, relatorios mensais. R$39,90/mes, cancelamento livre. Para academia, casa ou ao ar livre."
+  jsonLd={[serviceJsonLd, productJsonLd, faqJsonLd]}
+>
+  <Hero
+    title="Treino Personalizado na Palma da Mao -- Onde e Quando Quiser"
+    subtitle="App inteligente (PWA) com videos de cada exercicio, progressao automatica baseada no seu feedback, chat direto com o professor e relatorios mensais. R$39,90/mes, cancelamento livre."
+    ctaText="Comecar Agora"
+    ctaHref="/consultoria-online#formulario"
+    ctaVariant="primary"
+    ctaTrackSource="hero"
+    badge="App PWA | Progressao inteligente | Chat com professor | Cancelamento livre"
+    stats={[
+      { value: 'R$ 39,90', label: '/mes' },
+      { value: '24h', label: 'Resposta do professor' },
+      { value: '100%', label: 'Personalizado' },
+    ]}
+    image="/app-mockup.jpg"
+    imageAlt="Mockup do app VicentBOX mostrando treino, video e chat"
+  />
+
+  <Features
+    title="Tudo que voce precisa para treinar com inteligencia"
+    subtitle="Nao e planilha estatica. E um sistema que evolui com voce:"
+    features={featuresConsultoria}
+  >
+    <Video slot="video" class="w-6 h-6" />
+    <TrendingUp slot="trending-up" class="w-6 h-6" />
+    <MessageCircle slot="message-circle" class="w-6 h-6" />
+    <BarChart slot="bar-chart" class="w-6 h-6" />
+    <Dumbbell slot="dumbbell" class="w-6 h-6" />
+    <ShieldCheck slot="shield" class="w-6 h-6" />
+  </Features>
+
+  <SocialProof
+    title="Alunos treinando em todo Brasil"
+    subtitle="De Maringa para o mundo: qualidade de acompanhamento presencial no digital"
+    emptyMessage="Depoimentos de alunos da Consultoria Online -- em coleta. Em breve historias reais aqui."
+  />
+
+  <Offer
+    title="Simples, transparente, sem pegadinha"
+    subtitle="Um plano, tudo incluso:"
+    plans={[
+      {
+        name: 'Consultoria Online Completa',
+        price: 'R$ 39,90',
+        period: '/mes',
+        features: [
+          'App PWA (instala na tela inicial, funciona offline)',
+          'Treinos para academia, casa, hotel ou parque',
+          'Videos explicativos de cada exercicio',
+          'Progressao semanal automatica (RPE + feedback)',
+          'Chat direto com o professor (resposta ate 24h uteis)',
+          'Relatorios mensais: volume, frequencia, evolucao, aderencia',
+          'Adaptacao imediata para lesoes/restricoes',
+          'Cancelamento livre, sem multa, direto no app',
+        ],
+        ctaText: 'Comecar minha consultoria',
+        ctaHref: '#formulario',
+        ctaVariant: 'primary',
+        popular: true,
+        guarantee: 'Acesso vitalicio aos treinos ja entregues',
+      },
+    ]}
+  />
+
+  <FAQ
+    title="Duvidas frequentes sobre a Consultoria Online"
+    faqs={faqConsultoria}
+  />
+
+  <section id="formulario" class="section bg-white" aria-labelledby="form-title">
+    <Container>
+      <LeadForm
+        source="consultoria"
+        title="Comece sua consultoria hoje"
+        subtitle="Preencha o formulario e voce recebera por e-mail o link de acesso ao app + questionario inicial para montarmos seu primeiro treino."
+        submitText="Receber acesso por E-mail"
+        fields={['name', 'email', 'phone', 'objective', 'injuries']}
+        successMessage="Verifique seu e-mail (incluindo spam) com o link de acesso ao app e o questionario inicial."
+      />
+    </Container>
+  </section>
+
+  <CTA
+    title="Prefere falar no WhatsApp antes de decidir?"
+    subtitle="Sem problema. Tire suas duvidas direto com a gente."
+    ctaText="Falar no WhatsApp"
+    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Tenho duvidas sobre a Consultoria Online."
+    ctaTrackSource="final_cta"
+    background="primary-600"
+  />
+</Layout>

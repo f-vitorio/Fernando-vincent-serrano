@@ -1,0 +1,53 @@
+---
+import { siteConfig } from '../../types';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  pillars: Array<{ icon: string; title: string; desc: string; details?: string[] }>;
+  class?: string;
+}
+
+const { title = 'Nossa Metodologia', subtitle, pillars, class: className = '' } = Astro.props;
+---
+
+<Section id="metodologia" background="neutral-50" class={className} aria-labelledby="methodology-title">
+  <Container>
+    <header class="heading-section">
+      <h2 id="methodology-title" class="heading-section-title">{title}</h2>
+      {subtitle && <p class="heading-section-subtitle">{subtitle}</p>}
+    </header>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {pillars.map((pillar, i) => (
+        <Card key={i} class="card-hover p-6 relative animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
+          <div class="absolute -top-3 left-6 w-10 h-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center font-heading font-bold text-xl" aria-hidden="true">
+            {i + 1}
+          </div>
+          <div class="pt-6">
+            <div class="icon-wrapper icon-wrapper-primary mb-4" aria-hidden="true">
+              <slot name={pillar.icon} />
+            </div>
+            <h3 class="text-fluid-xl font-heading font-semibold text-neutral-900 mb-2">{pillar.title}</h3>
+            <p class="text-fluid-base text-neutral-600 mb-4">{pillar.desc}</p>
+            {pillar.details && pillar.details.length > 0 && (
+              <ul class="space-y-2 text-fluid-sm text-neutral-700" role="list">
+                {pillar.details.map((detail, j) => (
+                  <li key={j} class="flex items-center gap-2" role="listitem">
+                    <svg class="w-4 h-4 text-secondary-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    {detail}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </Card>
+      ))}
+    </div>
+  </Container>
+</Section>

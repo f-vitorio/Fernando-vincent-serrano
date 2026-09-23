@@ -1,0 +1,53 @@
+---
+import { siteConfig } from '../../types';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText: string;
+  ctaHref: string;
+  ctaVariant?: 'primary' | 'secondary' | 'whatsapp' | 'outline';
+  ctaTrackSource?: string;
+  background?: 'white' | 'primary-50' | 'secondary-50' | 'accent-50' | 'primary-600' | 'primary-700';
+  class?: string;
+}
+
+const {
+  title = 'Pronto para começar?',
+  subtitle = 'Agende sua avaliação gratuita e venha conhecer o método que já ajudou centenas de pessoas a voltar a se mover sem dor.',
+  ctaText,
+  ctaHref,
+  ctaVariant = 'whatsapp',
+  ctaTrackSource = 'cta',
+  background = 'primary-600',
+  class: className = '',
+} = Astro.props;
+
+const backgroundClasses = {
+  white: 'bg-white',
+  'primary-50': 'bg-primary-50',
+  'secondary-50': 'bg-secondary-50',
+  'accent-50': 'bg-accent-50',
+  'primary-600': 'bg-primary-600 text-white',
+  'primary-700': 'bg-primary-700 text-white',
+};
+---
+
+<Section class={`${backgroundClasses[background]} ${className}`} aria-labelledby="cta-title">
+  <Container class="text-center">
+    <h2 id="cta-title" class="text-fluid-3xl font-heading font-bold mb-4">{title}</h2>
+    {subtitle && <p class="text-fluid-lg mb-8 max-w-2xl mx-auto opacity-90">{subtitle}</p>}
+    <Button
+      href={ctaHref}
+      variant={ctaVariant}
+      size="lg"
+      data-track="cta_click"
+      data-track-source={ctaTrackSource}
+    >
+      {ctaText}
+    </Button>
+  </Container>
+</Section>

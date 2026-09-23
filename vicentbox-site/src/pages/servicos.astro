@@ -1,0 +1,97 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { siteConfig, services } from '@types';
+import ServiceCard from '@components/sections/ServiceCard.astro';
+import CTA from '@components/sections/CTA.astro';
+import Container from '@components/ui/Container.astro';
+import Section from '@components/ui/Section.astro';
+import Dumbbell from '@components/ui/icons/Dumbbell.astro';
+import Running from '@components/ui/icons/Running.astro';
+import Smartphone from '@components/ui/icons/Smartphone.astro';
+import Target from '@components/ui/icons/Target.astro';
+import Sparkles from '@components/ui/icons/Sparkles.astro';
+import HeartPulse from '@components/ui/icons/HeartPulse.astro';
+import Users from '@components/ui/icons/Users.astro';
+import Calendar from '@components/ui/icons/Calendar.astro';
+---
+
+<Layout
+  title="Todos os Servicos | VicentBOX"
+  description="Conheca todos os 8 servicos da VicentBOX: Treinamento Multifuncional, Grupo de Corrida, Consultoria Online, Desafio 15 Dias, Alongamento, Relaxamento, Palestras e Sessoes Avulsas. Em Maringa/PR e online."
+>
+  <section class="section bg-primary-50" aria-labelledby="servicos-title">
+    <Container>
+      <header class="heading-section">
+        <h1 id="servicos-title" class="heading-section-title">Nossos Servicos</h1>
+        <p class="heading-section-subtitle">8 opcoes para cuidar da sua saude, seja presencial em Maringa ou online para todo Brasil</p>
+      </header>
+    </Container>
+  </section>
+
+  <Section id="servicos-grid" background="white" aria-labelledby="grid-title">
+    <Container>
+      <h2 id="grid-title" class="sr-only">Grade de servicos</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service, i) => (
+          <ServiceCard key={i} service={service}>
+            <Dumbbell slot="dumbbell" class="w-6 h-6" />
+            <Running slot="running" class="w-6 h-6" />
+            <Smartphone slot="smartphone" class="w-6 h-6" />
+            <Target slot="target" class="w-6 h-6" />
+            <Sparkles slot="sparkles" class="w-6 h-6" />
+            <HeartPulse slot="heart-pulse" class="w-6 h-6" />
+            <Users slot="users" class="w-6 h-6" />
+            <Calendar slot="calendar" class="w-6 h-6" />
+          </ServiceCard>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="prioritarios" background="neutral-50" aria-labelledby="prioritarios-title">
+    <Container>
+      <header class="heading-section">
+        <h2 id="prioritarios-title" class="heading-section-title">Prontos para comecar agora</h2>
+        <p class="heading-section-subtitle">Estes 3 servicos tem vaga imediata e formulario de inscricao ativo</p>
+      </header>
+      <div class="grid md:grid-cols-3 gap-6">
+        {services.filter(s => s.priority).map((service, i) => (
+          <ServiceCard key={i} service={service}>
+            <Dumbbell slot="dumbbell" class="w-6 h-6" />
+            <Running slot="running" class="w-6 h-6" />
+            <Smartphone slot="smartphone" class="w-6 h-6" />
+          </ServiceCard>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="em-breve" background="white" aria-labelledby="em-breve-title">
+    <Container>
+      <header class="heading-section">
+        <h2 id="em-breve-title" class="heading-section-title">Em preparacao -- lista de espera aberta</h2>
+        <p class="heading-section-subtitle">Deixe seu contato e avisamos quando abrir as vagas</p>
+      </header>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.filter(s => s.comingSoon).map((service, i) => (
+          <ServiceCard key={i} service={service}>
+            <Target slot="target" class="w-6 h-6" />
+            <Sparkles slot="sparkles" class="w-6 h-6" />
+            <HeartPulse slot="heart-pulse" class="w-6 h-6" />
+            <Users slot="users" class="w-6 h-6" />
+            <Calendar slot="calendar" class="w-6 h-6" />
+          </ServiceCard>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <CTA
+    title="Nao encontrou o que procura?"
+    subtitle="Entre em contato e vamos encontrar a melhor opcao para voce."
+    ctaText="Falar no WhatsApp"
+    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Tenho interesse nos servicos mas preciso de mais informacoes."
+    ctaTrackSource="servicos_cta"
+    background="primary-600"
+  />
+</Layout>

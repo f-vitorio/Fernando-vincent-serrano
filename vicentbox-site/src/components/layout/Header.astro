@@ -1,0 +1,47 @@
+---
+import { siteConfig } from '../../types';
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import Instagram from '../ui/icons/Instagram.astro';
+import Facebook from '../ui/icons/Facebook.astro';
+import TikTok from '../ui/icons/TikTok.astro';
+import YouTube from '../ui/icons/YouTube.astro';
+---
+
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-neutral-200">
+  <nav class="container-custom" aria-label="Navegação principal">
+    <div class="flex h-16 items-center justify-between gap-4">
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <a href="/" class="flex items-center gap-2" aria-label={`${siteConfig.name} - Início`}>
+          <span class="font-heading font-bold text-xl text-primary-700">Vicent<span class="text-accent-600">BOX</span></span>
+        </a>
+      </div>
+
+      <div class="hidden md:flex items-center gap-8">
+        <a href="/servicos" class="text-fluid-sm font-medium text-neutral-700 hover:text-primary-700 transition-colors duration-fast">Serviços</a>
+        <a href="/sobre" class="text-fluid-sm font-medium text-neutral-700 hover:text-primary-700 transition-colors duration-fast">Sobre</a>
+        <a href="/studio" class="text-fluid-sm font-medium text-neutral-700 hover:text-primary-700 transition-colors duration-fast">Studio</a>
+        <a href="/contato" class="text-fluid-sm font-medium text-neutral-700 hover:text-primary-700 transition-colors duration-fast">Contato</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 text-fluid-sm text-neutral-600">
+          <span class="font-medium">{siteConfig.phoneFormatted}</span>
+        </div>
+        <Button
+          variant="whatsapp"
+          size="sm"
+          href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent('Olá! Vim pelo site da VicentBOX. Gostaria de mais informações.')}`}
+          data-track="whatsapp_click"
+          data-track-source="header"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hidden sm:inline-flex"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.471.099-.173.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347-.297-.149-1.005-.463-2.536-1.905-2.5-.225-.374-.248-.449-.3-.522zm-6.871-7.247c-.712 0-1.36.588-1.36 1.313 0 .726.587 1.313 1.36 1.313.712 0 1.36-.587 1.36-1.313 0-.725-.648-1.313-1.36-1.313zm0 2.08c-.427 0-.774-.347-.774-.774 0-.427.347-.774.774-.774.427 0 .774.347.774.774 0 .427-.347.774-.774.774z"/></svg>
+          <span>WhatsApp</span>
+        </Button>
+      </div>
+    </div>
+  </nav>
+</header>

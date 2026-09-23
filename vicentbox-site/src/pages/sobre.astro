@@ -1,0 +1,152 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { siteConfig } from '@types';
+import Hero from '@components/sections/Hero.astro';
+import Methodology from '@components/sections/Methodology.astro';
+import CTA from '@components/sections/CTA.astro';
+import Container from '@components/ui/Container.astro';
+import Section from '@components/ui/Section.astro';
+import Card from '@components/ui/Card.astro';
+import Button from '@components/ui/Button.astro';
+import ShieldCheck from '@components/ui/icons/ShieldCheck.astro';
+import Dumbbell from '@components/ui/icons/Dumbbell.astro';
+import Sparkles from '@components/ui/icons/Sparkles.astro';
+import Users from '@components/ui/icons/Users.astro';
+import HeartPulse from '@components/ui/icons/HeartPulse.astro';
+import Target from '@components/ui/icons/Target.astro';
+import Calendar from '@components/ui/icons/Calendar.astro';
+import BarChart from '@components/ui/icons/BarChart.astro';
+import GraduationCap from '@components/ui/icons/TrendingUp.astro';
+---
+
+<Layout
+  title="Sobre | Fernando Serrano Vicentin & VicentBOX | 19 Anos de Experiencia"
+  description="Fernando Serrano Vicentin: 19 anos de experiencia, especializacao USP HC Hospital das Clinicas, terapia manual, parceria com fisioterapeuta osteopata. Conheca a historia e metodologia por tras da VicentBOX em Maringa/PR."
+>
+  <Hero
+    title="Fernando Serrano Vicentin"
+    subtitle="19 anos transformando vidas atraves do movimento. Especialista em dores cronicas, desvios posturais e performance. Finalizando especializacao em Educacao Fisica na Saude no HC da USP."
+    ctaText="Falar com Fernando no WhatsApp"
+    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de falar com o Fernando."
+    ctaTrackSource="hero"
+    badge="19 anos de experiencia | Especializacao USP HC | Terapia manual inclusa"
+    stats={[
+      { value: '19+', label: 'Anos de experiencia' },
+      { value: 'USP HC', label: 'Especializacao em andamento' },
+      { value: '5 min', label: 'Terapia manual/sessao' },
+    ]}
+  />
+
+  <Section id="historia" background="white" aria-labelledby="historia-title">
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-fluid-10 items-center">
+        <div>
+          <h2 id="historia-title" class="text-fluid-3xl font-heading font-bold text-neutral-900 mb-6">A historia por tras do metodo</h2>
+          <div class="space-y-4 text-fluid-base text-neutral-700 leading-relaxed">
+            <p>Comecei ha 19 anos como personal trainer convencional. Via pessoas se machucando, desistindo, nao conseguindo resultado. Percebi que o modelo tradicional -- "treino de revista", carga progressiva sem avaliacao, zero individualizacao -- falhava com a maioria.</p>
+            <p>Nos ultimos anos, foquei em estudar o corpo humano na profundidade que ele merece. Finalizei a especializacao em <strong>Educacao Fisica na Saude em Ambiente Hospitalar pela Escola de Medicina da USP -- Hospital das Clinicas</strong>. Isso mudou tudo: passei a prescrever exercicio como se prescreve remedio -- com dose, frequencia, indicacao e contraindicacao claras.</p>
+            <p>Hoje, na VicentBOX, cada aluna passa por avaliacao completa, recebe prescricao individualizada (mesmo em grupo) e termina toda sessao com 5 minutos de terapia manual. Nao e "aula de ginastica". E intervencao na saude.</p>
+          </div>
+        </div>
+        <div class="aspect-[4/3] rounded-2xl bg-neutral-100 border border-neutral-200 overflow-hidden relative">
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-neutral-400 p-4 text-center">
+            <span class="text-fluid-xl font-heading font-semibold">Foto do Fernando -- em breve</span>
+            <p class="text-fluid-sm mt-2">Retrato profissional no studio</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Methodology
+    title="Os 3 Pilares da Metodologia VicentBOX"
+    subtitle="Nao e filosofia. E protocolo testado e replicavel:"
+    pillars={[
+      {
+        icon: 'shield-check',
+        title: 'Avaliar Antes de Prescrever',
+        desc: 'Ninguem treina sem anamnese, testes de movimento e analise postural. Seguranca primeiro.',
+        details: ['Anamnese de saude completa', 'Testes de mobilidade e estabilidade', 'Analise postural fotografica', 'Definicao de objetivos mensuraveis'],
+      },
+      {
+        icon: 'dumbbell',
+        title: 'Prescrever para o Individuo',
+        desc: 'Mesmo em grupo de 3, cada uma faz seu treino. Carga, amplitude, exercicio -- tudo individualizado.',
+        details: ['Progressao quinzenal controlada', 'Adaptacao para patologias', 'Foco em padroes funcionais', 'Respeito a individualidade biologica'],
+      },
+      {
+        icon: 'sparkles',
+        title: 'Tratar + Treinar = Resultado',
+        desc: 'A terapia manual (liberacao miofascial, mobilizacao) acelera a adaptacao e previne compensacoes.',
+        details: ['5 min terapia manual/sessao', 'Liberacao de pontos gatilho', 'Mobilizacao articular suave', 'Reavaliacao mensal documentada'],
+      },
+    ]}
+  >
+    <ShieldCheck slot="shield-check" class="w-6 h-6" />
+    <Dumbbell slot="dumbbell" class="w-6 h-6" />
+    <Sparkles slot="sparkles" class="w-6 h-6" />
+  </Methodology>
+
+  <Section id="formacao" background="neutral-50" aria-labelledby="formacao-title">
+    <Container>
+      <header class="heading-section">
+        <h2 id="formacao-title" class="heading-section-title">Formacao e Parcerias</h2>
+        <p class="heading-section-subtitle">Credenciais que sustentam a pratica</p>
+      </header>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card class="card-hover p-6">
+          <div class="icon-wrapper icon-wrapper-primary mb-4">
+            <GraduationCap class="w-6 h-6" />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Educacao Fisica na Saude -- USP HC</h3>
+          <p class="text-fluid-base text-neutral-600">Especializacao em andamento na Escola de Medicina da USP, Hospital das Clinicas. Foco em exercicio como intervencao clinica.</p>
+        </Card>
+        <Card class="card-hover p-6">
+          <div class="icon-wrapper icon-wrapper-secondary mb-4">
+            <HeartPulse class="w-6 h-6" />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">19 Anos de Pratica Clinica</h3>
+          <p class="text-fluid-base text-neutral-600">Atendimento continuo de publico 40+ com doencas cronicas, desvios posturais, dores musculoesqueleticas.</p>
+        </Card>
+        <Card class="card-hover p-6">
+          <div class="icon-wrapper icon-wrapper-accent mb-4">
+            <Users class="w-6 h-6" />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Parceria Fisioterapeuta Osteopata</h3>
+          <p class="text-fluid-base text-neutral-600">Encaminhamento mutuo e discussao de casos complexos. Expansao de rede em andamento.</p>
+        </Card>
+        <Card class="card-hover p-6">
+          <div class="icon-wrapper icon-wrapper-primary mb-4">
+            <Target class="w-6 h-6" />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Especialista em Desvios Posturais</h3>
+          <p class="text-fluid-base text-neutral-600">Hiperlordose, cifose, escoliose, cabeca anteriorizada -- protocolo testado de correcao progressiva.</p>
+        </Card>
+        <Card class="card-hover p-6">
+          <div class="icon-wrapper icon-wrapper-secondary mb-4">
+            <Calendar class="w-6 h-6" />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Doencas Cronicas & Exercicio</h3>
+          <p class="text-fluid-base text-neutral-600">Hipertensao, diabetes, osteoporose, artrite -- prescricao segura baseada em diretrizes ACSM/ADA.</p>
+        </Card>
+        <Card class="card-hover p-6">
+          <div class="icon-wrapper icon-wrapper-accent mb-4">
+            <BarChart class="w-6 h-6" />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Mensuracao de Resultados</h3>
+          <p class="text-fluid-base text-neutral-600">Reavaliacao mensal com testes padronizados, fotos posturais, relatorio de evolucao para aluna e medico.</p>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <CTA
+    title="Quer conversar com o Fernando?"
+    subtitle="Tire suas duvidas, entenda se o metodo faz sentido para voce, agende a avaliacao."
+    ctaText="Falar no WhatsApp"
+    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de falar com o Fernando."
+    ctaTrackSource="sobre_cta"
+    background="primary-600"
+  />
+</Layout>

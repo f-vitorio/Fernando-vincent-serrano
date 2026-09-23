@@ -1,0 +1,67 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { siteConfig } from '@types';
+import Container from '@components/ui/Container.astro';
+import Section from '@components/ui/Section.astro';
+import Button from '@components/ui/Button.astro';
+import Home from '@components/ui/icons/Home.astro';
+import Search from '@components/ui/icons/Search.astro';
+---
+
+<Layout
+  title="Pagina Nao Encontrada | VicentBOX"
+  description="A pagina que voce procura nao existe. Volte para a home ou use a navegacao para encontrar o que precisa."
+  noIndex={true}
+  noFollow={true}
+>
+  <Section class="min-h-[70vh] flex items-center" background="white" aria-labelledby="not-found-title">
+    <Container class="text-center">
+      <div class="mb-6 text-accent-600" aria-hidden="true">
+        <svg class="w-24 h-24 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+
+      <h1 id="not-found-title" class="text-fluid-4xl font-heading font-bold text-neutral-900 mb-4">404</h1>
+      <h2 class="text-fluid-2xl font-heading font-semibold text-neutral-700 mb-4">Pagina nao encontrada</h2>
+      <p class="text-fluid-lg text-neutral-600 max-w-md mx-auto mb-8">
+        Desculpe, a pagina que voce procura nao existe ou foi movida. Pode ter digitado o endereco errado ou o link pode estar desatualizado.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        <Button
+          variant="primary"
+          size="lg"
+          href="/"
+          data-track="cta_click"
+          data-track-source="404_home"
+        >
+          <Home class="w-5 h-5" aria-hidden="true" />
+          Voltar para o Inicio
+        </Button>
+        <Button
+          variant="outline"
+          size="lg"
+          href="/servicos"
+          data-track="cta_click"
+          data-track-source="404_servicos"
+        >
+          Ver Servicos
+        </Button>
+      </div>
+
+      <div class="max-w-md mx-auto p-6 bg-neutral-50 rounded-xl">
+        <p class="text-fluid-sm text-neutral-600 mb-4">Ou navegue pelas secoes principais:</p>
+        <nav class="flex flex-wrap items-center justify-center gap-3 text-fluid-sm" aria-label="Navegacao rapida">
+          <a href="/treinamento-multifuncional" class="text-primary-700 hover:underline" data-track="nav_click" data-track-source="404_treinamento">Treinamento Multifuncional</a>
+          <span class="text-neutral-300">.</span>
+          <a href="/grupo-corrida" class="text-primary-700 hover:underline" data-track="nav_click" data-track-source="404_corrida">Grupo de Corrida</a>
+          <span class="text-neutral-300">.</span>
+          <a href="/consultoria-online" class="text-primary-700 hover:underline" data-track="nav_click" data-track-source="404_consultoria">Consultoria Online</a>
+          <span class="text-neutral-300">.</span>
+          <a href="/contato" class="text-primary-700 hover:underline" data-track="nav_click" data-track-source="404_contato">Contato</a>
+        </nav>
+      </div>
+    </Container>
+  </Section>
+</Layout>

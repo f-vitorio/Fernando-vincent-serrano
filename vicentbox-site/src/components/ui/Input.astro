@@ -1,0 +1,94 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'textarea' | 'select';
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
+  error?: string;
+  value?: string;
+  options?: Array<{ value: string; label: string }>;
+  class?: string;
+  autocomplete?: string;
+  inputMode?: 'text' | 'tel' | 'email' | 'numeric';
+}
+
+const {
+  id,
+  name,
+  label,
+  type = 'text',
+  placeholder,
+  required = false,
+  disabled = false,
+  error,
+  value = '',
+  options,
+  class: className = '',
+  autocomplete,
+  inputMode,
+} = Astro.props;
+
+const inputClasses = `input ${error ? 'invalid' : ''} ${className}`;
+const labelClasses = `label ${required ? 'required' : ''}`;
+---
+
+<div class="form-group">
+  <label for={id} class={labelClasses}>
+    {label}
+    {required && <span class="text-accent-600 ml-1" aria-hidden="true">*</span>}
+  </label>
+
+  {type === 'textarea' ? (
+    <textarea
+      id={id}
+      name={name}
+      class={inputClasses}
+      placeholder={placeholder}
+      required={required}
+      disabled={disabled}
+      autocomplete={autocomplete}
+      aria-invalid={!!error}
+      aria-describedby={error ? `${id}-error` : undefined}
+      rows={4}
+    >{value}</textarea>
+  ) : type === 'select' ? (
+    <select
+      id={id}
+      name={name}
+      class={inputClasses}
+      required={required}
+      disabled={disabled}
+      aria-invalid={!!error}
+      aria-describedby={error ? `${id}-error` : undefined}
+    >
+      <option value="" disabled selected>{placeholder || 'Selecione'}</option>
+      {options?.map((opt) => (
+        <option value={opt.value} selected={value === opt.value}>{opt.label}</option>
+      ))}
+    </select>
+  ) : (
+    <input
+      id={id}
+      name={name}
+      type={type}
+      class={inputClasses}
+      placeholder={placeholder}
+      required={required}
+      disabled={disabled}
+      value={value}
+      autocomplete={autocomplete}
+      inputmode={inputMode}
+      aria-invalid={!!error}
+      aria-describedby={error ? `${id}-error` : undefined}
+    />
+  )}
+
+  {error && (
+    <p id={`${id}-error`} class="text-fluid-sm text-accent-600 mt-1.5" role="alert">
+      {error}
+    </p>
+  )}
+</div>

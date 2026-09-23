@@ -1,0 +1,59 @@
+---
+interface Props {
+  children: any;
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'whatsapp';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  class?: string;
+  'data-track'?: string;
+  'data-track-source'?: string;
+}
+
+// Explicitly destructure only known props to avoid spreading internal Astro props
+const {
+  children,
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  class: className = '',
+  'data-track': dataTrack,
+  'data-track-source': dataTrackSource,
+} = Astro.props;
+
+const variantClasses = {
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
+  outline: 'btn-outline',
+  ghost: 'btn-ghost',
+  whatsapp: 'btn-whatsapp',
+};
+
+const sizeClasses = {
+  sm: 'btn-sm',
+  md: '',
+  lg: 'btn-lg',
+};
+
+const classes = `btn ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+
+const isLink = !!href;
+const Tag = isLink ? 'a' : 'button';
+const buttonType = isLink ? undefined : type;
+const buttonDisabled = disabled && !isLink;
+---
+
+<{Tag}
+  href={href}
+  type={buttonType}
+  class={classes}
+  disabled={buttonDisabled}
+  aria-disabled={disabled}
+  data-track={dataTrack}
+  data-track-source={dataTrackSource}
+>
+  <slot>{children}</slot>
+</{Tag}>

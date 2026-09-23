@@ -1,0 +1,64 @@
+---
+import { siteConfig } from '../../types';
+import { type Service } from '../../types';
+import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+import Container from '../ui/Container.astro';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const isComingSoon = service.comingSoon === true;
+---
+
+<Card class="card-hover h-full flex flex-col">
+  <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4" aria-hidden="true">
+    <slot name={service.icon} />
+  </div>
+
+  <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2 text-center">{service.name}</h3>
+  <p class="text-fluid-base text-neutral-600 mb-4 text-center flex-1">{service.shortDescription}</p>
+
+  <div class="text-center mb-4">
+    <p class="text-fluid-xl font-heading font-bold text-primary-700">{service.price}</p>
+    {service.priceDetails && <p class="text-fluid-sm text-neutral-500 mt-1">{service.priceDetails}</p>}
+  </div>
+
+  <ul class="space-y-2 mb-6 flex-1" role="list">
+    {service.features.slice(0, 4).map((feature, i) => (
+      <li key={i} class="flex items-center gap-2 text-fluid-sm text-neutral-700" role="listitem">
+        <svg class="w-4 h-4 text-secondary-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        {feature}
+      </li>
+    ))}
+    {service.features.length > 4 && (
+      <li class="text-fluid-sm text-primary-600 font-medium flex items-center gap-1" role="listitem">
+        <span>+{service.features.length - 4} mais benefícios</span>
+      </li>
+    )}
+  </ul>
+
+  <div class="pt-4 border-t border-neutral-100">
+    {isComingSoon ? (
+      <Button variant="outline" class="w-full" disabled>
+        <Badge variant="neutral" class="mr-2">Em breve</Badge>
+        {service.ctaText}
+      </Button>
+    ) : (
+      <Button
+        href={service.ctaUrl}
+        variant={service.ctaType === 'whatsapp' ? 'whatsapp' : 'primary'}
+        class="w-full"
+        data-track="service_card_cta"
+        data-track-source={service.id}
+      >
+        {service.ctaText}
+      </Button>
+    )}
+  </div>
+</Card>

@@ -1,0 +1,35 @@
+---
+import { siteConfig } from '../../types';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  features: Array<{ icon: string; title: string; desc: string }>;
+  class?: string;
+}
+
+const { title = 'Por que funciona', subtitle, features, class: className = '' } = Astro.props;
+---
+
+<Section id="beneficios" class={className} aria-labelledby="features-title">
+  <Container>
+    <header class="heading-section">
+      <h2 id="features-title" class="heading-section-title">{title}</h2>
+      {subtitle && <p class="heading-section-subtitle">{subtitle}</p>}
+    </header>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((feature, i) => (
+        <article key={i} class="card card-hover p-6 animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
+          <div class="icon-wrapper icon-wrapper-primary mb-4" aria-hidden="true">
+            <slot name={feature.icon} />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">{feature.title}</h3>
+          <p class="text-fluid-base text-neutral-600">{feature.desc}</p>
+        </article>
+      ))}
+    </div>
+  </Container>
+</Section>

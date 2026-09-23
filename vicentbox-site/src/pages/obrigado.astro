@@ -1,0 +1,112 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { siteConfig } from '@types';
+import Container from '@components/ui/Container.astro';
+import Section from '@components/ui/Section.astro';
+import Button from '@components/ui/Button.astro';
+import CheckCircle from '@components/ui/icons/CheckCircle.astro';
+import MessageCircle from '@components/ui/icons/MessageCircle.astro';
+import Mail from '@components/ui/icons/Mail.astro';
+import ArrowUp from '@components/ui/icons/ArrowUp.astro';
+
+const { source, type } = Astro.url.searchParams;
+const isWhatsApp = type === 'whatsapp';
+const isEmail = type === 'email';
+
+const serviceNames = {
+  treinamento: 'Treinamento Multifuncional',
+  corrida: 'Grupo de Corrida',
+  consultoria: 'Consultoria Online',
+  contato: 'Contato Geral',
+  studio: 'Visita ao Studio',
+  sobre: 'Informacoes Gerais',
+};
+
+const serviceName = source ? (serviceNames[source] || 'Servico') : 'nosso servico';
+---
+
+<Layout
+  title="Obrigado! | VicentBOX"
+  description="Obrigado pelo seu interesse na VicentBOX. Sua mensagem foi enviada com sucesso. Verifique as instrucoes abaixo para proximos passos."
+  noIndex={true}
+  noFollow={true}
+>
+  <Section class="min-h-[70vh] flex items-center" background="white" aria-labelledby="obrigado-title">
+    <Container class="text-center">
+      <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-green-100 text-green-600 mb-6" aria-hidden="true">
+        <CheckCircle class="w-12 h-12" />
+      </div>
+
+      <h1 id="obrigado-title" class="text-fluid-3xl font-heading font-bold text-neutral-900 mb-4">
+        Obrigado{source ? ` pelo interesse no ${serviceName}` : ''}!
+      </h1>
+
+      <div class="max-w-md mx-auto mb-8 space-y-4 text-fluid-base text-neutral-600">
+        {isWhatsApp && (
+          <div class="p-6 bg-green-50 rounded-xl border border-green-200 text-left">
+            <div class="flex items-start gap-3 mb-3">
+              <MessageCircle class="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <div>
+                <h3 class="font-semibold text-green-800">Proximo passo: WhatsApp</h3>
+                <p class="text-fluid-sm text-green-700 mt-1">A conversa foi aberta com sua mensagem pre-preenchida. <strong>E so clicar em enviar!</strong></p>
+              </div>
+            </div>
+            <p class="text-fluid-sm text-green-700">Se nao abriu automaticamente, <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="underline hover:text-green-900">clique aqui para abrir o WhatsApp</a>.</p>
+          </div>
+        )}
+
+        {isEmail && (
+          <div class="p-6 bg-blue-50 rounded-xl border border-blue-200 text-left">
+            <div class="flex items-start gap-3 mb-3">
+              <Mail class="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <div>
+                <h3 class="font-semibold text-blue-800">Proximo passo: E-mail</h3>
+                <p class="text-fluid-sm text-blue-700 mt-1">Enviamos um e-mail para <strong>vicentbox71@gmail.com</strong> com seus dados. Verifique tambem a <strong>caixa de spam/lixo eletronico</strong>.</p>
+              </div>
+            </div>
+            <p class="text-fluid-sm text-blue-700">Responderemos em ate 24h uteis. Se preferir agilizar, <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-900">chame no WhatsApp</a>.</p>
+          </div>
+        )}
+
+        {!isWhatsApp && !isEmail && (
+          <div class="p-6 bg-primary-50 rounded-xl border border-primary-200 text-left">
+            <div class="flex items-start gap-3 mb-3">
+              <CheckCircle class="w-6 h-6 text-primary-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <div>
+                <h3 class="font-semibold text-primary-800">Recebemos seu contato</h3>
+                <p class="text-fluid-sm text-primary-700 mt-1">Retornaremos por WhatsApp e e-mail em breve. Obrigado pela confianca!</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Button
+          variant="whatsapp"
+          size="lg"
+          href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(`Ola! Vim pelo site da VicentBOX. Tenho interesse em ${serviceName}.`)}`}
+          data-track="cta_click"
+          data-track-source="obrigado_whatsapp"
+        >
+          <MessageCircle class="w-5 h-5" aria-hidden="true" />
+          Falar no WhatsApp
+        </Button>
+        <Button
+          variant="secondary"
+          size="lg"
+          href="/servicos"
+          data-track="cta_click"
+          data-track-source="obrigado_servicos"
+        >
+          <ArrowUp class="w-5 h-5" aria-hidden="true" />
+          Conhecer Outros Servicos
+        </Button>
+      </div>
+
+      <p class="mt-8 text-fluid-sm text-neutral-500">
+        Duvidas? Chama a gente no <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="text-primary-700 underline hover:text-primary-900">WhatsApp</a> ou manda e-mail para <a href={`mailto:${siteConfig.email}`} class="text-primary-700 underline hover:text-primary-900">{siteConfig.email}</a>.
+      </p>
+    </Container>
+  </Section>
+</Layout>

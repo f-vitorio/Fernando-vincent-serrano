@@ -1,0 +1,94 @@
+---
+import { siteConfig } from '../../types';
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import Instagram from '../ui/icons/Instagram.astro';
+import Facebook from '../ui/icons/Facebook.astro';
+import TikTok from '../ui/icons/TikTok.astro';
+import YouTube from '../ui/icons/YouTube.astro';
+import MapPin from '../ui/icons/MapPin.astro';
+import Phone from '../ui/icons/Phone.astro';
+import Mail from '../ui/icons/Mail.astro';
+import Clock from '../ui/icons/Clock.astro';
+---
+
+<footer class="bg-neutral-900 text-neutral-300" role="contentinfo">
+  <div class="container-custom py-fluid-16 lg:py-fluid-20">
+    <div class="grid gap-fluid-10 md:grid-cols-2 lg:grid-cols-4">
+      <div class="lg:col-span-2">
+        <a href="/" class="flex items-center gap-2 mb-6" aria-label={`${siteConfig.name} - Início`}>
+          <span class="font-heading font-bold text-2xl text-white">Vicent<span class="text-accent-500">BOX</span></span>
+        </a>
+        <p class="text-fluid-base max-w-xs mb-6 leading-relaxed">
+          Treinamento personalizado para saúde e qualidade de vida. Especialista em dores crônicas, desvios posturais, grupo de corrida e consultoria online. Fernando Serrano Vicentin — 19 anos de experiência, especialização USP HC.
+        </p>
+        <div class="flex items-center gap-6">
+          <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-neutral-400 hover:text-white transition-colors duration-fast">
+            <Instagram class="w-5 h-5" />
+          </a>
+          <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-neutral-400 hover:text-white transition-colors duration-fast">
+            <Facebook class="w-5 h-5" />
+          </a>
+          <a href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="text-neutral-400 hover:text-white transition-colors duration-fast">
+            <TikTok class="w-5 h-5" />
+          </a>
+          <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="text-neutral-400 hover:text-white transition-colors duration-fast">
+            <YouTube class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-heading font-semibold text-white mb-4">Serviços</h3>
+        <nav aria-label="Serviços">
+          <ul class="space-y-3">
+            <li><a href="/treinamento-multifuncional" class="hover:text-white transition-colors duration-fast">Treinamento Multifuncional</a></li>
+            <li><a href="/grupo-corrida" class="hover:text-white transition-colors duration-fast">Grupo de Corrida</a></li>
+            <li><a href="/consultoria-online" class="hover:text-white transition-colors duration-fast">Consultoria Online / App</a></li>
+            <li><a href="/servicos" class="hover:text-white transition-colors duration-fast">Ver todos os serviços</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div>
+        <h3 class="font-heading font-semibold text-white mb-4">Contato</h3>
+        <address class="not-italic space-y-3 text-fluid-sm">
+          <div class="flex items-start gap-3">
+            <MapPin class="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <div>
+              <p>{siteConfig.address.street}</p>
+              <p>{siteConfig.address.neighborhood}</p>
+              <p>{siteConfig.address.city} - {siteConfig.address.state}, {siteConfig.address.zipCode}</p>
+            </div>
+          </div>
+          <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 hover:text-white transition-colors duration-fast">
+            <Phone class="w-5 h-5 text-primary-400 flex-shrink-0" aria-hidden="true" />
+            <span>{siteConfig.phoneFormatted}</span>
+          </a>
+          <a href={`mailto:${siteConfig.email}`} class="flex items-center gap-3 hover:text-white transition-colors duration-fast">
+            <Mail class="w-5 h-5 text-primary-400 flex-shrink-0" aria-hidden="true" />
+            <span>{siteConfig.email}</span>
+          </a>
+          <div class="flex items-center gap-3">
+            <Clock class="w-5 h-5 text-primary-400 flex-shrink-0" aria-hidden="true" />
+            <div>
+              <p>{siteConfig.businessHours.weekdays}</p>
+              <p>{siteConfig.businessHours.saturday}</p>
+            </div>
+          </div>
+        </address>
+      </div>
+    </div>
+
+    <div class="mt-fluid-10 pt-fluid-8 border-t border-neutral-800">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-fluid-sm text-neutral-500">
+          © {new Date().getFullYear()} {siteConfig.name}. Todos os direitos reservados.
+        </p>
+        <p class="text-fluid-sm text-neutral-500">
+          Desenvolvido com foco em conversão, acessibilidade e performance.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

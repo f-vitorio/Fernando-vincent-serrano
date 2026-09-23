@@ -1,0 +1,54 @@
+---
+import { siteConfig } from '../../types';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import ShieldCheck from '../ui/icons/ShieldCheck.astro';
+import HeartPulse from '../ui/icons/HeartPulse.astro';
+import Sparkles from '../ui/icons/Sparkles.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+const valueProps = [
+  {
+    icon: 'heart-pulse',
+    title: 'Atenção Humanizada',
+    desc: 'Você não é "mais um número". Turmas de até 3 pessoas, onde o professor conhece seu nome, sua dor e seu objetivo.',
+  },
+  {
+    icon: 'sparkles',
+    title: 'Terapia Manual Inclusa',
+    desc: 'Toda sessão termina com 5 minutos de liberação miofascial e mobilização — incluso no valor, sem custo extra.',
+  },
+  {
+    icon: 'shield-check',
+    title: 'Especialista USP HC',
+    desc: 'Fernando está finalizando especialização em Educação Física na Saúde no Hospital das Clínicas da USP — excelência técnica comprovada.',
+  },
+];
+---
+
+<Section id="diferenciais" class={className} aria-labelledby="value-props-title">
+  <Container>
+    <header class="heading-section">
+      <h2 id="value-props-title" class="heading-section-title">Por que escolher a VicentBOX?</h2>
+      <p class="heading-section-subtitle">Três pilares que fazem a diferença no seu resultado</p>
+    </header>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {valueProps.map((prop, i) => (
+        <Card key={i} class="card-hover p-6 text-center animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
+          <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4" aria-hidden="true">
+            <slot name={prop.icon} />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">{prop.title}</h3>
+          <p class="text-fluid-base text-neutral-600">{prop.desc}</p>
+        </Card>
+      ))}
+    </div>
+  </Container>
+</Section>

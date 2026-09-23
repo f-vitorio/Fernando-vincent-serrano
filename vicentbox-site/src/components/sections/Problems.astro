@@ -1,0 +1,35 @@
+---
+import { siteConfig } from '../../types';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import XCircle from '../ui/icons/XCircle.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  problems: string[];
+  class?: string;
+}
+
+const { title = 'Os problemas que impedem seu progresso', subtitle, problems, class: className = '' } = Astro.props;
+---
+
+<Section id="problemas" background="neutral-50" class={className} aria-labelledby="problems-title">
+  <Container>
+    <header class="heading-section">
+      <h2 id="problems-title" class="heading-section-title">{title}</h2>
+      {subtitle && <p class="heading-section-subtitle">{subtitle}</p>}
+    </header>
+
+    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
+      {problems.map((problem, i) => (
+        <li key={i} class="flex items-start gap-4 p-6 bg-white rounded-xl border border-neutral-200 hover:shadow-card-hover transition-shadow duration-normal animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`} role="listitem">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-accent-50 text-accent-600 flex items-center justify-center" aria-hidden="true">
+            <XCircle class="w-6 h-6" />
+          </div>
+          <p class="text-fluid-base font-medium text-neutral-900 leading-relaxed">{problem}</p>
+        </li>
+      ))}
+    </ul>
+  </Container>
+</Section>

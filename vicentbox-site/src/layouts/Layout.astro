@@ -1,0 +1,94 @@
+---
+import { siteConfig } from '../types';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import WhatsAppFloat from '../components/layout/WhatsAppFloat.astro';
+import { generateWebSiteJSONLD, generateLocalBusinessJSONLD } from '../utils/jsonld';
+import { initTracking, trackPageView } from '../utils/tracking';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalURL?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: unknown[];
+  noIndex?: boolean;
+  noFollow?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalURL,
+  ogImage = '/og-default.jpg',
+  ogType = 'website',
+  jsonLd = [],
+  noIndex = false,
+  noFollow = false,
+} = Astro.props;
+
+const pageUrl = canonicalURL || Astro.url.href;
+const pageTitle = `${title} | ${siteConfig.name}`;
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteConfig.url}${ogImage}`;
+
+const structuredData = [
+  generateWebSiteJSONLD(),
+  ...(Astro.url.pathname === '/' ? [generateLocalBusinessJSONLD()] : []),
+  ...jsonLd,
+];
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#1C4ED8" />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={pageUrl} />
+    <link rel="alternate" hreflang="pt-BR" href={pageUrl} />
+
+    {noIndex && <meta name="robots" content="noindex" />}
+    {noFollow && <meta name="robots" content="nofollow" />}
+    {noIndex && noFollow && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImage} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content="pt_BR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImage} />
+
+    {structuredData.map((data, i) => (
+      <script type="application/ld+json" set:json={JSON.stringify(data)} />
+    ))}
+
+    <script is:inline>
+      {initTracking.toString()}
+      initTracking();
+      {trackPageView.toString()}
+      trackPageView('{title}');
+    </script>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloat />
+  </body>
+</html>

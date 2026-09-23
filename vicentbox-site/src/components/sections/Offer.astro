@@ -1,0 +1,75 @@
+---
+import { siteConfig } from '../../types';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
+import CheckCircle from '../ui/icons/CheckCircle.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  plans: Array<{
+    name: string;
+    price: string;
+    period?: string;
+    features: string[];
+    ctaText: string;
+    ctaHref: string;
+    ctaVariant?: 'primary' | 'secondary' | 'whatsapp' | 'outline';
+    popular?: boolean;
+    guarantee?: string;
+  }>;
+  class?: string;
+}
+
+const { title = 'Escolha seu plano', subtitle, plans, class: className = '' } = Astro.props;
+---
+
+<Section id="oferta" class={className} aria-labelledby="offer-title">
+  <Container>
+    <header class="heading-section">
+      <h2 id="offer-title" class="heading-section-title">{title}</h2>
+      {subtitle && <p class="heading-section-subtitle">{subtitle}</p>}
+    </header>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {plans.map((plan, i) => (
+        <Card key={i} class={`card-hover p-6 relative ${plan.popular ? 'border-2 border-primary-500 shadow-card-hover' : ''}`}>
+          {plan.popular && (
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span class="badge badge-primary px-3 py-1 text-fluid-sm">Mais Popular</span>
+            </div>
+          )}
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-1">{plan.name}</h3>
+          {plan.period && <p class="text-fluid-sm text-neutral-500 mb-4">{plan.period}</p>}
+          <div class="text-fluid-4xl font-heading font-bold text-primary-700 mb-4">{plan.price}</div>
+          {plan.guarantee && (
+            <p class="text-fluid-sm text-secondary-700 bg-secondary-50 px-3 py-2 rounded-lg mb-6 flex items-center gap-2">
+              <CheckCircle class="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+              {plan.guarantee}
+            </p>
+          )}
+          <ul class="space-y-3 mb-6" role="list">
+            {plan.features.map((feature, j) => (
+              <li key={j} class="flex items-start gap-3 text-fluid-base text-neutral-700" role="listitem">
+                <CheckCircle class="w-5 h-5 text-secondary-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <Button
+            href={plan.ctaHref}
+            variant={plan.ctaVariant || 'primary'}
+            size="lg"
+            class="w-full"
+            data-track="plan_cta_click"
+            data-track-source={plan.name.toLowerCase().replace(/\s+/g, '-')}
+          >
+            {plan.ctaText}
+          </Button>
+        </Card>
+      ))}
+    </div>
+  </Container>
+</Section>

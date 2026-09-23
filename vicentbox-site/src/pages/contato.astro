@@ -1,0 +1,168 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { siteConfig } from '@types';
+import Hero from '@components/sections/Hero.astro';
+import LeadForm from '@components/forms/LeadForm.astro';
+import Container from '@components/ui/Container.astro';
+import Section from '@components/ui/Section.astro';
+import Card from '@components/ui/Card.astro';
+import Button from '@components/ui/Button.astro';
+import MapPin from '@components/ui/icons/MapPin.astro';
+import Phone from '@components/ui/icons/Phone.astro';
+import Mail from '@components/ui/icons/Mail.astro';
+import Clock from '@components/ui/icons/Clock.astro';
+import Instagram from '@components/ui/icons/Instagram.astro';
+import Facebook from '@components/ui/icons/Facebook.astro';
+import TikTok from '@components/ui/icons/TikTok.astro';
+import YouTube from '@components/ui/icons/YouTube.astro';
+---
+
+<Layout
+  title="Contato | Fale Conosco | VicentBOX"
+  description="Entre em contato com a VicentBOX: WhatsApp (44) 99921-8147, e-mail vicentbox71@gmail.com, endereco Rua Neo Alves Martins 2447 - Centro, Maringa/PR. Horarios: Segunda a Sexta 6h-21h, Sabado 7h-12h."
+>
+  <Hero
+    title="Vamos Conversar?"
+    subtitle="Tire duvidas, agende sua avaliacao gratuita ou venha nos conhecer. Estamos prontos para te atender."
+    ctaText="Chamar no WhatsApp"
+    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de mais informacoes."
+    ctaTrackSource="hero"
+    badge="Resposta rapida | Atendimento humanizado | Sem compromisso"
+    stats={[
+      { value: '< 5 min', label: 'Tempo medio de resposta' },
+      { value: '6h-21h', label: 'Horario comercial' },
+      { value: 'Seg-Sab', label: 'Dias de atendimento' },
+    ]}
+  />
+
+  <Section id="formulario" background="white" aria-labelledby="form-title">
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-fluid-10">
+        <div>
+          <h2 id="form-title" class="text-fluid-2xl font-heading font-semibold text-neutral-900 mb-4">Envie sua mensagem</h2>
+          <p class="text-fluid-base text-neutral-600 mb-8">Preencha o formulario e retornamos por e-mail e WhatsApp. Todos os campos com * sao obrigatorios.</p>
+        </div>
+        <div>
+          <LeadForm
+            source="contato"
+            title=""
+            subtitle=""
+            submitText="Enviar Mensagem"
+            fields={['name', 'email', 'phone', 'subject', 'message']}
+            successMessage="Sua mensagem foi enviada! Retornaremos por e-mail e WhatsApp em breve."
+          />
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="info-contato" background="neutral-50" aria-labelledby="info-title">
+    <Container>
+      <header class="heading-section">
+        <h2 id="info-title" class="heading-section-title">Outras formas de contato</h2>
+        <p class="heading-section-subtitle">Escolha a que for mais comoda para voce</p>
+      </header>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card class="card-hover p-6 text-center">
+          <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4">
+            <MapPin class="w-6 h-6" />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Endereco</h3>
+          <address class="not-italic text-fluid-base text-neutral-600 leading-relaxed">
+            <p>{siteConfig.address.street}</p>
+            <p>{siteConfig.address.neighborhood}</p>
+            <p>{siteConfig.address.city} - {siteConfig.address.state}</p>
+            <p>{siteConfig.address.zipCode}</p>
+          </address>
+          <a
+            href={`https://maps.google.com/?q=${encodeURIComponent(siteConfig.address.full)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-4 inline-flex items-center gap-1 text-fluid-sm text-primary-700 hover:underline"
+            data-track="cta_click"
+            data-track-source="maps_link"
+          >
+            <MapPin class="w-4 h-4" aria-hidden="true" />
+            Abrir no Google Maps
+          </a>
+        </Card>
+
+        <Card class="card-hover p-6 text-center">
+          <div class="icon-wrapper icon-wrapper-secondary mx-auto mb-4">
+            <Phone class="w-6 h-6" />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">WhatsApp</h3>
+          <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="text-fluid-xl font-heading font-semibold text-neutral-900 block mb-2">{siteConfig.phoneFormatted}</a>
+          <p class="text-fluid-base text-neutral-600 mb-4">Resposta em minutos no horario comercial</p>
+          <Button
+            variant="whatsapp"
+            href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent('Ola! Vim pelo site da VicentBOX. Gostaria de mais informacoes.')}`}
+            data-track="cta_click"
+            data-track-source="whatsapp_card"
+          >
+            Abrir Conversa
+          </Button>
+        </Card>
+
+        <Card class="card-hover p-6 text-center">
+          <div class="icon-wrapper icon-wrapper-accent mx-auto mb-4">
+            <Mail class="w-6 h-6" />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">E-mail</h3>
+          <a href={`mailto:${siteConfig.email}`} class="text-fluid-base text-neutral-900 block mb-4">{siteConfig.email}</a>
+          <p class="text-fluid-base text-neutral-600 mb-4">Para duvidas detalhadas, envio de documentos, parcerias B2B</p>
+          <Button
+            variant="outline"
+            href={`mailto:${siteConfig.email}?subject=Contato via Site - VicentBOX`}
+            data-track="cta_click"
+            data-track-source="email_card"
+          >
+            Enviar E-mail
+          </Button>
+        </Card>
+
+        <Card class="card-hover p-6 text-center">
+          <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4">
+            <Clock class="w-6 h-6" />
+          </div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Horarios de Atendimento</h3>
+          <div class="space-y-2 text-fluid-base text-neutral-600">
+            <p><strong>Segunda a Sexta:</strong> 6h as 21h</p>
+            <p><strong>Sabado:</strong> 7h as 12h</p>
+            <p><strong>Domingo:</strong> Fechado</p>
+          </div>
+          <p class="text-fluid-sm text-neutral-500 mt-4">Fora do horario? Deixe mensagem no WhatsApp que retornamos no proximo dia util.</p>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="redes-sociais" background="white" aria-labelledby="redes-title">
+    <Container class="text-center">
+      <header class="heading-section">
+        <h2 id="redes-title" class="heading-section-title">Acompanhe nas Redes Sociais</h2>
+        <p class="heading-section-subtitle">Conteudo diario: dicas de treino, saude, motivacao e bastidores</p>
+      </header>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity duration-fast" data-track="social_click" data-track-source="instagram">
+          <Instagram class="w-5 h-5" aria-hidden="true" />
+          <span>@vicentbox</span>
+        </a>
+        <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:opacity-90 transition-opacity duration-fast" data-track="social_click" data-track-source="facebook">
+          <Facebook class="w-5 h-5" aria-hidden="true" />
+          <span>VicentBOX</span>
+        </a>
+        <a href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-medium hover:opacity-90 transition-opacity duration-fast" data-track="social_click" data-track-source="tiktok">
+          <TikTok class="w-5 h-5" aria-hidden="true" />
+          <span>@vicentbox</span>
+        </a>
+        <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:opacity-90 transition-opacity duration-fast" data-track="social_click" data-track-source="youtube">
+          <YouTube class="w-5 h-5" aria-hidden="true" />
+          <span>Canal VicentBOX</span>
+        </a>
+      </div>
+    </Container>
+  </Section>
+</Layout>

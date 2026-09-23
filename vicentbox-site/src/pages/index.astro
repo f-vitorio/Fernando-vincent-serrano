@@ -1,0 +1,81 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { siteConfig, services, problemsTreinamento, benefitsTreinamento } from '@types';
+import Hero from '@components/sections/Hero.astro';
+import ValueProps from '@components/sections/ValueProps.astro';
+import ServiceCard from '@components/sections/ServiceCard.astro';
+import CTA from '@components/sections/CTA.astro';
+import SocialProof from '@components/sections/SocialProof.astro';
+import Dumbbell from '@components/ui/icons/Dumbbell.astro';
+import Running from '@components/ui/icons/Running.astro';
+import Smartphone from '@components/ui/icons/Smartphone.astro';
+import HeartPulse from '@components/ui/icons/HeartPulse.astro';
+import Sparkles from '@components/ui/icons/Sparkles.astro';
+import ShieldCheck from '@components/ui/icons/ShieldCheck.astro';
+import Container from '@components/ui/Container.astro';
+import { generateLocalBusinessJSONLD } from '@utils/jsonld';
+---
+
+<Layout
+  title="Treinamento Personalizado para Saude e Qualidade de Vida aos 40+ | VicentBOX"
+  description="Elimine dores, corrija a postura e volte a se movimentar com seguranca. Studio em Maringa/PR com 19 anos de experiencia, especializacao USP HC e terapia manual inclusa. Agende avaliacao gratuita."
+  jsonLd={[generateLocalBusinessJSONLD()]}
+>
+  <Hero
+    title="Treinamento Personalizado para Saude e Qualidade de Vida aos 40+"
+    subtitle="Elimine dores cronicas, corrija desvios posturais e volte a fazer o que ama com metodo testado, turmas de ate 3 pessoas e terapia manual em toda sessao."
+    ctaText="Agendar Avaliacao Gratuita"
+    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de agendar uma avaliacao gratuita."
+    ctaTrackSource="hero"
+    badge="Studio em Maringa/PR | 19 anos de experiencia | Especializacao USP HC"
+    stats={[
+      { value: '19+', label: 'Anos de experiencia' },
+      { value: '3', label: 'Alunos por turma (max.)' },
+      { value: '5 min', label: 'Terapia manual/sessao' },
+    ]}
+  />
+
+  <ValueProps>
+    <HeartPulse slot="heart-pulse" class="w-6 h-6" />
+    <Sparkles slot="sparkles" class="w-6 h-6" />
+    <ShieldCheck slot="shield-check" class="w-6 h-6" />
+  </ValueProps>
+
+  <section id="servicos-destaque" class="section bg-white" aria-labelledby="servicos-title">
+    <Container class="px-4 sm:px-6 lg:px-8">
+      <header class="heading-section">
+        <h2 id="servicos-title" class="heading-section-title">Servicos Principais</h2>
+        <p class="heading-section-subtitle">Escolha o que faz sentido para sua rotina e objetivo</p>
+      </header>
+      <div class="grid md:grid-cols-3 gap-6">
+        {services.filter(s => s.priority).map((service, i) => (
+          <ServiceCard key={i} service={service}>
+            <Dumbbell slot="dumbbell" class="w-6 h-6" />
+            <Running slot="running" class="w-6 h-6" />
+            <Smartphone slot="smartphone" class="w-6 h-6" />
+          </ServiceCard>
+        ))}
+      </div>
+      <div class="text-center mt-8">
+        <a href="/servicos" class="btn btn-outline" data-track="cta_click" data-track-source="ver_todos_servicos">
+          Ver todos os 8 servicos ->
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <SocialProof
+    title="Resultados reais de quem confiou no metodo"
+    subtitle="Mulheres 40+ que eliminaram dores, voltaram a correr e recuperaram a qualidade de vida"
+    emptyMessage="Depoimentos de alunas -- em coleta. Em breve voce vera historias reais aqui."
+  />
+
+  <CTA
+    title="Vamos comecar sua transformacao?"
+    subtitle="A avaliacao e gratuita, sem compromisso, e voce sai com um plano de acao claro para seus objetivos."
+    ctaText="Agendar Minha Avaliacao Gratuita"
+    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de agendar uma avaliacao gratuita."
+    ctaTrackSource="final_cta"
+    background="primary-600"
+  />
+</Layout>

@@ -1,0 +1,104 @@
+---
+import { siteConfig } from '../../types';
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  ctaText: string;
+  ctaHref: string;
+  ctaVariant?: 'primary' | 'secondary' | 'whatsapp' | 'outline';
+  ctaTrackSource?: string;
+  background?: 'white' | 'primary-50' | 'secondary-50' | 'accent-50' | 'neutral-900' | 'primary-900';
+  class?: string;
+  badge?: string;
+  image?: string;
+  imageAlt?: string;
+  stats?: Array<{ value: string; label: string }>;
+}
+
+const {
+  title,
+  subtitle,
+  ctaText,
+  ctaHref,
+  ctaVariant = 'whatsapp',
+  ctaTrackSource = 'hero',
+  background = 'white',
+  class: className = '',
+  badge,
+  image,
+  imageAlt,
+  stats,
+} = Astro.props;
+
+const backgroundClasses = {
+  white: 'bg-white',
+  'primary-50': 'bg-primary-50',
+  'secondary-50': 'bg-secondary-50',
+  'accent-50': 'bg-accent-50',
+  'neutral-900': 'bg-neutral-900 text-neutral-100',
+  'primary-900': 'bg-primary-900 text-neutral-100',
+};
+---
+
+<section class={`${backgroundClasses[background]} ${className}`} aria-labelledby="hero-title">
+  <Container class="py-fluid-16 lg:py-fluid-24">
+    <div class="grid lg:grid-cols-2 gap-fluid-10 items-center">
+      <div class="text-center lg:text-left">
+        {badge && (
+          <span class="inline-block badge badge-accent mb-4 animate-fade-in">{badge}</span>
+        )}
+        <h1 id="hero-title" class="text-fluid-4xl lg:text-fluid-5xl font-heading font-bold text-neutral-900 mb-6 animate-slide-up">
+          {title}
+        </h1>
+        {subtitle && (
+          <p class="text-fluid-lg lg:text-fluid-xl text-neutral-600 mb-8 max-w-xl mx-auto lg:mx-0 animate-slide-up stagger-1">{subtitle}</p>
+        )}
+
+        {stats && stats.length > 0 && (
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-8 mb-8 animate-slide-up stagger-2" role="list" aria-label="Estatísticas">
+            {stats.map((stat, i) => (
+              <div key={i} class="text-center" role="listitem">
+                <div class="text-fluid-3xl font-heading font-bold text-primary-700">{stat.value}</div>
+                <div class="text-fluid-sm text-neutral-600">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-slide-up stagger-3">
+          <Button
+            href={ctaHref}
+            variant={ctaVariant}
+            size="lg"
+            data-track="cta_click"
+            data-track-source={ctaTrackSource}
+            class="w-full sm:w-auto"
+          >
+            {ctaText}
+          </Button>
+        </div>
+      </div>
+
+      {image && (
+        <div class="relative animate-fade-in stagger-4" aria-hidden="true">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-card-hover bg-neutral-100">
+            <img
+              src={image}
+              alt={imageAlt || ''}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          {badge && (
+            <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-4 max-w-xs">
+              <p class="text-fluid-sm text-neutral-700">{badge}</p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  </Container>
+</section>

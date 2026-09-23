@@ -1,0 +1,61 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  testimonials?: Array<{ name: string; role?: string; content: string; avatar?: string; result?: string }>;
+  emptyMessage?: string;
+  class?: string;
+}
+
+const {
+  title = 'Resultados de quem confia',
+  subtitle,
+  testimonials = [],
+  emptyMessage = 'Depoimentos de alunos — em coleta',
+  class: className = '',
+} = Astro.props;
+---
+
+<Section id="depoimentos" background="neutral-50" class={className} aria-labelledby="social-proof-title">
+  <Container>
+    <header class="heading-section">
+      <h2 id="social-proof-title" class="heading-section-title">{title}</h2>
+      {subtitle && <p class="heading-section-subtitle">{subtitle}</p>}
+    </header>
+
+    {testimonials.length > 0 ? (
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {testimonials.map((testimonial, i) => (
+          <Card key={i} class="card-hover p-6 animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
+            {testimonial.result && (
+              <div class="badge badge-secondary mb-3">{testimonial.result}</div>
+            )}
+            <p class="text-fluid-base text-neutral-700 mb-4 leading-relaxed">"{testimonial.content}"</p>
+            <div class="flex items-center gap-3">
+              {testimonial.avatar && (
+                <img src={testimonial.avatar} alt="" class="w-10 h-10 rounded-full object-cover" aria-hidden="true" />
+              )}
+              <div>
+                <p class="font-medium text-neutral-900">{testimonial.name}</p>
+                {testimonial.role && <p class="text-fluid-sm text-neutral-500">{testimonial.role}</p>}
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-fluid-12">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-neutral-100 text-neutral-400 mb-4" aria-hidden="true">
+          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+        </div>
+        <p class="text-fluid-lg text-neutral-600 max-w-md mx-auto">{emptyMessage}</p>
+      </div>
+    )}
+  </Container>
+</Section>

@@ -1,0 +1,46 @@
+---
+interface Props {
+  children: any;
+  class?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  background?: 'white' | 'neutral-50' | 'primary-50' | 'secondary-50' | 'accent-50' | 'neutral-900' | 'primary-900';
+  id?: string;
+  ariaLabel?: string;
+}
+
+const {
+  children,
+  class: className = '',
+  size = 'md',
+  background = 'white',
+  id,
+  ariaLabel,
+} = Astro.props;
+
+const sizeClasses = {
+  sm: 'section-sm',
+  md: 'section',
+  lg: 'section lg:py-fluid-24',
+  xl: 'section lg:py-fluid-32',
+};
+
+const backgroundClasses = {
+  white: 'bg-white',
+  'neutral-50': 'bg-neutral-50',
+  'primary-50': 'bg-primary-50',
+  'secondary-50': 'bg-secondary-50',
+  'accent-50': 'bg-accent-50',
+  'neutral-900': 'bg-neutral-900 text-neutral-100',
+  'primary-900': 'bg-primary-900 text-neutral-100',
+};
+
+const classes = `${sizeClasses[size]} ${backgroundClasses[background]} ${className}`;
+---
+
+<section
+  id={id}
+  class={classes}
+  aria-label={ariaLabel}
+>
+  <slot>{children}</slot>
+</section>

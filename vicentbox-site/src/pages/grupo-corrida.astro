@@ -1,0 +1,130 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { siteConfig, benefitsCorrida, faqCorrida } from '@types';
+import Hero from '@components/sections/Hero.astro';
+import Features from '@components/sections/Features.astro';
+import SocialProof from '@components/sections/SocialProof.astro';
+import Offer from '@components/sections/Offer.astro';
+import FAQ from '@components/sections/FAQ.astro';
+import CTA from '@components/sections/CTA.astro';
+import LeadForm from '@components/forms/LeadForm.astro';
+import Running from '@components/ui/icons/Running.astro';
+import ShieldCheck from '@components/ui/icons/ShieldCheck.astro';
+import Users from '@components/ui/icons/Users.astro';
+import Target from '@components/ui/icons/Target.astro';
+import Timer from '@components/ui/icons/Clock.astro';
+import Smartphone from '@components/ui/icons/Smartphone.astro';
+import { generateServiceJSONLD, generateFAQPageJSONLD } from '@utils/jsonld';
+
+const service = {
+  name: 'Grupo de Corrida',
+  description: 'Corra com seguranca, evolua seu pace e faca parte de uma comunidade que se apoia. Presencial 3x/semana ou online.',
+  price: '50',
+  url: '/grupo-corrida',
+};
+
+const serviceJsonLd = generateServiceJSONLD(service);
+const faqJsonLd = generateFAQPageJSONLD(faqCorrida);
+---
+
+<Layout
+  title="Grupo de Corrida | Corra com Seguranca e Evolua seu Pace | VicentBOX"
+  description="Grupo de corrida em Maringa/PR e online: planilha personalizada, acompanhamento semanal, comunidade ativa. Presencial 3x/semana R$100 | Online R$50/mes. Iniciantes bem-vindos."
+  jsonLd={[serviceJsonLd, faqJsonLd]}
+>
+  <Hero
+    title="Corra com Seguranca, Evolua seu Pace e Faca Parte de uma Comunidade"
+    subtitle="Seja para seu primeiro 5k ou uma maratona: planilha individualizada, treinos educativos de tecnica, forca e grupo WhatsApp ativo. Iniciantes absolutos bem-vindos."
+    ctaText="Entrar no Grupo"
+    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Tenho interesse no Grupo de Corrida. Gostaria de mais informacoes."
+    ctaTrackSource="hero"
+    badge="Planilha personalizada | Acompanhamento semanal | Comunidade ativa"
+    stats={[
+      { value: '3x/sem', label: 'Treinos presenciais' },
+      { value: '80/20', label: 'Treino polarizado' },
+      { value: '5k-42k', label: 'Provas alvo' },
+    ]}
+  />
+
+  <Features
+    title="Por que o Grupo de Corrida VicentBOX funciona"
+    subtitle="Nao e so 'sair correndo'. E ciencia do esporte aplicada ao seu nivel:"
+    features={benefitsCorrida}
+  >
+    <ShieldCheck slot="shield-check" class="w-6 h-6" />
+    <Timer slot="timer" class="w-6 h-6" />
+    <Users slot="users" class="w-6 h-6" />
+    <Target slot="target" class="w-6 h-6" />
+    <Running slot="graduation-cap" class="w-6 h-6" />
+    <Smartphone slot="smartphone" class="w-6 h-6" />
+  </Features>
+
+  <SocialProof
+    title="Corredores de todos os niveis evoluindo juntos"
+    subtitle="Do primeiro quilometro a maratona: a comunidade faz a diferenca"
+    emptyMessage="Depoimentos de corredores do grupo -- em coleta. Em breve historias reais aqui."
+  />
+
+  <Offer
+    title="Dois formatos, mesma qualidade de acompanhamento"
+    subtitle="Escolha o que cabe na sua rotina:"
+    plans={[
+      {
+        name: 'Presencial',
+        price: 'R$ 100',
+        period: '/mes',
+        features: [
+          '3 treinos presenciais/semana em Maringa',
+          'Planilha personalizada no app',
+          'Acompanhamento semanal de volume/intensidade',
+          'Grupo WhatsApp ativo (duvidas + motivacao)',
+          'Treinos educativos: tecnica, forca, cadencia',
+          'Prova alvo opcional (5k, 10k, 21k, 42k)',
+        ],
+        ctaText: 'Quero treinar presencial',
+        ctaHref: 'https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Quero o Grupo de Corrida Presencial 3x/semana (R$100/mes). Gostaria de agendar.',
+        ctaVariant: 'whatsapp',
+        popular: true,
+      },
+      {
+        name: 'Online',
+        price: 'R$ 50',
+        period: '/mes',
+        features: [
+          'Planilha 100% personalizada no app',
+          'Feedback semanal do professor',
+          'Grupo WhatsApp ativo',
+          'Treinos educativos em video',
+          'Prova alvo opcional',
+          'Acesso de qualquer lugar do Brasil',
+        ],
+        ctaText: 'Quero treinar online',
+        ctaHref: 'https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Quero o Grupo de Corrida Online (R$50/mes). Gostaria de agendar.',
+        ctaVariant: 'whatsapp',
+      },
+    ]}
+  />
+
+  <FAQ
+    title="Duvidas frequentes sobre o Grupo de Corrida"
+    faqs={faqCorrida}
+  />
+
+  <LeadForm
+    source="corrida"
+    title="Pronto para calcahr o tenis?"
+    subtitle="Preencha e entraremos em contato para definir seu nivel, objetivo e melhor formato."
+    submitText="Entrar no Grupo pelo WhatsApp"
+    fields={['name', 'phone', 'objective', 'preferredTime']}
+    successMessage="A conversa no WhatsApp sera aberta com seus dados pre-preenchidos. E so enviar!"
+  />
+
+  <CTA
+    title="Sua prova dos sonhos comeca com o primeiro passo"
+    subtitle="Seja 5k ou maratona, a jornada e mais leve com quem entende de corrida e cuida de voce."
+    ctaText="Falar no WhatsApp"
+    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Tenho duvidas sobre o Grupo de Corrida."
+    ctaTrackSource="final_cta"
+    background="primary-600"
+  />
+</Layout>

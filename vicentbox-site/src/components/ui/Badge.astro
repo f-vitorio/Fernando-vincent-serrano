@@ -1,0 +1,22 @@
+---
+interface Props {
+  children: any;
+  variant?: 'primary' | 'secondary' | 'accent' | 'neutral';
+  class?: string;
+}
+
+const { children, variant = 'primary', class: className = '' } = Astro.props;
+
+const variantClasses = {
+  primary: 'badge-primary',
+  secondary: 'badge-secondary',
+  accent: 'badge-accent',
+  neutral: 'badge-neutral',
+};
+
+const classes = `${variantClasses[variant]} ${className}`;
+---
+
+<span class={classes}>
+  <slot>{children}</slot>
+</span>
