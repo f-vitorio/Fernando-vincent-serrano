@@ -60,7 +60,7 @@
 - [ ] Criar/reivindicar perfil: "VicentBOX"
 - [ ] Endereço: Rua Néo Alves Martins, 2447 - Centro, Maringá - PR
 - [ ] Telefone: (44) 99921-8147
-- [ ] Site: https://vicentbox.com.br
+- [ ] Site: https://vicentboxmga.com.br
 - [ ] Categoria: "Personal trainer" / "Academia"
 - [ ] Horários: Seg-Sex 6h-21h, Sáb 7h-12h
 - [ ] Adicionar fotos do studio
@@ -68,9 +68,9 @@
 
 ### Google Search Console
 
-- [ ] Adicionar propriedade: `https://vicentbox.com.br`
+- [ ] Adicionar propriedade: `https://vicentboxmga.com.br`
 - [ ] Verificar via DNS (TXT) ou HTML tag
-- [ ] Enviar sitemap: `https://vicentbox.com.br/sitemap-index.xml`
+- [ ] Enviar sitemap: `https://vicentboxmga.com.br/sitemap-index.xml`
 - [ ] Verificar cobertura de indexação semanal
 
 ### Google Ads
@@ -97,7 +97,7 @@
 - [ ] Limpar `public_html/` (backup se houver site antigo)
 - [ ] Upload conteúdo de `dist/` para `public_html/`
 - [ ] Verificar SSL ativo (Let's Encrypt)
-- [ ] Testar: https://vicentbox.com.br
+- [ ] Testar: https://vicentboxmga.com.br
 - [ ] Configurar redirecionamento www → non-www (ou vice-versa)
 
 ### Cloudflare Pages
@@ -106,7 +106,7 @@
 - [ ] Build command: `npm run build`
 - [ ] Output directory: `dist`
 - [ ] Environment variables: adicionar todas do `.env`
-- [ ] Custom domain: `vicentbox.com.br`
+- [ ] Custom domain: `vicentboxmga.com.br`
 - [ ] DNS: apontar para Cloudflare (nameservers)
 - [ ] SSL/TLS: Full (Strict)
 - [ ] Cache Rules: Cache Everything para assets estáticos

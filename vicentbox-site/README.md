@@ -233,7 +233,7 @@ npx @lhci/cli autorun
 2. Build command: `npm run build`
 3. Build output directory: `dist`
 4. Environment variables: Add all from `.env`
-5. Custom domain: `vicentbox.com.br` → DNS → Cloudflare
+5. Custom domain: `vicentboxmga.com.br` → DNS → Cloudflare
 
 ### Netlify / Vercel
 
