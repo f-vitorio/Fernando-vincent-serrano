@@ -17,7 +17,7 @@ import Users from '@components/ui/icons/Users.astro';
 import Dumbbell from '@components/ui/icons/Dumbbell.astro';
 import ShieldCheck from '@components/ui/icons/ShieldCheck.astro';
 import Breadcrumb from '@components/ui/Breadcrumb.astro';
-import { generateServiceJSONLD, generateProductJSONLD, generateBreadcrumbListJSONLD } from '@utils/jsonld';
+import { generateServiceJSONLD, generateProductJSONLD, generateBreadcrumbListJSONLD, generateFAQPageJSONLD } from '@utils/jsonld';
 
 const breadcrumbItems = [
   { name: 'Início', url: '/' },
@@ -44,12 +44,13 @@ const product = {
 const serviceJsonLd = generateServiceJSONLD(service);
 const productJsonLd = generateProductJSONLD(product);
 const breadcrumbJsonLd = generateBreadcrumbListJSONLD(breadcrumbItems);
+const faqJsonLd = generateFAQPageJSONLD(faqConsultoria);
 ---
 
 <Layout
   title="Consultoria Online de Treino | App R$39,90/mês | VicentBOX"
   description="Consultoria online por R$39,90/mês: treino personalizado no celular, onde e quando quiser, com acompanhamento do professor."
-  jsonLd={[serviceJsonLd, productJsonLd, breadcrumbJsonLd]}
+  jsonLd={[serviceJsonLd, productJsonLd, breadcrumbJsonLd, faqJsonLd]}
 >
   <Breadcrumb items={breadcrumbItems} />
   <Hero

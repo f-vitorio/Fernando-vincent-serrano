@@ -74,15 +74,18 @@ const sobreJsonLd = [
           </div>
         </div>
         <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-100 border border-neutral-200">
-          <img
-            src="/images/sobre-fernando.jpg"
-            alt="Retrato de Fernando Serrano Vicentin, personal trainer e fundador da VicentBOX"
-            width="1200"
-            height="800"
-            class="w-full h-full object-cover"
-            loading="lazy"
-            decoding="async"
-          />
+          <picture>
+            <source srcset="/images/sobre-fernando.webp" type="image/webp" />
+            <img
+              src="/images/sobre-fernando.jpg"
+              alt="Retrato de Fernando Serrano Vicentin, personal trainer e fundador da VicentBOX"
+              width="1200"
+              height="800"
+              class="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
       </div>
     </Container>

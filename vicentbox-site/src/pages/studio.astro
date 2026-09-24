@@ -71,15 +71,18 @@ const galleryItems = [
             style={`animation-delay: ${(i + 1) * 50}ms`}
             role="listitem"
           >
-            <img
-              src={item.image}
-              alt={item.alt}
-              width="1200"
-              height="800"
-              class="w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              <source srcset={item.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+              <img
+                src={item.image}
+                alt={item.alt}
+                width="1200"
+                height="800"
+                class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-neutral-900/75 to-transparent p-3 pt-8">
               <span class="text-fluid-sm font-medium text-white">{item.label}</span>
             </figcaption>

@@ -18,7 +18,7 @@ import HeartPulse from '@components/ui/icons/HeartPulse.astro';
 import Container from '@components/ui/Container.astro';
 import Section from '@components/ui/Section.astro';
 import Breadcrumb from '@components/ui/Breadcrumb.astro';
-import { generateServiceJSONLD, generateBreadcrumbListJSONLD } from '@utils/jsonld';
+import { generateServiceJSONLD, generateBreadcrumbListJSONLD, generateFAQPageJSONLD } from '@utils/jsonld';
 
 const breadcrumbItems = [
   { name: 'Início', url: '/' },
@@ -36,12 +36,13 @@ const service = {
 
 const serviceJsonLd = generateServiceJSONLD(service);
 const breadcrumbJsonLd = generateBreadcrumbListJSONLD(breadcrumbItems);
+const faqJsonLd = generateFAQPageJSONLD(faqTreinamento);
 ---
 
 <Layout
   title="Treinamento Multifuncional em Maringá | Turmas de até 3 | VicentBOX"
   description="Treinamento multifuncional em Maringá: turmas de até 3, terapia manual 5 min e foco em dores 40+. 2x/sem R$400 | 1x/sem R$250."
-  jsonLd={[serviceJsonLd, breadcrumbJsonLd]}
+  jsonLd={[serviceJsonLd, breadcrumbJsonLd, faqJsonLd]}
 >
   <Breadcrumb items={breadcrumbItems} />
   <Hero

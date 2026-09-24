@@ -239,15 +239,16 @@ const estimatedTicket = getEstimatedTicket(source);
           if (!input) return;
           input.setAttribute('aria-invalid', 'true');
           input.classList.add('invalid');
-          let errorEl = input.parentElement?.querySelector<HTMLElement>(`#${field}-error`);
+          let errorEl = input.parentElement?.querySelector<HTMLElement>(`#${input.id}-error`);
           if (!errorEl) {
             errorEl = document.createElement('p');
-            errorEl.id = `${field}-error`;
+            errorEl.id = `${input.id}-error`;
             errorEl.className = 'text-fluid-sm text-red-600 mt-1.5';
             errorEl.setAttribute('role', 'alert');
             input.parentElement?.appendChild(errorEl);
           }
           errorEl.textContent = error;
+          input.setAttribute('aria-describedby', errorEl.id);
         });
         return;
       }
@@ -317,7 +318,8 @@ const estimatedTicket = getEstimatedTicket(source);
       input.addEventListener('input', () => {
         input.classList.remove('invalid');
         input.removeAttribute('aria-invalid');
-        input.parentElement?.querySelector(`#${input.name}-error`)?.remove();
+        input.removeAttribute('aria-describedby');
+        input.parentElement?.querySelector(`#${input.id}-error`)?.remove();
       });
     });
   });

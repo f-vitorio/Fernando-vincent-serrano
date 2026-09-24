@@ -16,7 +16,7 @@ import GraduationCap from '@components/ui/icons/GraduationCap.astro';
 import Breadcrumb from '@components/ui/Breadcrumb.astro';
 import Container from '@components/ui/Container.astro';
 import Section from '@components/ui/Section.astro';
-import { generateServiceJSONLD, generateBreadcrumbListJSONLD } from '@utils/jsonld';
+import { generateServiceJSONLD, generateBreadcrumbListJSONLD, generateFAQPageJSONLD } from '@utils/jsonld';
 
 const breadcrumbItems = [
   { name: 'Início', url: '/' },
@@ -34,12 +34,13 @@ const service = {
 
 const serviceJsonLd = generateServiceJSONLD(service);
 const breadcrumbJsonLd = generateBreadcrumbListJSONLD(breadcrumbItems);
+const faqJsonLd = generateFAQPageJSONLD(faqCorrida);
 ---
 
 <Layout
   title="Grupo de Corrida em Maringá | Presencial e Online | VicentBOX"
   description="Grupo de corrida em Maringá: presencial 3x/semana R$100/mês ou consultoria online R$50/mês. Acompanhamento para diferentes níveis."
-  jsonLd={[serviceJsonLd, breadcrumbJsonLd]}
+  jsonLd={[serviceJsonLd, breadcrumbJsonLd, faqJsonLd]}
 >
   <Breadcrumb items={breadcrumbItems} />
   <Hero

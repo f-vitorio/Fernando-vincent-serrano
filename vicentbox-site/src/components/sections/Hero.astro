@@ -118,15 +118,19 @@ const hasImage = !!image;
       <div class="relative mx-auto w-full max-w-md lg:max-w-none animate-fade-in stagger-2">
         {hasImage ? (
           <div class="aspect-[4/3] rounded-3xl overflow-hidden shadow-card-hover border border-neutral-200 bg-neutral-100">
-            <img
-              src={image}
-              alt={imageAlt || ''}
-              width="1200"
-              height="900"
-              class="w-full h-full object-cover"
-              loading="eager"
-              decoding="async"
-            />
+            <picture>
+              <source srcset={image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+              <img
+                src={image}
+                alt={imageAlt || ''}
+                width="1200"
+                height="900"
+                class="w-full h-full object-cover"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </picture>
           </div>
         ) : (
           <div class="relative aspect-[4/3]" aria-hidden="true">
