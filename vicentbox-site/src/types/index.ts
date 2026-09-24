@@ -423,7 +423,7 @@ export const benefitsCorrida = [
 
 export const featuresConsultoria = [
   { icon: 'video', title: 'Treino Personalizado', desc: 'Treino montado para o seu objetivo, no celular — onde e quando quiser' },
-  { icon: 'trending-up', title: 'Adaptado ao Local', desc: 'O treino se adapta ao local onde você treina (academia, casa, parque)' },
+  { icon: 'map-pin', title: 'Adaptado ao Local', desc: 'O treino se adapta ao local onde você treina (academia, casa, parque)' },
   { icon: 'message-circle', title: 'Acompanhamento do Professor', desc: 'Suporte direto com o professor para dúvidas, adaptações e motivação' },
   { icon: 'users', title: 'Assinatura Simples', desc: 'R$ 39,90/mês — consultoria online completa, sem contratos complexos' },
   { icon: 'dumbbell', title: 'Onde e Quando Quizer', desc: 'Academia, casa, hotel, parque. Treino personalizado no celular' },
