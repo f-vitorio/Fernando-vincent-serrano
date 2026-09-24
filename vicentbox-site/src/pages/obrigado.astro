@@ -19,15 +19,15 @@ const serviceNames = {
   consultoria: 'Consultoria Online',
   contato: 'Contato Geral',
   studio: 'Visita ao Studio',
-  sobre: 'Informacoes Gerais',
+  sobre: 'Informações Gerais',
 };
 
-const serviceName = source ? (serviceNames[source] || 'Servico') : 'nosso servico';
+const serviceName = source ? (serviceNames[source] || 'Serviço') : 'nosso serviço';
 ---
 
 <Layout
   title="Obrigado! | VicentBOX"
-  description="Obrigado pelo seu interesse na VicentBOX. Sua mensagem foi enviada com sucesso. Verifique as instrucoes abaixo para proximos passos."
+  description="Obrigado pelo seu interesse na VicentBOX. Sua mensagem foi enviada com sucesso. Verifique as instruções abaixo para próximos passos."
   noIndex={true}
   noFollow={true}
 >
@@ -47,11 +47,11 @@ const serviceName = source ? (serviceNames[source] || 'Servico') : 'nosso servic
             <div class="flex items-start gap-3 mb-3">
               <MessageCircle class="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <div>
-                <h3 class="font-semibold text-green-800">Proximo passo: WhatsApp</h3>
-                <p class="text-fluid-sm text-green-700 mt-1">A conversa foi aberta com sua mensagem pre-preenchida. <strong>E so clicar em enviar!</strong></p>
+                <h3 class="font-semibold text-green-800">Próximo passo: WhatsApp</h3>
+                <p class="text-fluid-sm text-green-700 mt-1">A conversa foi aberta com sua mensagem pré-preenchida. <strong>É só clicar em enviar!</strong></p>
               </div>
             </div>
-            <p class="text-fluid-sm text-green-700">Se nao abriu automaticamente, <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="underline hover:text-green-900">clique aqui para abrir o WhatsApp</a>.</p>
+            <p class="text-fluid-sm text-green-700">Se não abriu automaticamente, <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="underline hover:text-green-900">clique aqui para abrir o WhatsApp</a>.</p>
           </div>
         )}
 
@@ -60,11 +60,11 @@ const serviceName = source ? (serviceNames[source] || 'Servico') : 'nosso servic
             <div class="flex items-start gap-3 mb-3">
               <Mail class="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <div>
-                <h3 class="font-semibold text-blue-800">Proximo passo: E-mail</h3>
-                <p class="text-fluid-sm text-blue-700 mt-1">Enviamos um e-mail para <strong>vicentbox71@gmail.com</strong> com seus dados. Verifique tambem a <strong>caixa de spam/lixo eletronico</strong>.</p>
+                <h3 class="font-semibold text-blue-800">Próximo passo: E-mail</h3>
+                <p class="text-fluid-sm text-blue-700 mt-1">Enviamos um e-mail para <strong>vicentbox71@gmail.com</strong> com seus dados. Verifique também a <strong>caixa de spam/lixo eletrônico</strong>.</p>
               </div>
             </div>
-            <p class="text-fluid-sm text-blue-700">Responderemos em ate 24h uteis. Se preferir agilizar, <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-900">chame no WhatsApp</a>.</p>
+            <p class="text-fluid-sm text-blue-700">Responderemos em até 24h úteis. Se preferir agilizar, <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-900">chame no WhatsApp</a>.</p>
           </div>
         )}
 
@@ -74,7 +74,7 @@ const serviceName = source ? (serviceNames[source] || 'Servico') : 'nosso servic
               <CheckCircle class="w-6 h-6 text-primary-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <h3 class="font-semibold text-primary-800">Recebemos seu contato</h3>
-                <p class="text-fluid-sm text-primary-700 mt-1">Retornaremos por WhatsApp e e-mail em breve. Obrigado pela confianca!</p>
+                <p class="text-fluid-sm text-primary-700 mt-1">Retornaremos por WhatsApp e e-mail em breve. Obrigado pela confiança!</p>
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@ const serviceName = source ? (serviceNames[source] || 'Servico') : 'nosso servic
         <Button
           variant="whatsapp"
           size="lg"
-          href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(`Ola! Vim pelo site da VicentBOX. Tenho interesse em ${serviceName}.`)}`}
+          href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(`Olá! Vim pelo site da VicentBOX. Tenho interesse em ${serviceName}.`)}`}
           data-track="cta_click"
           data-track-source="obrigado_whatsapp"
         >
@@ -100,12 +100,12 @@ const serviceName = source ? (serviceNames[source] || 'Servico') : 'nosso servic
           data-track-source="obrigado_servicos"
         >
           <ArrowUp class="w-5 h-5" aria-hidden="true" />
-          Conhecer Outros Servicos
+          Conhecer Outros Serviços
         </Button>
       </div>
 
       <p class="mt-8 text-fluid-sm text-neutral-500">
-        Duvidas? Chama a gente no <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="text-primary-700 underline hover:text-primary-900">WhatsApp</a> ou manda e-mail para <a href={`mailto:${siteConfig.email}`} class="text-primary-700 underline hover:text-primary-900">{siteConfig.email}</a>.
+        Dúvidas? Chama a gente no <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="text-primary-700 underline hover:text-primary-900">WhatsApp</a> ou manda e-mail para <a href={`mailto:${siteConfig.email}`} class="text-primary-700 underline hover:text-primary-900">{siteConfig.email}</a>.
       </p>
     </Container>
   </Section>

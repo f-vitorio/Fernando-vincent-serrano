@@ -17,23 +17,48 @@ import Target from '@components/ui/icons/Target.astro';
 import Calendar from '@components/ui/icons/Calendar.astro';
 import BarChart from '@components/ui/icons/BarChart.astro';
 import GraduationCap from '@components/ui/icons/TrendingUp.astro';
+import Breadcrumb from '@components/ui/Breadcrumb.astro';
+import {
+  generateAboutPageJSONLD,
+  generateBreadcrumbListJSONLD,
+} from '@utils/jsonld';
+
+const breadcrumbItems = [
+  { name: 'Início', url: '/' },
+  { name: 'Sobre', url: '/sobre' },
+];
+
+const sobreJsonLd = [
+  generateAboutPageJSONLD({
+    name: 'Sobre Fernando Serrano Vicentin — Personal Trainer em Maringá',
+    description:
+      'Fernando Serrano Vicentin, personal trainer em Maringá: 19 anos de experiência, fundador da VicentBOX, especialização USP HC em andamento.',
+    url: '/sobre',
+  }),
+  generateBreadcrumbListJSONLD(breadcrumbItems),
+];
 ---
 
 <Layout
-  title="Sobre | Fernando Serrano Vicentin & VicentBOX | 19 Anos de Experiencia"
-  description="Fernando Serrano Vicentin: 19 anos de experiencia, especializacao USP HC Hospital das Clinicas, terapia manual, parceria com fisioterapeuta osteopata. Conheca a historia e metodologia por tras da VicentBOX em Maringa/PR."
+  title="Sobre Fernando Serrano Vicentin | Personal Trainer VicentBOX"
+  description="Conheça Fernando Serrano Vicentin, personal trainer em Maringá: 19 anos de experiência, fundador da VicentBOX e especialização USP HC em andamento."
+  jsonLd={sobreJsonLd}
+  includePerson
 >
+  <Breadcrumb items={breadcrumbItems} />
   <Hero
-    title="Fernando Serrano Vicentin"
-    subtitle="19 anos transformando vidas atraves do movimento. Especialista em dores cronicas, desvios posturais e performance. Finalizando especializacao em Educacao Fisica na Saude no HC da USP."
+    title="Fernando Serrano Vicentin — Personal Trainer em Maringá"
+    subtitle="19 anos de experiência com movimento. Foco em saúde aos 40+, com atenção humanizada. Finalizando especialização em Educação Física na Saúde no HC da USP."
     ctaText="Falar com Fernando no WhatsApp"
-    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de falar com o Fernando."
+    ctaHref="https://wa.me/5544999218147?text=Olá! Vim pelo site da VicentBOX. Gostaria de falar com o Fernando."
     ctaTrackSource="hero"
-    badge="19 anos de experiencia | Especializacao USP HC | Terapia manual inclusa"
+    badge="19 anos de experiência | Especialização USP HC em andamento | Terapia manual 5 min"
+    image="/images/sobre-fernando.jpg"
+    imageAlt="Fernando Serrano Vicentin, personal trainer da VicentBOX em Maringá"
     stats={[
-      { value: '19+', label: 'Anos de experiencia' },
-      { value: 'USP HC', label: 'Especializacao em andamento' },
-      { value: '5 min', label: 'Terapia manual/sessao' },
+      { value: '19+', label: 'Anos de experiência' },
+      { value: 'USP HC', label: 'Especialização em andamento' },
+      { value: '5 min', label: 'Terapia manual/aula' },
     ]}
   />
 
@@ -41,18 +66,23 @@ import GraduationCap from '@components/ui/icons/TrendingUp.astro';
     <Container>
       <div class="grid lg:grid-cols-2 gap-fluid-10 items-center">
         <div>
-          <h2 id="historia-title" class="text-fluid-3xl font-heading font-bold text-neutral-900 mb-6">A historia por tras do metodo</h2>
+          <h2 id="historia-title" class="text-fluid-3xl font-heading font-bold text-neutral-900 mb-6">A história por trás do método</h2>
           <div class="space-y-4 text-fluid-base text-neutral-700 leading-relaxed">
-            <p>Comecei ha 19 anos como personal trainer convencional. Via pessoas se machucando, desistindo, nao conseguindo resultado. Percebi que o modelo tradicional -- "treino de revista", carga progressiva sem avaliacao, zero individualizacao -- falhava com a maioria.</p>
-            <p>Nos ultimos anos, foquei em estudar o corpo humano na profundidade que ele merece. Finalizei a especializacao em <strong>Educacao Fisica na Saude em Ambiente Hospitalar pela Escola de Medicina da USP -- Hospital das Clinicas</strong>. Isso mudou tudo: passei a prescrever exercicio como se prescreve remedio -- com dose, frequencia, indicacao e contraindicacao claras.</p>
-            <p>Hoje, na VicentBOX, cada aluna passa por avaliacao completa, recebe prescricao individualizada (mesmo em grupo) e termina toda sessao com 5 minutos de terapia manual. Nao e "aula de ginastica". E intervencao na saude.</p>
+            <p>Comecei há 19 anos como personal trainer. Via pessoas se machucando, desistindo, não conseguindo resultado. A VicentBOX nasceu para mudar isso: atenção humanizada, turmas pequenas e acompanhamento de verdade.</p>
+            <p>Estou finalizando a especialização em <strong>Educação Física na Saúde em Ambiente Hospitalar pela Escola de Medicina da USP — Hospital das Clínicas</strong>, o que reforça a forma como prescrevo exercício com segurança e indicação clara.</p>
+            <p>Hoje, na VicentBOX, cada aluno passa por avaliação antes de começar, treina em turma reduzida (até 3 no multifuncional) e termina toda aula com 5 minutos de terapia manual. Também contamos com parceria de uma fisioterapeuta osteopata para casos que precisam desse cuidado.</p>
           </div>
         </div>
-        <div class="aspect-[4/3] rounded-2xl bg-neutral-100 border border-neutral-200 overflow-hidden relative">
-          <div class="absolute inset-0 flex flex-col items-center justify-center text-neutral-400 p-4 text-center">
-            <span class="text-fluid-xl font-heading font-semibold">Foto do Fernando -- em breve</span>
-            <p class="text-fluid-sm mt-2">Retrato profissional no studio</p>
-          </div>
+        <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-100 border border-neutral-200">
+          <img
+            src="/images/sobre-fernando.jpg"
+            alt="Retrato de Fernando Serrano Vicentin, personal trainer e fundador da VicentBOX"
+            width="1200"
+            height="800"
+            class="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
     </Container>
@@ -60,25 +90,25 @@ import GraduationCap from '@components/ui/icons/TrendingUp.astro';
 
   <Methodology
     title="Os 3 Pilares da Metodologia VicentBOX"
-    subtitle="Nao e filosofia. E protocolo testado e replicavel:"
+    subtitle="Como a avaliação e a prescrição funcionam na prática:"
     pillars={[
       {
         icon: 'shield-check',
         title: 'Avaliar Antes de Prescrever',
-        desc: 'Ninguem treina sem anamnese, testes de movimento e analise postural. Seguranca primeiro.',
-        details: ['Anamnese de saude completa', 'Testes de mobilidade e estabilidade', 'Analise postural fotografica', 'Definicao de objetivos mensuraveis'],
+        desc: 'Ninguém treina sem anamnese, testes de movimento e análise postural. Segurança primeiro.',
+        details: ['Anamnese de saúde', 'Testes de movimento', 'Análise postural', 'Definição de objetivos'],
       },
       {
         icon: 'dumbbell',
-        title: 'Prescrever para o Individuo',
-        desc: 'Mesmo em grupo de 3, cada uma faz seu treino. Carga, amplitude, exercicio -- tudo individualizado.',
-        details: ['Progressao quinzenal controlada', 'Adaptacao para patologias', 'Foco em padroes funcionais', 'Respeito a individualidade biologica'],
+        title: 'Prescrever para o Indivíduo',
+        desc: 'Mesmo em grupo de 3, cada uma faz seu treino. Carga, amplitude, exercício — tudo individualizado.',
+        details: ['Ajustes conforme seu progresso', 'Adaptação para restrições e condições', 'Foco em padrões funcionais', 'Respeito ao seu nível atual'],
       },
       {
         icon: 'sparkles',
-        title: 'Tratar + Treinar = Resultado',
-        desc: 'A terapia manual (liberacao miofascial, mobilizacao) acelera a adaptacao e previne compensacoes.',
-        details: ['5 min terapia manual/sessao', 'Liberacao de pontos gatilho', 'Mobilizacao articular suave', 'Reavaliacao mensal documentada'],
+        title: 'Treinar com Cuidado',
+        desc: 'A terapia manual de 5 minutos ao final da aula ajuda no relaxamento e na recuperação muscular.',
+        details: ['Terapia manual 5 min ao final de toda aula', 'Atenção humanizada', 'Movimento com acompanhamento', 'Ambiente acolhedor'],
       },
     ]}
   >
@@ -90,8 +120,8 @@ import GraduationCap from '@components/ui/icons/TrendingUp.astro';
   <Section id="formacao" background="neutral-50" aria-labelledby="formacao-title">
     <Container>
       <header class="heading-section">
-        <h2 id="formacao-title" class="heading-section-title">Formacao e Parcerias</h2>
-        <p class="heading-section-subtitle">Credenciais que sustentam a pratica</p>
+        <h2 id="formacao-title" class="heading-section-title">Formação e Parcerias</h2>
+        <p class="heading-section-subtitle">Credenciais que sustentam a prática</p>
       </header>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -99,43 +129,43 @@ import GraduationCap from '@components/ui/icons/TrendingUp.astro';
           <div class="icon-wrapper icon-wrapper-primary mb-4">
             <GraduationCap class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Educacao Fisica na Saude -- USP HC</h3>
-          <p class="text-fluid-base text-neutral-600">Especializacao em andamento na Escola de Medicina da USP, Hospital das Clinicas. Foco em exercicio como intervencao clinica.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Educação Física na Saúde — USP HC</h3>
+          <p class="text-fluid-base text-neutral-600">Especialização em andamento na Escola de Medicina da USP, Hospital das Clínicas — Educação Física na Saúde em Ambiente Hospitalar.</p>
         </Card>
         <Card class="card-hover p-6">
           <div class="icon-wrapper icon-wrapper-secondary mb-4">
             <HeartPulse class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">19 Anos de Pratica Clinica</h3>
-          <p class="text-fluid-base text-neutral-600">Atendimento continuo de publico 40+ com doencas cronicas, desvios posturais, dores musculoesqueleticas.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">19 Anos de Experiência</h3>
+          <p class="text-fluid-base text-neutral-600">Atuação com foco em saúde, qualidade de vida e público 40+ — dores, cansaço, fadiga e sobrepeso.</p>
         </Card>
         <Card class="card-hover p-6">
           <div class="icon-wrapper icon-wrapper-accent mb-4">
             <Users class="w-6 h-6" />
           </div>
           <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Parceria Fisioterapeuta Osteopata</h3>
-          <p class="text-fluid-base text-neutral-600">Encaminhamento mutuo e discussao de casos complexos. Expansao de rede em andamento.</p>
+          <p class="text-fluid-base text-neutral-600">Parceria com uma fisioterapeuta osteopata para cuidado integrado quando necessário.</p>
         </Card>
         <Card class="card-hover p-6">
           <div class="icon-wrapper icon-wrapper-primary mb-4">
             <Target class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Especialista em Desvios Posturais</h3>
-          <p class="text-fluid-base text-neutral-600">Hiperlordose, cifose, escoliose, cabeca anteriorizada -- protocolo testado de correcao progressiva.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Foco em Saúde aos 40+</h3>
+          <p class="text-fluid-base text-neutral-600">Atenção humanizada para mulheres a partir dos 40 e para quem busca qualidade de vida com segurança.</p>
         </Card>
         <Card class="card-hover p-6">
           <div class="icon-wrapper icon-wrapper-secondary mb-4">
             <Calendar class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Doencas Cronicas & Exercicio</h3>
-          <p class="text-fluid-base text-neutral-600">Hipertensao, diabetes, osteoporose, artrite -- prescricao segura baseada em diretrizes ACSM/ADA.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Empresa VicentBOX — 3 Anos</h3>
+          <p class="text-fluid-base text-neutral-600">Studio em Maringá com treinamento multifuncional, alongamento, grupo de corrida, consultoria online e palestras.</p>
         </Card>
         <Card class="card-hover p-6">
           <div class="icon-wrapper icon-wrapper-accent mb-4">
             <BarChart class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Mensuracao de Resultados</h3>
-          <p class="text-fluid-base text-neutral-600">Reavaliacao mensal com testes padronizados, fotos posturais, relatorio de evolucao para aluna e medico.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Avaliação Antes de Começar</h3>
+          <p class="text-fluid-base text-neutral-600">Toda jornada começa com avaliação para anamnese, testes de movimento e definição de objetivos. Valor informado no agendamento.</p>
         </Card>
       </div>
     </Container>
@@ -143,9 +173,9 @@ import GraduationCap from '@components/ui/icons/TrendingUp.astro';
 
   <CTA
     title="Quer conversar com o Fernando?"
-    subtitle="Tire suas duvidas, entenda se o metodo faz sentido para voce, agende a avaliacao."
+    subtitle="Tire suas dúvidas, entenda se o método faz sentido para você, agende a avaliação."
     ctaText="Falar no WhatsApp"
-    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de falar com o Fernando."
+    ctaHref="https://wa.me/5544999218147?text=Olá! Vim pelo site da VicentBOX. Gostaria de falar com o Fernando."
     ctaTrackSource="sobre_cta"
     background="primary-600"
   />

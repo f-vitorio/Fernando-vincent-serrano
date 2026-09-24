@@ -4,7 +4,6 @@ import { siteConfig, benefitsTreinamento, problemsTreinamento, faqTreinamento } 
 import Hero from '@components/sections/Hero.astro';
 import Problems from '@components/sections/Problems.astro';
 import Features from '@components/sections/Features.astro';
-import SocialProof from '@components/sections/SocialProof.astro';
 import Offer from '@components/sections/Offer.astro';
 import FAQ from '@components/sections/FAQ.astro';
 import CTA from '@components/sections/CTA.astro';
@@ -14,67 +13,79 @@ import Dumbbell from '@components/ui/icons/Dumbbell.astro';
 import ShieldCheck from '@components/ui/icons/ShieldCheck.astro';
 import Running from '@components/ui/icons/Running.astro';
 import Users from '@components/ui/icons/Users.astro';
-import TrendingUp from '@components/ui/icons/TrendingUp.astro';
 import Sparkles from '@components/ui/icons/Sparkles.astro';
-import { generateServiceJSONLD, generateFAQPageJSONLD } from '@utils/jsonld';
+import Container from '@components/ui/Container.astro';
+import Section from '@components/ui/Section.astro';
+import Breadcrumb from '@components/ui/Breadcrumb.astro';
+import { generateServiceJSONLD, generateBreadcrumbListJSONLD } from '@utils/jsonld';
+
+const breadcrumbItems = [
+  { name: 'Início', url: '/' },
+  { name: 'Serviços', url: '/servicos' },
+  { name: 'Treinamento Multifuncional', url: '/treinamento-multifuncional' },
+];
 
 const service = {
   name: 'Treinamento Multifuncional',
-  description: 'Elimine dores, corrija a postura e volte a se movimentar com seguranca em turmas de ate 3 pessoas com terapia manual.',
+  description: 'Reduza dores, melhore a postura e volte a se movimentar com segurança em turmas de até 3 pessoas com terapia manual de 5 minutos ao final da aula.',
   price: '250',
   url: '/treinamento-multifuncional',
+  image: '/images/treinamento-multifuncional.jpg',
 };
 
 const serviceJsonLd = generateServiceJSONLD(service);
-const faqJsonLd = generateFAQPageJSONLD(faqTreinamento);
+const breadcrumbJsonLd = generateBreadcrumbListJSONLD(breadcrumbItems);
 ---
 
 <Layout
-  title="Treinamento Multifuncional | Elimine Dores e Corrija a Postura | VicentBOX"
-  description="Elimine dores cronicas, corrija desvios posturais e volte a se movimentar com seguranca. Turmas de ate 3 pessoas, terapia manual inclusa, especialista USP HC. 2x/sem R$400 | 1x/sem R$250. Agende avaliacao gratuita."
-  jsonLd={[serviceJsonLd, faqJsonLd]}
+  title="Treinamento Multifuncional em Maringá | Turmas de até 3 | VicentBOX"
+  description="Treinamento multifuncional em Maringá: turmas de até 3, terapia manual 5 min e foco em dores 40+. 2x/sem R$400 | 1x/sem R$250."
+  jsonLd={[serviceJsonLd, breadcrumbJsonLd]}
 >
+  <Breadcrumb items={breadcrumbItems} />
   <Hero
-    title="Elimine Dores, Corrija a Postura e Volte a se Movimentar com Seguranca"
-    subtitle="Metodo testado para mulheres 40+: turmas de ate 3 pessoas, terapia manual em toda sessao, acompanhamento proximo. Resultados perceptiveis em 30 dias."
-    ctaText="Agendar Avaliacao Gratuita"
-    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Tenho interesse no Treinamento Multifuncional. Gostaria de agendar uma avaliacao gratuita."
+    title="Treinamento Multifuncional com Personal Trainer em Maringá"
+    subtitle="Foco em mulheres 40+: turmas de até 3 pessoas, terapia manual de 5 minutos ao final de toda aula e acompanhamento próximo. Avaliação antes de começar."
+    ctaText="Agendar Avaliação"
+    ctaHref="https://wa.me/5544999218147?text=Olá! Vim pelo site da VicentBOX. Tenho interesse no Treinamento Multifuncional. Gostaria de agendar uma avaliação."
     ctaTrackSource="hero"
-    badge="Turmas reduzidas (max. 3) | Terapia manual inclusa | Especialista USP HC"
+    badge="Turmas de até 3 | Terapia manual 5 min | Especialização USP HC em andamento"
+    image="/images/treinamento-multifuncional.jpg"
+    imageAlt="Personal trainer com duas alunas em treinamento multifuncional no studio VicentBOX"
     stats={[
-      { value: '3', label: 'Alunos por turma (max.)' },
-      { value: '5 min', label: 'Terapia manual/sessao' },
-      { value: '30 dias', label: 'Primeiros resultados' },
+      { value: '3', label: 'Alunos por turma (máx.)' },
+      { value: '5 min', label: 'Terapia manual/aula' },
+      { value: '40+', label: 'Público em destaque' },
     ]}
   />
 
   <Problems
-    title="O que te impede de viver sem dor?"
-    subtitle="Voce nao esta sozinha. Estes sao os problemas mais comuns que nossas alunas traziam antes de comecar:"
+    title="O que te impede de viver melhor?"
+    subtitle="Você não está sozinha. Estes são os problemas mais comuns que nossas alunas trazem antes de começar:"
     problems={problemsTreinamento}
   />
 
   <Methodology
     title="A Metodologia de 3 Pilares"
-    subtitle="Nao e apenas 'fazer exercicio'. E um sistema estruturado para resultados duradouros:"
+    subtitle="Avaliar, prescrever e treinar com acompanhamento de verdade:"
     pillars={[
       {
         icon: 'shield-check',
-        title: '1. Avaliacao Completa',
-        desc: 'Anamnese detalhada, testes de movimento, analise postural e definicao de objetivos claros.',
-        details: ['Historico de saude and lesoes', 'Testes de mobilidade e forca', 'Analise postural fotografica', 'Definicao de metas personalizadas'],
+        title: '1. Avaliação Antes de Começar',
+        desc: 'Anamnese, testes de movimento e definição de objetivos claros antes do primeiro treino.',
+        details: ['Histórico de saúde e restrições', 'Testes de movimento', 'Definição de objetivos', 'Valor informado no agendamento'],
       },
       {
         icon: 'dumbbell',
-        title: '2. Prescricao Individualizada',
-        desc: 'Treino desenhado para seu corpo, suas restricoes e seus objetivos -- mesmo em grupo.',
-        details: ['Exercicios adaptados por aluna', 'Progressao quinzenal controlada', 'Foco em padroes funcionais', 'Carga e volume individualizados'],
+        title: '2. Prescrição Individualizada',
+        desc: 'Treino desenhado para seu corpo, suas restrições e seus objetivos — mesmo em grupo.',
+        details: ['Exercícios adaptados por aluno', 'Turma de até 3 pessoas', 'Foco em padrões funcionais', 'Atenção humanizada'],
       },
       {
         icon: 'sparkles',
         title: '3. Terapia Manual + Acompanhamento',
-        desc: 'O diferencial que acelera resultados: 5 min de terapia manual + reavaliacao constante.',
-        details: ['Liberacao miofascial pos-treino', 'Mobilizacao articular', 'Correcao de compensacao', 'Reavaliacao mensal documentada'],
+        desc: 'O diferencial VicentBOX: 5 minutos de terapia manual ao final de toda aula.',
+        details: ['Terapia manual 5 min/aula', 'Acompanhamento próximo', 'Ambiente acolhedor', 'Progresso com suporte'],
       },
     ]}
   >
@@ -84,84 +95,100 @@ const faqJsonLd = generateFAQPageJSONLD(faqTreinamento);
   </Methodology>
 
   <Features
-    title="O que voce ganha com o metodo"
-    subtitle="Nao e promessa -- e o que nossas alunas relatam consistentemente:"
+    title="O que você ganha com o método"
+    subtitle="O que está no coração do treinamento VicentBOX:"
     features={benefitsTreinamento}
   >
     <ShieldCheck slot="shield-check" class="w-6 h-6" />
-    <Running slot="posture" class="w-6 h-6" />
+    <Sparkles slot="posture" class="w-6 h-6" />
     <Dumbbell slot="dumbbell" class="w-6 h-6" />
     <Users slot="user-check" class="w-6 h-6" />
     <Users slot="users" class="w-6 h-6" />
-    <TrendingUp slot="trending-up" class="w-6 h-6" />
+    <Sparkles slot="trending-up" class="w-6 h-6" />
   </Features>
 
-  <SocialProof
-    title="Mulheres como voce, resultados reais"
-    subtitle="Depoimentos de alunas que eliminaram dores e voltaram a viver ativas"
-    emptyMessage="Depoimentos de alunas do Treinamento Multifuncional -- em coleta. Em breve historias reais aqui."
-  />
-
   <Offer
-    title="Escolha sua frequencia ideal"
-    subtitle="Ambos os planos incluem: avaliacao inicial, terapia manual toda sessao, acompanhamento de evolucao e reavaliacao mensal."
+    title="Escolha sua frequência ideal"
+    subtitle="Ambos os planos incluem: avaliação antes de começar, terapia manual em toda aula e turma de até 3 pessoas."
     plans={[
       {
         name: '2x por semana',
         price: 'R$ 400',
-        period: '/mes',
+        period: '/mês',
         features: [
-          '8 sessoes/mes (2x por semana)',
-          'Terapia manual em todas as sessoes',
-          'Reavaliacao mensal completa',
-          'Grupo WhatsApp de suporte',
-          'Ajuste de treino quinzenal',
-          'Prioridade de horario',
+          'Turma de até 3 pessoas',
+          'Terapia manual de 5 min ao final de toda aula',
+          'Avaliação antes de começar',
+          'Foco em dores, cansaço, fadiga e sobrepeso',
+          'Exercícios personalizados para 40+',
+          'Atenção humanizada com acompanhamento próximo',
         ],
         ctaText: 'Quero 2x por semana',
-        ctaHref: 'https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Quero o Treinamento Multifuncional 2x/semana (R$400/mes). Gostaria de agendar avaliacao.',
+        ctaHref: 'https://wa.me/5544999218147?text=Olá! Vim pelo site da VicentBOX. Quero o Treinamento Multifuncional 2x/semana (R$400/mês). Gostaria de agendar avaliação.',
         ctaVariant: 'whatsapp',
         popular: true,
-        guarantee: 'Garantia de evolucao ou reavaliacao gratis',
       },
       {
         name: '1x por semana',
         price: 'R$ 250',
-        period: '/mes',
+        period: '/mês',
         features: [
-          '4 sessoes/mes (1x por semana)',
-          'Terapia manual em todas as sessoes',
-          'Reavaliacao mensal completa',
-          'Grupo WhatsApp de suporte',
-          'Ajuste de treino quinzenal',
+          'Turma de até 3 pessoas',
+          'Terapia manual de 5 min ao final de toda aula',
+          'Avaliação antes de começar',
+          'Foco em dores, cansaço, fadiga e sobrepeso',
+          'Exercícios personalizados para 40+',
+          'Atenção humanizada com acompanhamento próximo',
         ],
         ctaText: 'Quero 1x por semana',
-        ctaHref: 'https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Quero o Treinamento Multifuncional 1x/semana (R$250/mes). Gostaria de agendar avaliacao.',
+        ctaHref: 'https://wa.me/5544999218147?text=Olá! Vim pelo site da VicentBOX. Quero o Treinamento Multifuncional 1x/semana (R$250/mês). Gostaria de agendar avaliação.',
         ctaVariant: 'whatsapp',
-        guarantee: 'Garantia de evolucao ou reavaliacao gratis',
       },
     ]}
   />
 
   <FAQ
-    title="Duvidas frequentes sobre o Treinamento Multifuncional"
+    title="Dúvidas frequentes sobre o Treinamento Multifuncional"
     faqs={faqTreinamento}
   />
 
   <LeadForm
     source="treinamento"
-    title="Agende sua avaliacao gratuita"
-    subtitle="Sem compromisso. Vamos conversar, avaliar seu caso e montar o plano ideal para voce."
+    title="Agende sua avaliação"
+    subtitle="Vamos conversar, avaliar seu caso e entender se o método faz sentido para você."
     submitText="Agendar pelo WhatsApp"
     fields={['name', 'phone', 'objective', 'preferredTime']}
-    successMessage="A conversa no WhatsApp sera aberta com seus dados pre-preenchidos. E so enviar!"
+    successMessage="A conversa no WhatsApp será aberta com seus dados pré-preenchidos. É só enviar!"
   />
 
+  <Section id="relacionados" background="neutral-50" aria-labelledby="relacionados-title">
+    <Container>
+      <header class="heading-section">
+        <h2 id="relacionados-title" class="heading-section-title">Outros serviços da VicentBOX</h2>
+        <p class="heading-section-subtitle">Combine formatos conforme seu objetivo:</p>
+      </header>
+      <ul class="grid sm:grid-cols-3 gap-4 text-fluid-sm">
+        <li class="card">
+          <a href="/grupo-corrida" class="font-semibold text-primary-700 hover:underline">Grupo de Corrida em Maringá</a>
+          <p class="text-neutral-600 mt-1">Presencial 3x/semana ou consultoria online de corrida.</p>
+        </li>
+        <li class="card">
+          <a href="/consultoria-online" class="font-semibold text-primary-700 hover:underline">Consultoria Online</a>
+          <p class="text-neutral-600 mt-1">Treino personalizado no app por R$ 39,90/mês.</p>
+        </li>
+        <li class="card">
+          <a href="/servicos" class="font-semibold text-primary-700 hover:underline">Todos os serviços</a>
+          <p class="text-neutral-600 mt-1">Alongamento, relaxamento, desafio 15 dias e palestras.</p>
+        </li>
+      </ul>
+    </Container>
+  </Section>
+
   <CTA
-    title="Ainda com duvidas?"
-    subtitle="Fale direto com a gente no WhatsApp. Respondemos rapido e sem compromisso."
+    title="Ainda com dúvidas?"
+    subtitle="Fale direto com a gente no WhatsApp e tire suas dúvidas sem compromisso."
     ctaText="Falar no WhatsApp"
-    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Tenho duvidas sobre o Treinamento Multifuncional."
+    ctaHref="https://wa.me/5544999218147?text=Olá! Vim pelo site da VicentBOX. Tenho dúvidas sobre o Treinamento Multifuncional."
     ctaTrackSource="final_cta"
     background="primary-600"
   />

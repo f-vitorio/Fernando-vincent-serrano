@@ -42,18 +42,16 @@ const classes = `btn ${variantClasses[variant]} ${sizeClasses[size]} ${className
 
 const isLink = !!href;
 const Tag = isLink ? 'a' : 'button';
-const buttonType = isLink ? undefined : type;
-const buttonDisabled = disabled && !isLink;
 ---
 
-<{Tag}
-  href={href}
-  type={buttonType}
+<Tag
+  href={isLink ? href : undefined}
+  type={isLink ? undefined : type}
   class={classes}
-  disabled={buttonDisabled}
-  aria-disabled={disabled}
+  disabled={!isLink && disabled ? true : undefined}
+  aria-disabled={disabled ? 'true' : undefined}
   data-track={dataTrack}
   data-track-source={dataTrackSource}
 >
   <slot>{children}</slot>
-</{Tag}>
+</Tag>

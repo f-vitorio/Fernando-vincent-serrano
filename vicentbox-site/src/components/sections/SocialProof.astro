@@ -2,43 +2,59 @@
 import Container from '../ui/Container.astro';
 import Section from '../ui/Section.astro';
 import Card from '../ui/Card.astro';
+import Star from '../ui/icons/Star.astro';
+import { siteConfig } from '../../types';
 
 interface Props {
   title?: string;
   subtitle?: string;
-  testimonials?: Array<{ name: string; role?: string; content: string; avatar?: string; result?: string }>;
-  emptyMessage?: string;
+  testimonials?: Array<{ name: string; role?: string; content: string; avatar?: string; result?: string; rating?: number }>;
+  showGbpLink?: boolean;
   class?: string;
 }
 
 const {
-  title = 'Resultados de quem confia',
-  subtitle,
+  title = 'Conheça a VicentBOX no Google',
+  subtitle = 'Avaliações e fotos no perfil oficial do Google Business',
   testimonials = [],
-  emptyMessage = 'Depoimentos de alunos — em coleta',
+  showGbpLink = true,
   class: className = '',
 } = Astro.props;
+
+const hasTestimonials = testimonials.length > 0;
+const showSection = hasTestimonials || showGbpLink;
 ---
 
-<Section id="depoimentos" background="neutral-50" class={className} aria-labelledby="social-proof-title">
-  <Container>
-    <header class="heading-section">
-      <h2 id="social-proof-title" class="heading-section-title">{title}</h2>
-      {subtitle && <p class="heading-section-subtitle">{subtitle}</p>}
-    </header>
+{showSection && (
+  <Section id="depoimentos" background="neutral-50" class={className} aria-labelledby="social-proof-title">
+    <Container>
+      <header class="heading-section">
+        <h2 id="social-proof-title" class="heading-section-title">{title}</h2>
+        {subtitle && <p class="heading-section-subtitle">{subtitle}</p>}
+      </header>
 
-    {testimonials.length > 0 ? (
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {hasTestimonials && (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {testimonials.map((testimonial, i) => (
-          <Card key={i} class="card-hover p-6 animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
+          <Card key={i} class="card-hover p-6 flex flex-col animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
+            <div class="flex items-center gap-1 text-accent-600 mb-3" aria-label="5 de 5 estrelas">
+              {Array.from({ length: testimonial.rating ?? 5 }).map(() => (
+                <Star class="w-4 h-4" />
+              ))}
+            </div>
             {testimonial.result && (
-              <div class="badge badge-secondary mb-3">{testimonial.result}</div>
+              <div class="badge badge-secondary mb-3 self-start">{testimonial.result}</div>
             )}
-            <p class="text-fluid-base text-neutral-700 mb-4 leading-relaxed">"{testimonial.content}"</p>
-            <div class="flex items-center gap-3">
-              {testimonial.avatar && (
-                <img src={testimonial.avatar} alt="" class="w-10 h-10 rounded-full object-cover" aria-hidden="true" />
-              )}
+            <p class="text-fluid-base text-neutral-700 mb-4 leading-relaxed flex-1">
+              &ldquo;{testimonial.content}&rdquo;
+            </p>
+            <div class="flex items-center gap-3 pt-4 border-t border-neutral-200 mt-auto">
+              <div
+                class="w-10 h-10 rounded-full bg-primary-100 text-primary-700 font-heading font-semibold text-fluid-sm flex items-center justify-center flex-shrink-0"
+                aria-hidden="true"
+              >
+                {testimonial.name.charAt(0)}
+              </div>
               <div>
                 <p class="font-medium text-neutral-900">{testimonial.name}</p>
                 {testimonial.role && <p class="text-fluid-sm text-neutral-500">{testimonial.role}</p>}
@@ -46,16 +62,26 @@ const {
             </div>
           </Card>
         ))}
-      </div>
-    ) : (
-      <div class="text-center py-fluid-12">
-        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-neutral-100 text-neutral-400 mb-4" aria-hidden="true">
-          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
         </div>
-        <p class="text-fluid-lg text-neutral-600 max-w-md mx-auto">{emptyMessage}</p>
-      </div>
-    )}
-  </Container>
-</Section>
+      )}
+
+      {showGbpLink && (
+        <div class={hasTestimonials ? 'mt-8 text-center' : 'text-center'}>
+          <p class="text-fluid-sm text-neutral-600 mb-3">
+            Avaliações de quem já treinou com a gente no perfil oficial do Google
+          </p>
+          <a
+            href={siteConfig.googleBusinessProfile}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline"
+            data-track="cta_click"
+            data-track-source="gbp_reviews"
+          >
+            Ver no Google Business Profile
+          </a>
+        </div>
+      )}
+    </Container>
+  </Section>
+)}

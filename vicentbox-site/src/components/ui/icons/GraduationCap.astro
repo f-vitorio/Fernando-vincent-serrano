@@ -1,0 +1,22 @@
+---
+interface Props {
+  class?: string;
+  'aria-hidden'?: boolean;
+}
+const { class: className = 'w-6 h-6', 'aria-hidden': ariaHidden = true, ...attrs } = Astro.props;
+---
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+  aria-hidden={ariaHidden}
+  {...attrs}
+>
+  <path d="M12 4v7l1 3h4l1-3h-4l1 3v7" />
+  <circle cx="3" cy="3" r="2" />
+</svg>

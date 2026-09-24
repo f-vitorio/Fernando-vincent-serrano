@@ -14,11 +14,17 @@ export default defineConfig({
   output: 'static',
   integrations: [
     tailwind(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !/\/obrigado\/?$/.test(page),
+    }),
     robotsTxt({
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/obrigado'],
+      policy: [
+        {
+          userAgent: '*',
+          allow: '/',
+          disallow: ['/obrigado'],
+        },
+      ],
       sitemap: 'https://vicentbox.com.br/sitemap-index.xml',
     }),
   ],

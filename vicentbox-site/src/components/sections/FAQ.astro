@@ -1,5 +1,4 @@
 ---
-import { siteConfig } from '../../types';
 import { generateFAQPageJSONLD } from '../../utils/jsonld';
 import Container from '../ui/Container.astro';
 import Section from '../ui/Section.astro';
@@ -28,6 +27,7 @@ const faqJsonLd = generateFAQPageJSONLD(faqs);
         <div key={i} class="bg-white rounded-xl border border-neutral-200 overflow-hidden animate-fade-in" style={`animation-delay: ${(i + 1) * 50}ms`} role="listitem">
           <button
             type="button"
+            id={`faq-question-${i}`}
             class="w-full px-6 py-4 text-left flex items-center justify-between gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
             aria-expanded="false"
             aria-controls={`faq-answer-${i}`}
@@ -77,4 +77,4 @@ const faqJsonLd = generateFAQPageJSONLD(faqs);
   });
 </script>
 
-<script type="application/ld+json" set:json={JSON.stringify(faqJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />

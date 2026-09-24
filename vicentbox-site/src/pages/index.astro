@@ -1,51 +1,147 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import { siteConfig, services, problemsTreinamento, benefitsTreinamento } from '@types';
+import { services, faqHome, problemsTreinamento, benefitsTreinamento } from '@types';
 import Hero from '@components/sections/Hero.astro';
+import Problems from '@components/sections/Problems.astro';
 import ValueProps from '@components/sections/ValueProps.astro';
 import ServiceCard from '@components/sections/ServiceCard.astro';
-import CTA from '@components/sections/CTA.astro';
 import SocialProof from '@components/sections/SocialProof.astro';
+import CTA from '@components/sections/CTA.astro';
+import FAQ from '@components/sections/FAQ.astro';
 import Dumbbell from '@components/ui/icons/Dumbbell.astro';
 import Running from '@components/ui/icons/Running.astro';
 import Smartphone from '@components/ui/icons/Smartphone.astro';
 import HeartPulse from '@components/ui/icons/HeartPulse.astro';
 import Sparkles from '@components/ui/icons/Sparkles.astro';
 import ShieldCheck from '@components/ui/icons/ShieldCheck.astro';
+import Users from '@components/ui/icons/Users.astro';
+import CheckCircle from '@components/ui/icons/CheckCircle.astro';
 import Container from '@components/ui/Container.astro';
-import { generateLocalBusinessJSONLD } from '@utils/jsonld';
+import Section from '@components/ui/Section.astro';
+import Card from '../components/ui/Card.astro';
+import {
+  generateBreadcrumbListJSONLD,
+  generateHomeReviewsJSONLD,
+} from '@utils/jsonld';
+
+const waAvaliacao = 'https://wa.me/5544999218147?text=Olá! Vim pelo site da VicentBOX. Quero agendar uma avaliação com o personal trainer.';
+const benefitIcons: Record<string, any> = {
+  'shield-check': ShieldCheck,
+  posture: Sparkles,
+  dumbbell: Dumbbell,
+  'user-check': Users,
+  users: Users,
+  'heart-pulse': HeartPulse,
+};
+
+const homeJsonLd = [
+  generateBreadcrumbListJSONLD([{ name: 'Início', url: '/' }]),
+  ...generateHomeReviewsJSONLD(),
+];
 ---
 
 <Layout
-  title="Treinamento Personalizado para Saude e Qualidade de Vida aos 40+ | VicentBOX"
-  description="Elimine dores, corrija a postura e volte a se movimentar com seguranca. Studio em Maringa/PR com 19 anos de experiencia, especializacao USP HC e terapia manual inclusa. Agende avaliacao gratuita."
-  jsonLd={[generateLocalBusinessJSONLD()]}
+  title="Personal Trainer em Maringá | Saia das Dores e Cuide da Saúde 40+"
+  description="Personal trainer em Maringá para dores, cansaço, fadiga e sobrepeso aos 40+. Turmas de até 3, terapia manual 5 min, 19 anos. Agende pelo WhatsApp."
+  jsonLd={homeJsonLd}
+  includePerson
 >
+  <!-- PAS · Hero: Problema + alívio imediato + solução -->
   <Hero
-    title="Treinamento Personalizado para Saude e Qualidade de Vida aos 40+"
-    subtitle="Elimine dores cronicas, corrija desvios posturais e volte a fazer o que ama com metodo testado, turmas de ate 3 pessoas e terapia manual em toda sessao."
-    ctaText="Agendar Avaliacao Gratuita"
-    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de agendar uma avaliacao gratuita."
+    title="Personal Trainer em Maringá para sair das dores e voltar a se movimentar"
+    subtitle="Dores no corpo, cansaço, fadiga e sobrepeso derrubam sua energia e a vontade de ser ativa de novo. Aqui você treina em turmas de até 3 pessoas, com terapia manual ao final de toda aula e acompanhamento de perto — feito para mulheres 40+ que querem cuidar da saúde com segurança."
+    ctaText="Falar no WhatsApp"
+    ctaHref={waAvaliacao}
+    ctaVariant="whatsapp"
     ctaTrackSource="hero"
-    badge="Studio em Maringa/PR | 19 anos de experiencia | Especializacao USP HC"
+    badge="Studio em Maringá/PR | 19 anos de experiência | Especialização USP HC em andamento"
+    image="/images/hero-personal-trainer.jpg"
+    imageAlt="Personal trainer acompanhando aluna em exercício com faixa elástica no studio VicentBOX"
+    visualChips={["Turma de até 3", "Terapia manual 5 min"]}
     stats={[
-      { value: '19+', label: 'Anos de experiencia' },
-      { value: '3', label: 'Alunos por turma (max.)' },
-      { value: '5 min', label: 'Terapia manual/sessao' },
+      { value: '19+', label: 'Anos de experiência' },
+      { value: '3', label: 'Alunos por turma (máx.)' },
+      { value: '5 min', label: 'Terapia manual/aula' },
     ]}
   />
 
+  <!-- PAS · Agitação: espelha as dores reais do público -->
+  <Problems
+    title="Se você se reconhece aqui, não está sozinha"
+    subtitle="São exatamente os problemas que mais chegam até a VicentBOX — e o ponto de partida do nosso trabalho"
+    problems={[
+      'Dores no corpo que limitam o seu dia a dia',
+      'Cansaço e fadiga que derrubam sua energia',
+      'Sobrepeso ou obesidade sem rumo definido',
+      'Não se sente bem com o próprio corpo',
+      'Quer voltar a ser ativa, mas não sabe por onde começar',
+      'Sedentarismo e medo de se machucar ao tentar voltar a treinar',
+    ]}
+  />
+
+  <!-- Passo de conversão logo após a agitação -->
+  <Section background="white" class="py-0" aria-label="Chamada para agendar avaliação">
+    <Container class="text-center pb-fluid-8">
+      <a
+        href={waAvaliacao}
+        class="btn btn-whatsapp btn-lg"
+        data-track="cta_click"
+        data-track-source="after_problems"
+      >
+        Falar no WhatsApp e agendar avaliação
+      </a>
+      <p class="text-fluid-sm text-neutral-500 mt-3">
+        Avaliação com valor informado no agendamento · Sem compromisso de contratar plano
+      </p>
+    </Container>
+  </Section>
+
+  <!-- PAS · Solução + mecanismo -->
   <ValueProps>
     <HeartPulse slot="heart-pulse" class="w-6 h-6" />
     <Sparkles slot="sparkles" class="w-6 h-6" />
     <ShieldCheck slot="shield-check" class="w-6 h-6" />
   </ValueProps>
 
+  <!-- PAS · Desejo: o que muda no dia a dia -->
+  <Section id="beneficios" background="neutral-50" aria-labelledby="beneficios-title">
+    <Container>
+      <header class="heading-section">
+        <h2 id="beneficios-title" class="heading-section-title">O que muda quando o treino é feito para você</h2>
+        <p class="heading-section-subtitle">Benefícios do método VicentBOX para quem busca saúde, mobilidade e acompanhamento de verdade</p>
+      </header>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {benefitsTreinamento.map((benefit, i) => {
+          const Icon = benefitIcons[benefit.icon] || CheckCircle;
+          return (
+            <Card key={i} class="card-hover p-6 h-full animate-slide-up" style={`animation-delay: ${(i + 1) * 60}ms`}>
+              <div class="flex items-start gap-4">
+                <div class="icon-wrapper icon-wrapper-primary flex-shrink-0" aria-hidden="true">
+                  <Icon class="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 class="font-heading font-semibold text-neutral-900 mb-1">{benefit.title}</h3>
+                  <p class="text-fluid-base text-neutral-600">{benefit.desc}</p>
+                </div>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+      <div class="text-center mt-8">
+        <a href={waAvaliacao} class="btn btn-whatsapp" data-track="cta_click" data-track-source="after_benefits">
+          Quero começar pelo WhatsApp
+        </a>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Oferta / caminhos (AIDA micro: interesse → ação) -->
   <section id="servicos-destaque" class="section bg-white" aria-labelledby="servicos-title">
     <Container class="px-4 sm:px-6 lg:px-8">
       <header class="heading-section">
-        <h2 id="servicos-title" class="heading-section-title">Servicos Principais</h2>
-        <p class="heading-section-subtitle">Escolha o que faz sentido para sua rotina e objetivo</p>
+        <h2 id="servicos-title" class="heading-section-title">Escolha o caminho da sua avaliação</h2>
+        <p class="heading-section-subtitle">Comece pela sessão que resolve o que te traz aqui — treino presencial, corrida ou consultoria online</p>
       </header>
       <div class="grid md:grid-cols-3 gap-6">
         {services.filter(s => s.priority).map((service, i) => (
@@ -58,23 +154,53 @@ import { generateLocalBusinessJSONLD } from '@utils/jsonld';
       </div>
       <div class="text-center mt-8">
         <a href="/servicos" class="btn btn-outline" data-track="cta_click" data-track-source="ver_todos_servicos">
-          Ver todos os 8 servicos ->
+          Ver todos os serviços →
         </a>
       </div>
     </Container>
   </section>
 
+  <!-- Prova social mais cedo no funil -->
   <SocialProof
-    title="Resultados reais de quem confiou no metodo"
-    subtitle="Mulheres 40+ que eliminaram dores, voltaram a correr e recuperaram a qualidade de vida"
-    emptyMessage="Depoimentos de alunas -- em coleta. Em breve voce vera historias reais aqui."
+    title="Quem já treina aqui avalia no Google"
+    subtitle="Avaliações reais de quem buscou saúde e acompanhamento com a VicentBOX"
+    testimonials={[
+      {
+        name: 'roseli oliveira cordeiro',
+        role: 'Avaliação no Google · há 10 meses',
+        content:
+          'Experiência incrível organização respeito equidade excelente profissional de educação física cujo nome é Fernando vc está de parabéns. Muito obrigada por sua dedicação a todos os participantes',
+        rating: 5,
+      },
+      {
+        name: 'Anita Naka',
+        role: 'Avaliação no Google · há 10 meses',
+        content:
+          'Muito bom profissional, atencioso. E ajudando na saude fisica e mental! Recomendo 100%',
+        rating: 5,
+      },
+      {
+        name: 'Carolina Siqueira',
+        role: 'Avaliação no Google · há 10 meses',
+        content:
+          'Muito boa, professor atencioso e preocupado com a saúde dos alunos, em especial a minha por ser diabética.',
+        rating: 5,
+      },
+    ]}
   />
 
+  <FAQ
+    title="Dúvidas frequentes antes de agendar"
+    subtitle="Preços, horários, avaliação e para quem é o método"
+    faqs={faqHome}
+  />
+
+  <!-- PAS · Fechamento: alívio + ação única -->
   <CTA
-    title="Vamos comecar sua transformacao?"
-    subtitle="A avaliacao e gratuita, sem compromisso, e voce sai com um plano de acao claro para seus objetivos."
-    ctaText="Agendar Minha Avaliacao Gratuita"
-    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de agendar uma avaliacao gratuita."
+    title="Chega de conviver com a dor no piloto automático"
+    subtitle="Agende sua avaliação pelo WhatsApp. Você conversa direto com a gente, tira suas dúvidas e recebe um plano de ação claro para os seus objetivos de saúde."
+    ctaText="Agendar avaliação no WhatsApp"
+    ctaHref={waAvaliacao}
     ctaTrackSource="final_cta"
     background="primary-600"
   />

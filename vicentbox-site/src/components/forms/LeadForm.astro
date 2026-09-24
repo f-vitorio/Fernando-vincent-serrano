@@ -8,7 +8,7 @@ import Container from '../ui/Container.astro';
 
 interface Props {
   source: FormData['source'];
-  title: string;
+  title?: string;
   subtitle?: string;
   submitText: string;
   fields?: Array<'name' | 'email' | 'phone' | 'objective' | 'preferredTime' | 'injuries' | 'subject' | 'message'>;
@@ -33,10 +33,12 @@ const estimatedTicket = getEstimatedTicket(source);
 ---
 
 <div class={`bg-white rounded-2xl border border-neutral-200 p-6 md:p-8 shadow-card ${className}`}>
-  <div class="text-center mb-8">
-    <h2 class="text-fluid-2xl font-heading font-semibold text-neutral-900 mb-2">{title}</h2>
-    {subtitle && <p class="text-fluid-base text-neutral-600">{subtitle}</p>}
-  </div>
+  {title && (
+    <div class="text-center mb-8">
+      <h2 class="text-fluid-2xl font-heading font-semibold text-neutral-900 mb-2">{title}</h2>
+      {subtitle && <p class="text-fluid-base text-neutral-600">{subtitle}</p>}
+    </div>
+  )}
 
   <form
     id={`form-${source}`}
@@ -44,6 +46,9 @@ const estimatedTicket = getEstimatedTicket(source);
     data-source={source}
     data-form-type={formType}
     data-estimated-ticket={estimatedTicket}
+    data-redirect={redirectToObrigado ? 'true' : 'false'}
+    data-endpoint={siteConfig.formspreeEndpoint || ''}
+    data-submit-text={submitText}
   >
     {fields.includes('name') && (
       <Input
@@ -102,7 +107,7 @@ const estimatedTicket = getEstimatedTicket(source);
         type="select"
         placeholder="Selecione"
         options={[
-          { value: 'manha-cedo', label: 'Manhã cedo (6h-8h)' },
+          { value: 'manha-cedo', label: 'Manhã cedo (7h-9h)' },
           { value: 'manha', label: 'Manhã (8h-12h)' },
           { value: 'almoco', label: 'Horário de almoço (12h-14h)' },
           { value: 'tarde', label: 'Tarde (14h-18h)' },
@@ -188,18 +193,28 @@ const estimatedTicket = getEstimatedTicket(source);
 </div>
 
 <script>
-  // Client-side form handling
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById(`form-${source}`);
-    const successDiv = document.getElementById(`form-${source}-success`);
+  import { validateFormData, generateWhatsAppLink } from '../../utils/whatsapp';
+  import { trackFormSubmit, trackWhatsAppClick } from '../../utils/tracking';
+  import type { FormData as LeadFormData } from '../../types';
 
-    if (!form || !successDiv) return;
+  document.querySelectorAll<HTMLFormElement>('form[id^="form-"]').forEach((form) => {
+    if (form.dataset.leadFormBound === 'true') return;
+    form.dataset.leadFormBound = 'true';
+
+    const source = form.dataset.source || '';
+    const formType = form.dataset.formType || 'whatsapp';
+    const estimatedTicket = Number(form.dataset.estimatedTicket || '0');
+    const redirectToObrigado = form.dataset.redirect === 'true';
+    const endpoint = form.dataset.endpoint || '';
+    const submitText = form.dataset.submitText || 'Enviar';
+    const successDiv = document.getElementById(`form-${source}-success`);
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (!successDiv) return;
 
       const formData = new FormData(form);
-      const data: FormData = {
+      const data: LeadFormData = {
         name: formData.get('name')?.toString() || '',
         email: formData.get('email')?.toString() || '',
         phone: formData.get('phone')?.toString() || '',
@@ -208,112 +223,101 @@ const estimatedTicket = getEstimatedTicket(source);
         subject: formData.get('subject')?.toString() || '',
         message: formData.get('message')?.toString() || '',
         injuries: formData.get('injuries')?.toString() || '',
-        source: '{source}',
-        formType: '{formType}',
+        source: source as LeadFormData['source'],
+        formType: formType as LeadFormData['formType'],
       };
 
-      // Client-side validation
       const validation = validateFormData(data);
       if (!validation.valid) {
-        // Show errors
+        form.querySelectorAll('.invalid').forEach((el) => {
+          el.classList.remove('invalid');
+          el.removeAttribute('aria-invalid');
+        });
+        form.querySelectorAll('[id$="-error"]').forEach((el) => el.remove());
         Object.entries(validation.errors).forEach(([field, error]) => {
-          const input = form.querySelector(`[name="${field}"]`);
-          if (input) {
-            input.setAttribute('aria-invalid', 'true');
-            input.classList.add('invalid');
-            let errorEl = input.parentElement?.querySelector(`#${field}-error`);
-            if (!errorEl) {
-              errorEl = document.createElement('p');
-              errorEl.id = `${field}-error`;
-              errorEl.className = 'text-fluid-sm text-accent-600 mt-1.5';
-              errorEl.role = 'alert';
-              input.parentElement?.appendChild(errorEl);
-            }
-            errorEl.textContent = error;
+          const input = form.querySelector<HTMLElement>(`[name="${field}"]`);
+          if (!input) return;
+          input.setAttribute('aria-invalid', 'true');
+          input.classList.add('invalid');
+          let errorEl = input.parentElement?.querySelector<HTMLElement>(`#${field}-error`);
+          if (!errorEl) {
+            errorEl = document.createElement('p');
+            errorEl.id = `${field}-error`;
+            errorEl.className = 'text-fluid-sm text-red-600 mt-1.5';
+            errorEl.setAttribute('role', 'alert');
+            input.parentElement?.appendChild(errorEl);
           }
+          errorEl.textContent = error;
         });
         return;
       }
 
-      // Clear previous errors
-      form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
-      form.querySelectorAll('[id$="-error"]').forEach(el => el.remove());
+      trackFormSubmit(source as LeadFormData['source'], estimatedTicket);
 
-      // Track form submit
-      if (window.trackFormSubmit) {
-        window.trackFormSubmit('{source}', {estimatedTicket});
-      }
-
-      if ('{formType}' === 'whatsapp') {
-        // Generate WhatsApp link and redirect
+      if (formType === 'whatsapp') {
         const whatsappUrl = generateWhatsAppLink(data);
-        if (window.trackWhatsAppClick) {
-          window.trackWhatsAppClick('form');
+        trackWhatsAppClick('form');
+        const win = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        if (!win) {
+          window.location.href = whatsappUrl;
         }
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 
-        // Show success state
         form.classList.add('hidden');
         successDiv.classList.remove('hidden');
 
-        // Redirect to obrigado page after delay
-        if ({redirectToObrigado}) {
+        if (redirectToObrigado) {
           setTimeout(() => {
-            window.location.href = `/obrigado?source={source}&type=whatsapp`;
+            window.location.href = `/obrigado?source=${source}&type=whatsapp`;
           }, 3000);
         }
-      } else {
-        // Submit to Formspree (email)
-        const endpoint = '{siteConfig.formspreeEndpoint}';
-        if (!endpoint) {
-          console.error('Formspree endpoint not configured');
-          alert('Erro: configuração de e-mail não encontrada. Tente pelo WhatsApp.');
-          return;
-        }
+        return;
+      }
 
-        const submitBtn = form.querySelector('button[type="submit"]');
+      if (!endpoint) {
+        console.error('Formspree endpoint not configured');
+        alert('Erro: configuração de e-mail não encontrada. Tente pelo WhatsApp.');
+        return;
+      }
+
+      const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+      }
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          form.classList.add('hidden');
+          successDiv.classList.remove('hidden');
+          if (redirectToObrigado) {
+            setTimeout(() => {
+              window.location.href = `/obrigado?source=${source}&type=email`;
+            }, 3000);
+          }
+        } else {
+          throw new Error('Falha no envio');
+        }
+      } catch (error) {
+        console.error('Formspree error:', error);
+        alert('Erro ao enviar. Tente novamente ou use o WhatsApp.');
         if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Enviando...';
-        }
-
-        try {
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-          });
-
-          if (response.ok) {
-            form.classList.add('hidden');
-            successDiv.classList.remove('hidden');
-
-            if ({redirectToObrigado}) {
-              setTimeout(() => {
-                window.location.href = `/obrigado?source={source}&type=email`;
-              }, 3000);
-            }
-          } else {
-            throw new Error('Falha no envio');
-          }
-        } catch (error) {
-          console.error('Formspree error:', error);
-          alert('Erro ao enviar. Tente novamente ou use o WhatsApp.');
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = '{submitText}';
-          }
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitText;
         }
       }
     });
 
-    // Clear errors on input
-    form.querySelectorAll('input, textarea, select').forEach(input => {
+    form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input, textarea, select').forEach((input) => {
       input.addEventListener('input', () => {
         input.classList.remove('invalid');
         input.removeAttribute('aria-invalid');
-        const errorEl = input.parentElement?.querySelector(`#${input.name}-error`);
-        errorEl?.remove();
+        input.parentElement?.querySelector(`#${input.name}-error`)?.remove();
       });
     });
   });

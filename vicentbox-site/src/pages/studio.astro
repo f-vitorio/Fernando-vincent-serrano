@@ -1,52 +1,89 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import { siteConfig } from '@types';
 import Hero from '@components/sections/Hero.astro';
 import CTA from '@components/sections/CTA.astro';
 import Container from '@components/ui/Container.astro';
 import Section from '@components/ui/Section.astro';
 import Button from '@components/ui/Button.astro';
 import Card from '@components/ui/Card.astro';
-import Camera from '@components/ui/icons/Video.astro';
 import Dumbbell from '@components/ui/icons/Dumbbell.astro';
 import Sparkles from '@components/ui/icons/Sparkles.astro';
 import Users from '@components/ui/icons/Users.astro';
 import Refresh from '@components/ui/icons/Refresh.astro';
+import Breadcrumb from '@components/ui/Breadcrumb.astro';
+import { generateBreadcrumbListJSONLD } from '@utils/jsonld';
+
+const waVisit = 'https://wa.me/5544999218147?text=Olá! Vim pelo site da VicentBOX. Gostaria de agendar uma visita ao studio.';
+
+const breadcrumbItems = [
+  { name: 'Início', url: '/' },
+  { name: 'Studio', url: '/studio' },
+];
+
+const studioJsonLd = [
+  generateBreadcrumbListJSONLD(breadcrumbItems),
+];
+
+const galleryItems = [
+  { label: 'Área de treino', image: '/images/studio.jpg', alt: 'Área de treino do studio VicentBOX em Maringá' },
+  { label: 'Treinamento em turma reduzida', image: '/images/treinamento-multifuncional.jpg', alt: 'Personal trainer com duas alunas em treinamento supervisionado' },
+  { label: 'Alongamento em grupo', image: '/images/alongamento.jpg', alt: 'Aula de alongamento em grupo no studio' },
+  { label: 'Terapia manual', image: '/images/terapia-manual.jpg', alt: 'Sessão de terapia manual ao final do treino' },
+  { label: 'Grupo de corrida', image: '/images/grupo-corrida.jpg', alt: 'Grupo de corrida VicentBOX em treino ao ar livre' },
+  { label: 'Avaliação antes de começar', image: '/images/hero-personal-trainer.jpg', alt: 'Personal trainer acompanhando aluna em exercício no studio' },
+];
 ---
 
 <Layout
-  title="Studio | Conheca Nosso Espaco | VicentBOX"
-  description="Conheca o studio VicentBOX em Maringa/PR: equipamentos, espaco de treino, area de terapia manual e ambiente acolhedor. Fotos e videos do espaco, equipamentos e aulas. Agende sua visita."
+  title="Studio VicentBOX em Maringá | Conheça o Espaço de Treino"
+  description="Conheça o studio VicentBOX em Maringá/PR: equipamentos, espaço de treino e ambiente acolhedor. Rua Néo Alves Martins 2447, Centro. Agende visita."
+  jsonLd={studioJsonLd}
 >
+  <Breadcrumb items={breadcrumbItems} />
   <Hero
-    title="Conheca Nosso Studio em Maringa/PR"
-    subtitle="Um espaco pensado para seu conforto, seguranca e resultados. Equipamentos de qualidade, ambiente climatizado e acolhedor."
+    title="Studio de Personal Trainer em Maringá/PR"
+    subtitle="Um espaço pensado para seu conforto e segurança: turmas reduzidas e terapia manual ao final de cada aula."
     ctaText="Agendar Visita"
-    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de agendar uma visita ao studio."
+    ctaHref={waVisit}
     ctaTrackSource="hero"
-    badge="Rua Neo Alves Martins, 2447 - Centro, Maringa/PR"
+    badge="Rua Néo Alves Martins, 2447 - Centro, Maringá/PR"
+    image="/images/studio.jpg"
+    imageAlt="Interior do studio VicentBOX com equipamentos de treino funcional em Maringá"
     stats={[
-      { value: '100m2', label: 'Area total' },
-      { value: 'Climatizado', label: 'Ambiente' },
-      { value: 'Acessivel', label: 'Entrada' },
+      { value: '3', label: 'Alunos no multifuncional (máx.)' },
+      { value: '6', label: 'Alunos no alongamento (máx.)' },
+      { value: '5 min', label: 'Terapia manual/aula' },
     ]}
   />
 
   <Section id="galeria" background="white" aria-labelledby="galeria-title">
     <Container>
       <header class="heading-section">
-        <h2 id="galeria-title" class="heading-section-title">Galeria do Espaco</h2>
-        <p class="heading-section-subtitle">Fotos do espaco, equipamentos, aulas e equipe chegando em breve</p>
+        <h2 id="galeria-title" class="heading-section-title">Galeria do Espaço</h2>
+        <p class="heading-section-subtitle">Um tour pelas áreas do studio e do método VicentBOX</p>
       </header>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" role="list" aria-label="Fotos do studio">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <article key={i} class="aspect-[4/3] rounded-xl bg-neutral-100 border border-neutral-200 overflow-hidden relative animate-fade-in" style={`animation-delay: ${(i + 1) * 50}ms`} role="listitem">
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-neutral-400 p-4 text-center">
-              <Camera class="w-10 h-10 mb-2 opacity-50" aria-hidden="true" />
-              <p class="text-fluid-sm">Foto {i + 1} -- em breve</p>
-            </div>
-          </article>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4" role="list" aria-label="Áreas do studio na galeria">
+        {galleryItems.map((item, i) => (
+          <figure
+            key={item.label}
+            class="relative aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200 animate-fade-in"
+            style={`animation-delay: ${(i + 1) * 50}ms`}
+            role="listitem"
+          >
+            <img
+              src={item.image}
+              alt={item.alt}
+              width="1200"
+              height="800"
+              class="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-neutral-900/75 to-transparent p-3 pt-8">
+              <span class="text-fluid-sm font-medium text-white">{item.label}</span>
+            </figcaption>
+          </figure>
         ))}
       </div>
 
@@ -55,7 +92,7 @@ import Refresh from '@components/ui/icons/Refresh.astro';
         <Button
           variant="whatsapp"
           size="lg"
-          href="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de agendar uma visita ao studio."
+          href={waVisit}
           data-track="cta_click"
           data-track-source="studio_visita"
         >
@@ -68,38 +105,38 @@ import Refresh from '@components/ui/icons/Refresh.astro';
   <Section id="areas" background="neutral-50" aria-labelledby="areas-title">
     <Container>
       <header class="heading-section">
-        <h2 id="areas-title" class="heading-section-title">Areas do Studio</h2>
-        <p class="heading-section-subtitle">Cada espaco tem uma funcao no seu resultado</p>
+        <h2 id="areas-title" class="heading-section-title">Áreas do Studio</h2>
+        <p class="heading-section-subtitle">Cada espaço tem uma função no seu resultado</p>
       </header>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card class="card-hover p-6 text-center">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+        <Card class="card-hover p-6 text-center h-full flex flex-col">
           <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4">
             <Dumbbell class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Area de Treino</h3>
-          <p class="text-fluid-base text-neutral-600">Halteres, kettlebells, elasticos, bolas, colchonetes -- tudo para treino funcional completo.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Área de Treino</h3>
+          <p class="text-fluid-base text-neutral-600">Halteres, kettlebells, elásticos, bolas, colchonetes — tudo para treino funcional completo.</p>
         </Card>
-        <Card class="card-hover p-6 text-center">
+        <Card class="card-hover p-6 text-center h-full flex flex-col">
           <div class="icon-wrapper icon-wrapper-secondary mx-auto mb-4">
             <Sparkles class="w-6 h-6" />
           </div>
           <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Terapia Manual</h3>
-          <p class="text-fluid-base text-neutral-600">Maca dedicada, ambiente silencioso, climatizado -- 5 min de liberacao miofascial por sessao.</p>
+          <p class="text-fluid-base text-neutral-600">5 minutos de terapia manual ao final de toda aula, conforme o diferencial da VicentBOX.</p>
         </Card>
-        <Card class="card-hover p-6 text-center">
+        <Card class="card-hover p-6 text-center h-full flex flex-col">
           <div class="icon-wrapper icon-wrapper-accent mx-auto mb-4">
             <Users class="w-6 h-6" />
           </div>
           <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Aulas em Grupo</h3>
-          <p class="text-fluid-base text-neutral-600">Espaco para ate 6 pessoas no alongamento, 3 no multifuncional, 50 no grupo de corrida.</p>
+          <p class="text-fluid-base text-neutral-600">Turmas de até 3 (multifuncional), 6 (alongamento) e 50 (grupo de corrida); 1 no relaxamento individual.</p>
         </Card>
-        <Card class="card-hover p-6 text-center">
+        <Card class="card-hover p-6 text-center h-full flex flex-col">
           <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4">
             <Refresh class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Avaliacao & Reavaliacao</h3>
-          <p class="text-fluid-base text-neutral-600">Area reservada para anamnese, testes de movimento, analise postural fotografica.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Avaliação</h3>
+          <p class="text-fluid-base text-neutral-600">Avaliação antes de começar o treinamento, com definição de objetivos. Valor informado no agendamento.</p>
         </Card>
       </div>
     </Container>
@@ -107,9 +144,9 @@ import Refresh from '@components/ui/icons/Refresh.astro';
 
   <CTA
     title="Vem conhecer de perto?"
-    subtitle="A melhor forma de sentir o ambiente e estando aqui. Agende sua visita sem compromisso."
+    subtitle="A melhor forma de sentir o ambiente é estando aqui. Agende sua visita sem compromisso."
     ctaText="Agendar Visita pelo WhatsApp"
-    ctaHref="https://wa.me/5544999218147?text=Ola! Vim pelo site da VicentBOX. Gostaria de agendar uma visita ao studio."
+    ctaHref={waVisit}
     ctaTrackSource="studio_cta"
     background="primary-600"
   />

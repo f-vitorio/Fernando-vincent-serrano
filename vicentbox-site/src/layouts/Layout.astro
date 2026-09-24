@@ -3,7 +3,12 @@ import { siteConfig } from '../types';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import WhatsAppFloat from '../components/layout/WhatsAppFloat.astro';
-import { generateWebSiteJSONLD, generateLocalBusinessJSONLD } from '../utils/jsonld';
+import {
+  generateWebSiteJSONLD,
+  generateLocalBusinessJSONLD,
+  generatePersonJSONLD,
+  generateWebPageJSONLD,
+} from '../utils/jsonld';
 import { initTracking, trackPageView } from '../utils/tracking';
 import '../styles/global.css';
 
@@ -16,6 +21,8 @@ interface Props {
   jsonLd?: unknown[];
   noIndex?: boolean;
   noFollow?: boolean;
+  /** Inclui Person (Fernando) no schema da página */
+  includePerson?: boolean;
 }
 
 const {
@@ -27,15 +34,25 @@ const {
   jsonLd = [],
   noIndex = false,
   noFollow = false,
+  includePerson = false,
 } = Astro.props;
 
 const pageUrl = canonicalURL || Astro.url.href;
-const pageTitle = `${title} | ${siteConfig.name}`;
+const pathname = Astro.url.pathname;
+const pageTitle = title.includes(siteConfig.name) ? title : `${title} | ${siteConfig.name}`;
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteConfig.url}${ogImage}`;
 
 const structuredData = [
   generateWebSiteJSONLD(),
-  ...(Astro.url.pathname === '/' ? [generateLocalBusinessJSONLD()] : []),
+  generateLocalBusinessJSONLD(),
+  generateWebPageJSONLD({
+    name: pageTitle,
+    description,
+    url: pageUrl,
+  }),
+  ...(includePerson || pathname === '/' || pathname.startsWith('/sobre')
+    ? [generatePersonJSONLD()]
+    : []),
   ...jsonLd,
 ];
 ---
@@ -47,13 +64,17 @@ const structuredData = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#1C4ED8" />
+    <meta name="theme-color" content="#0f766e" />
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {siteConfig.googleSiteVerification && (
+      <meta name="google-site-verification" content={siteConfig.googleSiteVerification} />
+    )}
 
     <link rel="canonical" href={pageUrl} />
     <link rel="alternate" hreflang="pt-BR" href={pageUrl} />
+    <link rel="alternate" hreflang="x-default" href={pageUrl} />
 
     {noIndex && <meta name="robots" content="noindex" />}
     {noFollow && <meta name="robots" content="nofollow" />}
@@ -73,7 +94,7 @@ const structuredData = [
     <meta name="twitter:image" content={fullOgImage} />
 
     {structuredData.map((data, i) => (
-      <script type="application/ld+json" set:json={JSON.stringify(data)} />
+      <script type="application/ld+json" set:html={JSON.stringify(data)} />
     ))}
 
     <script is:inline>
@@ -81,6 +102,15 @@ const structuredData = [
       initTracking();
       {trackPageView.toString()}
       trackPageView('{title}');
+
+      // Listener delegado: dispara eventos de [data-track] em qualquer clique
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-track]');
+        if (!el || !window.__trackEvent) return;
+        window.__trackEvent(el.getAttribute('data-track') || 'click', {
+          source: el.getAttribute('data-track-source') || ''
+        });
+      });
     </script>
   </head>
   <body class="flex min-h-screen flex-col">

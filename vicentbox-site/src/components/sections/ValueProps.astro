@@ -17,17 +17,17 @@ const valueProps = [
   {
     icon: 'heart-pulse',
     title: 'Atenção Humanizada',
-    desc: 'Você não é "mais um número". Turmas de até 3 pessoas, onde o professor conhece seu nome, sua dor e seu objetivo.',
+    desc: 'Turmas de até 3 pessoas com acompanhamento próximo: o personal trainer conhece seu nome, sua dor e seu objetivo — você não é mais um número.',
   },
   {
     icon: 'sparkles',
-    title: 'Terapia Manual Inclusa',
-    desc: 'Toda sessão termina com 5 minutos de liberação miofascial e mobilização — incluso no valor, sem custo extra.',
+    title: 'Terapia Manual ao Final da Aula',
+    desc: 'Toda aula é finalizada com 5 minutos de terapia manual, conforme o diferencial da VicentBOX.',
   },
   {
     icon: 'shield-check',
-    title: 'Especialista USP HC',
-    desc: 'Fernando está finalizando especialização em Educação Física na Saúde no Hospital das Clínicas da USP — excelência técnica comprovada.',
+    title: 'Especialização USP HC em Andamento',
+    desc: 'Fernando está finalizando a especialização em Educação Física na Saúde em Ambiente Hospitalar pela Escola de Medicina da USP — Hospital das Clínicas.',
   },
 ];
 ---
@@ -35,13 +35,13 @@ const valueProps = [
 <Section id="diferenciais" class={className} aria-labelledby="value-props-title">
   <Container>
     <header class="heading-section">
-      <h2 id="value-props-title" class="heading-section-title">Por que escolher a VicentBOX?</h2>
-      <p class="heading-section-subtitle">Três pilares que fazem a diferença no seu resultado</p>
+      <h2 id="value-props-title" class="heading-section-title">A solução para treinar sem se machucar e sem virar mais um número</h2>
+      <p class="heading-section-subtitle">O mecanismo da VicentBOX: atenção de perto, terapia manual e formação voltada à saúde</p>
     </header>
 
-    <div class="grid md:grid-cols-3 gap-6">
+    <div class="grid md:grid-cols-3 gap-6 items-stretch">
       {valueProps.map((prop, i) => (
-        <Card key={i} class="card-hover p-6 text-center animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
+        <Card key={i} class="card-hover p-6 flex flex-col h-full text-center animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
           <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4" aria-hidden="true">
             <slot name={prop.icon} />
           </div>

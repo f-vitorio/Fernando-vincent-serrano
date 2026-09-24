@@ -1,6 +1,5 @@
 ---
 import { siteConfig } from '../../types';
-import Button from '../ui/Button.astro';
 import Container from '../ui/Container.astro';
 import Instagram from '../ui/icons/Instagram.astro';
 import Facebook from '../ui/icons/Facebook.astro';
@@ -10,85 +9,172 @@ import MapPin from '../ui/icons/MapPin.astro';
 import Phone from '../ui/icons/Phone.astro';
 import Mail from '../ui/icons/Mail.astro';
 import Clock from '../ui/icons/Clock.astro';
+
+const serviceLinks = [
+  { href: '/treinamento-multifuncional', label: 'Treinamento Multifuncional' },
+  { href: '/grupo-corrida', label: 'Grupo de Corrida' },
+  { href: '/consultoria-online', label: 'Consultoria Online / App' },
+  { href: '/servicos', label: 'Todos os serviços' },
+];
+
+const navLinks = [
+  { href: '/sobre', label: 'Sobre o Fernando' },
+  { href: '/studio', label: 'Studio em Maringá' },
+  { href: '/contato', label: 'Contato' },
+];
+
+const socials = [
+  { href: siteConfig.social.instagram, label: 'Instagram', Icon: Instagram },
+  { href: siteConfig.social.facebook, label: 'Facebook', Icon: Facebook },
+  { href: siteConfig.social.tiktok, label: 'TikTok', Icon: TikTok },
+  { href: siteConfig.social.youtube, label: 'YouTube', Icon: YouTube },
+];
 ---
 
-<footer class="bg-neutral-900 text-neutral-300" role="contentinfo">
-  <div class="container-custom py-fluid-16 lg:py-fluid-20">
-    <div class="grid gap-fluid-10 md:grid-cols-2 lg:grid-cols-4">
-      <div class="lg:col-span-2">
-        <a href="/" class="flex items-center gap-2 mb-6" aria-label={`${siteConfig.name} - Início`}>
+<footer class="bg-neutral-900 text-neutral-300 border-t-2 border-accent-600" role="contentinfo">
+  <div class="container-custom py-fluid-12 md:py-fluid-16">
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+      <!-- Coluna 1: marca + CTA + redes -->
+      <div class="lg:pr-4">
+        <a href="/" class="inline-flex items-center gap-2 mb-4" aria-label={`${siteConfig.name} - Início`}>
           <span class="font-heading font-bold text-2xl text-white">Vicent<span class="text-accent-500">BOX</span></span>
         </a>
-        <p class="text-fluid-base max-w-xs mb-6 leading-relaxed">
-          Treinamento personalizado para saúde e qualidade de vida. Especialista em dores crônicas, desvios posturais, grupo de corrida e consultoria online. Fernando Serrano Vicentin — 19 anos de experiência, especialização USP HC.
+        <p class="text-fluid-sm text-neutral-400 leading-relaxed mb-5 max-w-sm">
+          Personal trainer em Maringá para saúde e qualidade de vida aos 40+.
+          Fernando Serrano Vicentin — 19 anos de experiência; empresa VicentBOX com 3 anos. Especialização em Educação Física na Saúde (USP HC) em andamento.
         </p>
-        <div class="flex items-center gap-6">
-          <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-neutral-400 hover:text-white transition-colors duration-fast">
-            <Instagram class="w-5 h-5" />
-          </a>
-          <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-neutral-400 hover:text-white transition-colors duration-fast">
-            <Facebook class="w-5 h-5" />
-          </a>
-          <a href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="text-neutral-400 hover:text-white transition-colors duration-fast">
-            <TikTok class="w-5 h-5" />
-          </a>
-          <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="text-neutral-400 hover:text-white transition-colors duration-fast">
-            <YouTube class="w-5 h-5" />
-          </a>
+
+        <a
+          href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent('Olá! Vim pelo site da VicentBOX. Gostaria de agendar uma avaliação.')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#15803d] text-white text-fluid-sm font-medium hover:bg-[#166534] transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#15803d] focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
+          data-track="whatsapp_click"
+          data-track-source="footer"
+        >
+          <Phone class="w-4 h-4" aria-hidden="true" />
+          Agendar avaliação
+        </a>
+
+        <div class="flex items-center gap-3 mt-6">
+          {socials.map(({ href, label, Icon }) => (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-white transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+            >
+              <Icon class="w-5 h-5" />
+            </a>
+          ))}
         </div>
+
+        <a
+          href={siteConfig.googleBusinessProfile}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex items-center gap-2 text-fluid-sm text-neutral-400 hover:text-white transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
+          data-track="cta_click"
+          data-track-source="footer_gbp"
+        >
+          <MapPin class="w-4 h-4 text-primary-400" aria-hidden="true" />
+          Perfil no Google Business
+        </a>
       </div>
 
-      <div>
-        <h3 class="font-heading font-semibold text-white mb-4">Serviços</h3>
-        <nav aria-label="Serviços">
-          <ul class="space-y-3">
-            <li><a href="/treinamento-multifuncional" class="hover:text-white transition-colors duration-fast">Treinamento Multifuncional</a></li>
-            <li><a href="/grupo-corrida" class="hover:text-white transition-colors duration-fast">Grupo de Corrida</a></li>
-            <li><a href="/consultoria-online" class="hover:text-white transition-colors duration-fast">Consultoria Online / App</a></li>
-            <li><a href="/servicos" class="hover:text-white transition-colors duration-fast">Ver todos os serviços</a></li>
+      <!-- Coluna 2: navegação -->
+      <div class="lg:px-4">
+        <h3 class="text-fluid-sm font-heading font-semibold uppercase tracking-wider text-neutral-500 mb-4">Navegação</h3>
+        <nav aria-label="Serviços" class="mb-6">
+          <ul class="space-y-2.5">
+            {serviceLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-fluid-sm text-neutral-300 hover:text-white transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <nav aria-label="Institucional">
+          <ul class="space-y-2.5">
+            {navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-fluid-sm text-neutral-300 hover:text-white transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
 
-      <div>
-        <h3 class="font-heading font-semibold text-white mb-4">Contato</h3>
-        <address class="not-italic space-y-3 text-fluid-sm">
-          <div class="flex items-start gap-3">
-            <MapPin class="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
-            <div>
-              <p>{siteConfig.address.street}</p>
-              <p>{siteConfig.address.neighborhood}</p>
-              <p>{siteConfig.address.city} - {siteConfig.address.state}, {siteConfig.address.zipCode}</p>
-            </div>
-          </div>
-          <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 hover:text-white transition-colors duration-fast">
-            <Phone class="w-5 h-5 text-primary-400 flex-shrink-0" aria-hidden="true" />
+      <!-- Coluna 3: contato (NAP) -->
+      <div class="lg:pl-4">
+        <h3 class="text-fluid-sm font-heading font-semibold uppercase tracking-wider text-neutral-500 mb-4">Contato</h3>
+        <address class="not-italic space-y-3.5 text-fluid-sm">
+          <a
+            href={siteConfig.googleBusinessProfile}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-start gap-3 text-neutral-300 hover:text-white transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
+            data-track="cta_click"
+            data-track-source="footer_maps"
+          >
+            <MapPin class="w-4 h-4 text-primary-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <span>
+              {siteConfig.address.street}<br />
+              {siteConfig.address.neighborhood}<br />
+              {siteConfig.address.city} — {siteConfig.address.state}
+            </span>
+          </a>
+
+          <a
+            href={`https://wa.me/${siteConfig.whatsappNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 text-neutral-300 hover:text-white transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
+            data-track="whatsapp_click"
+            data-track-source="footer_phone"
+          >
+            <Phone class="w-4 h-4 text-primary-400 flex-shrink-0" aria-hidden="true" />
             <span>{siteConfig.phoneFormatted}</span>
           </a>
-          <a href={`mailto:${siteConfig.email}`} class="flex items-center gap-3 hover:text-white transition-colors duration-fast">
-            <Mail class="w-5 h-5 text-primary-400 flex-shrink-0" aria-hidden="true" />
+
+          <a
+            href={`mailto:${siteConfig.email}`}
+            class="flex items-center gap-3 text-neutral-300 hover:text-white transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded break-all"
+          >
+            <Mail class="w-4 h-4 text-primary-400 flex-shrink-0" aria-hidden="true" />
             <span>{siteConfig.email}</span>
           </a>
-          <div class="flex items-center gap-3">
-            <Clock class="w-5 h-5 text-primary-400 flex-shrink-0" aria-hidden="true" />
+
+          <div class="flex items-start gap-3 text-neutral-300">
+            <Clock class="w-4 h-4 text-primary-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
-              <p>{siteConfig.businessHours.weekdays}</p>
-              <p>{siteConfig.businessHours.saturday}</p>
+              <p class="text-neutral-300">{siteConfig.businessHours.weekdays}</p>
+              <p class="text-neutral-300">{siteConfig.businessHours.weekdaysAlt}</p>
+              <p class="text-neutral-500">Demais dias: sob consulta</p>
             </div>
           </div>
         </address>
       </div>
     </div>
 
-    <div class="mt-fluid-10 pt-fluid-8 border-t border-neutral-800">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-fluid-sm text-neutral-500">
-          © {new Date().getFullYear()} {siteConfig.name}. Todos os direitos reservados.
-        </p>
-        <p class="text-fluid-sm text-neutral-500">
-          Desenvolvido com foco em conversão, acessibilidade e performance.
-        </p>
-      </div>
+    <div class="mt-10 pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-fluid-xs text-neutral-500">
+        © {new Date().getFullYear()} {siteConfig.name} — Maringá/PR. Todos os direitos reservados.
+      </p>
+      <p class="text-fluid-xs text-neutral-500">
+        {siteConfig.address.full}
+      </p>
     </div>
   </div>
 </footer>

@@ -1,4 +1,4 @@
-import { siteConfig } from '../types';
+import { siteConfig, type FormData } from '../types';
 
 declare global {
   interface Window {
@@ -11,21 +11,45 @@ declare global {
 export function initTracking(): void {
   if (typeof window === 'undefined') return;
 
-  // Initialize dataLayer
   window.dataLayer = window.dataLayer || [];
 
-  // GA4 + GTM
-  if (siteConfig.gtmId) {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${siteConfig.gtmId}`;
-    document.head.appendChild(script);
+  (window as any).__trackEvent = trackEvent;
+  (window as any).trackWhatsAppClick = trackWhatsAppClick;
+  (window as any).trackFormSubmit = trackFormSubmit;
 
+  const ga4Id = siteConfig.ga4Id as string | undefined;
+  const gtmId = siteConfig.gtmId as string | undefined;
+  const adsId = siteConfig.googleAdsConversionId as string | undefined;
+
+  // Define gtag sempre que houver GA4, GTM (via dataLayer) ou Google Ads
+  if (ga4Id || gtmId || adsId) {
     window.gtag = function gtag() {
       window.dataLayer.push(arguments);
     };
+  }
+
+  // GA4 via gtag.js (config envia page_view automaticamente)
+  if (ga4Id) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${ga4Id}`;
+    document.head.appendChild(script);
+
     window.gtag('js', new Date());
-    window.gtag('config', siteConfig.gtmId);
+    window.gtag('config', ga4Id);
+  }
+
+  // GTM via snippet padrão do container
+  if (gtmId) {
+    (function (w: Window, d: Document, s: string, id: string) {
+      const dl = ((w as any).dataLayer = (w as any).dataLayer || []);
+      dl.push({ gtm: new Date().getTime(), event: 'gtm.js' });
+      const f = d.getElementsByTagName(s)[0] as HTMLScriptElement;
+      const j = d.createElement(s) as HTMLScriptElement;
+      j.async = true;
+      j.src = `https://www.googletagmanager.com/gtm.js?id=${id}`;
+      f.parentNode?.insertBefore(j, f);
+    })(window, document, 'script', gtmId);
   }
 
   // Meta Pixel
@@ -42,10 +66,9 @@ export function initTracking(): void {
     window.fbq('track', 'PageView');
   }
 
-  // Google Ads Conversion (base)
-  if (siteConfig.googleAdsConversionId) {
-    window.gtag = window.gtag || function() { window.dataLayer.push(arguments); };
-    window.gtag('config', `AW-${siteConfig.googleAdsConversionId}`);
+  // Google Ads (base) — page_view do gtag config não conta como conversão
+  if (adsId && window.gtag) {
+    window.gtag('config', `AW-${adsId}`, { send_page_view: false });
   }
 }
 
@@ -74,10 +97,9 @@ export function trackEvent({ event, parameters }: TrackingEventParams): void {
     window.fbq('track', fbEvent, parameters);
   }
 
-  // Google Ads Conversion
+  // Google Ads Conversion — apenas no lead real do formulário (evita duplicidade)
   if (siteConfig.googleAdsConversionId && siteConfig.googleAdsConversionLabel && window.gtag) {
-    const conversionEvents = ['generate_lead', 'contact'];
-    if (conversionEvents.includes(event)) {
+    if (event === 'generate_lead') {
       window.gtag('event', 'conversion', {
         send_to: `${siteConfig.googleAdsConversionId}/${siteConfig.googleAdsConversionLabel}`,
         value: parameters.value || 1.0,
@@ -93,7 +115,7 @@ export function trackEvent({ event, parameters }: TrackingEventParams): void {
   }
 }
 
-export function trackFormSubmit(formType: 'treinamento' | 'corrida' | 'consultoria' | 'contato', estimatedValue: number): void {
+export function trackFormSubmit(formType: FormData['source'], estimatedValue: number): void {
   trackEvent({
     event: 'generate_lead',
     parameters: {
@@ -128,7 +150,9 @@ export function trackServiceView(serviceName: string, price: number): void {
 export function trackPageView(pageName: string): void {
   if (typeof window === 'undefined') return;
 
-  if (window.gtag) {
+  // GA4 (gtag config) já envia page_view automático — não duplicar.
+  // GTM consome page_view via dataLayer do gtag config.
+  if (!siteConfig.ga4Id && window.gtag) {
     window.gtag('event', 'page_view', {
       page_title: pageName,
       page_location: window.location.href,

@@ -33,9 +33,9 @@ const { title = 'Escolha seu plano', subtitle, plans, class: className = '' } = 
       {subtitle && <p class="heading-section-subtitle">{subtitle}</p>}
     </header>
 
-    <div class="grid md:grid-cols-2 gap-6">
+    <div class="grid md:grid-cols-2 gap-6 items-stretch">
       {plans.map((plan, i) => (
-        <Card key={i} class={`card-hover p-6 relative ${plan.popular ? 'border-2 border-primary-500 shadow-card-hover' : ''}`}>
+        <Card key={i} class={`card-hover p-6 relative flex flex-col h-full ${plan.popular ? 'border-2 border-primary-500 shadow-card-hover' : ''}`}>
           {plan.popular && (
             <div class="absolute -top-3 left-1/2 -translate-x-1/2">
               <span class="badge badge-primary px-3 py-1 text-fluid-sm">Mais Popular</span>
@@ -50,7 +50,7 @@ const { title = 'Escolha seu plano', subtitle, plans, class: className = '' } = 
               {plan.guarantee}
             </p>
           )}
-          <ul class="space-y-3 mb-6" role="list">
+          <ul class="space-y-3 mb-6 flex-1" role="list">
             {plan.features.map((feature, j) => (
               <li key={j} class="flex items-start gap-3 text-fluid-base text-neutral-700" role="listitem">
                 <CheckCircle class="w-5 h-5 text-secondary-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
@@ -62,7 +62,7 @@ const { title = 'Escolha seu plano', subtitle, plans, class: className = '' } = 
             href={plan.ctaHref}
             variant={plan.ctaVariant || 'primary'}
             size="lg"
-            class="w-full"
+            class="w-full mt-auto"
             data-track="plan_cta_click"
             data-track-source={plan.name.toLowerCase().replace(/\s+/g, '-')}
           >
