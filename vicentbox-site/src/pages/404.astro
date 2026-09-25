@@ -16,15 +16,15 @@ import Search from '@components/ui/icons/Search.astro';
 >
   <Section class="min-h-[70vh] flex items-center" background="white" aria-labelledby="not-found-title">
     <Container class="text-center">
-      <div class="mb-6 text-accent-600" aria-hidden="true">
+      <div class="mb-6 text-accent-400" aria-hidden="true">
         <svg class="w-24 h-24 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
 
-      <h1 id="not-found-title" class="text-fluid-4xl font-heading font-bold text-neutral-900 mb-4">404</h1>
-      <h2 class="text-fluid-2xl font-heading font-semibold text-neutral-700 mb-4">Página não encontrada</h2>
-      <p class="text-fluid-lg text-neutral-600 max-w-md mx-auto mb-8">
+      <h1 id="not-found-title" class="text-fluid-4xl font-heading font-bold text-white mb-4">404</h1>
+      <h2 class="text-fluid-2xl font-heading font-semibold text-neutral-200 mb-4">Página não encontrada</h2>
+      <p class="text-fluid-lg text-neutral-300 max-w-md mx-auto mb-8">
         Desculpe, a página que você procura não existe ou foi movida. Pode ter digitado o endereço errado ou o link pode estar desatualizado.
       </p>
 
@@ -50,16 +50,16 @@ import Search from '@components/ui/icons/Search.astro';
         </Button>
       </div>
 
-      <div class="max-w-md mx-auto p-6 bg-neutral-50 rounded-xl">
-        <p class="text-fluid-sm text-neutral-600 mb-4">Ou navegue pelas seções principais:</p>
+      <div class="max-w-md mx-auto p-6 bg-primary-900 rounded-xl">
+        <p class="text-fluid-sm text-neutral-300 mb-4">Ou navegue pelas seções principais:</p>
         <nav class="flex flex-wrap items-center justify-center gap-3 text-fluid-sm" aria-label="Navegação rápida">
-          <a href="/treinamento-multifuncional" class="text-primary-700 hover:underline" data-track="nav_click" data-track-source="404_treinamento">Treinamento Multifuncional</a>
+          <a href="/treinamento-multifuncional" class="text-accent-400 hover:underline" data-track="nav_click" data-track-source="404_treinamento">Treinamento Multifuncional</a>
           <span class="text-neutral-300">.</span>
-          <a href="/grupo-corrida" class="text-primary-700 hover:underline" data-track="nav_click" data-track-source="404_corrida">Grupo de Corrida</a>
+          <a href="/grupo-corrida" class="text-accent-400 hover:underline" data-track="nav_click" data-track-source="404_corrida">Grupo de Corrida</a>
           <span class="text-neutral-300">.</span>
-          <a href="/consultoria-online" class="text-primary-700 hover:underline" data-track="nav_click" data-track-source="404_consultoria">Consultoria Online</a>
+          <a href="/consultoria-online" class="text-accent-400 hover:underline" data-track="nav_click" data-track-source="404_consultoria">Consultoria Online</a>
           <span class="text-neutral-300">.</span>
-          <a href="/contato" class="text-primary-700 hover:underline" data-track="nav_click" data-track-source="404_contato">Contato</a>
+          <a href="/contato" class="text-accent-400 hover:underline" data-track="nav_click" data-track-source="404_contato">Contato</a>
         </nav>
       </div>
     </Container>

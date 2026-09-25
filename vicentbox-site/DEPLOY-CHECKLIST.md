@@ -3,21 +3,20 @@
 ## Pré-Deploy (Local)
 
 - [ ] `npm run build` → exit code 0
-- [ ] `dist/` gerado com 8 páginas + assets
+- [ ] `dist/` gerado com as páginas do site + assets
 - [ ] `npm run preview` → todas as rotas HTTP 200
 - [ ] TypeScript strict: `npx astro check` → 0 erros
-- [ ] Formulários testados:
+- [ ] CTAs de WhatsApp testados (todas as páginas):
   - [ ] Treinamento → WhatsApp abre com mensagem pré-preenchida
   - [ ] Corrida → WhatsApp abre com mensagem pré-preenchida
-  - [ ] Consultoria → Formspree envia e-mail para vicentbox71@gmail.com
-  - [ ] Contato → Formspree + WhatsApp
-  - [ ] Página `/obrigado` mostra mensagem correta baseada em `?source=&type=`
+  - [ ] Consultoria → WhatsApp abre com mensagem pré-preenchida
+  - [ ] Contato → WhatsApp abre com mensagem pré-preenchida
 - [ ] WhatsApp Float (mobile) abre conversa correta
 - [ ] Header/WhatsApp links abrem `wa.me/5544999218147`
 - [ ] Tracking console logs aparecem em dev (`[Tracking] event params`)
 - [ ] JSON-LD válido (Google Rich Results Test)
 - [ ] Sitemap.xml gerado em `dist/sitemap-index.xml`
-- [ ] Robots.txt permite tudo, bloqueia `/obrigado`
+- [ ] Robots.txt permite tudo
 - [ ] Lighthouse CI: Performance ≥90, A11y ≥95, Best Practices ≥90, SEO ≥90
 
 ---
@@ -45,15 +44,6 @@
 | `META_PIXEL_ID` | Sim | `1234567890` | Meta Events Manager |
 | `GOOGLE_ADS_CONVERSION_ID` | Sim | `987654321` | Google Ads > Conversions |
 | `GOOGLE_ADS_CONVERSION_LABEL` | Sim | `abcDEF123` | Google Ads > Conversion Action |
-| `FORMSPREE_ENDPOINT` | Sim | `https://formspree.io/f/abc123` | Formspree > Form Settings |
-
-### Formspree
-
-- [ ] Criar conta em formspree.io
-- [ ] Criar formulário "VicentBOX Leads"
-- [ ] Configurar e-mail de notificação: `vicentbox71@gmail.com`
-- [ ] Adicionar endpoint no `.env`
-- [ ] Testar envio real (consultoria + contato)
 
 ### Google Business Profile (GBP)
 
@@ -110,15 +100,14 @@
 - [ ] DNS: apontar para Cloudflare (nameservers)
 - [ ] SSL/TLS: Full (Strict)
 - [ ] Cache Rules: Cache Everything para assets estáticos
-- [ ] Page Rules: Bypass cache para `/obrigado`
 
-### Netlify / Vercel (Alternativa)
+### GitHub Pages (deploy atual)
 
-- [ ] Importar repo
-- [ ] Detecta Astro automaticamente
-- [ ] Build: `npm run build`, Output: `dist`
-- [ ] Env vars: copiar do `.env`
-- [ ] Deploy
+- [ ] Workflow `.github/workflows/deploy.yml` builda `vicentbox-site/`
+- [ ] Habilitar Pages no repo: Settings → Pages → Source: "GitHub Actions"
+- [ ] Descomentar o job `deploy` no workflow
+- [ ] Apontar DNS do `vicentboxmga.com.br` para o GitHub Pages (quando for publicar)
+- [ ] Site migrado para GitHub — projeto Netlify encerrado
 
 ---
 
@@ -126,7 +115,7 @@
 
 - [ ] Home carrega < 2s (3G)
 - [ ] LPs carregam < 2.5s
-- [ ] Formulários funcionam em produção
+- [ ] Todos os CTAs abrem o WhatsApp com mensagem pré-preenchida
 - [ ] GA4 DebugView: eventos `page_view`, `generate_lead`, `contact`
 - [ ] GTM Preview: tags disparando
 - [ ] Meta Pixel Helper: eventos OK
@@ -137,7 +126,6 @@
 - [ ] Velocidade: PageSpeed Insights ≥ 90 mobile/desktop
 - [ ] Acessibilidade: axe-core 0 violações críticas
 - [ ] Mobile: sem overflow horizontal, CTAs sticky funcionam
-- [ ] Forms: spam protection (hCaptcha/Turnstile) ativo
 
 ---
 
@@ -145,7 +133,7 @@
 
 | Frequência | Ação |
 |---|---|
-| Diária | Verificar leads no Formspree / WhatsApp |
+| Diária | Verificar leads no WhatsApp |
 | Semanal | GA4: tráfego, conversões, origem |
 | Semanal | GSC: impressões, cliques, posição média |
 | Semanal | GBP: reviews, posts, fotos |
@@ -161,7 +149,7 @@ Se algo der errado no deploy:
 
 1. **Hostinger:** Restaurar backup anterior do `public_html/` via File Manager > Backups
 2. **Cloudflare Pages:** Deploy anterior → "Rollback to this deployment"
-3. **Netlify/Vercel:** Deploy anterior → "Promote to production"
+3. **GitHub Pages:** reverter o commit em `main` (o workflow republica) ou "Re-run" do último deploy OK
 
 ---
 
@@ -170,7 +158,7 @@ Se algo der errado no deploy:
 - **Dev:** Vitorio — [contato]
 - **Hospedagem:** Hostinger Support / Cloudflare Support
 - **Domínio:** Registro.br / Cloudflare Registrar
-- **E-mail:** vicentbox71@gmail.com (Formspree notifications)
+- **E-mail:** vicentbox71@gmail.com
 
 ---
 

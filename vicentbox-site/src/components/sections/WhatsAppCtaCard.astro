@@ -1,0 +1,38 @@
+---
+import { siteConfig } from '../../types';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText: string;
+  message: string;
+  source?: string;
+  id?: string;
+  class?: string;
+}
+
+const { title, subtitle, ctaText, message, source = 'whatsapp', id, class: className = '' } = Astro.props;
+
+const whatsappUrl = `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
+---
+
+<div id={id} class={`bg-white/5 rounded-2xl border border-white/10 p-6 md:p-8 shadow-card ${className}`} role="region" aria-label={title || ctaText}>
+  <div class="text-center max-w-xl mx-auto">
+    {title && <h2 class="text-fluid-2xl font-heading font-semibold text-white mb-3">{title}</h2>}
+    {subtitle && <p class="text-fluid-base text-neutral-300 mb-7">{subtitle}</p>}
+    <Button
+      variant="whatsapp"
+      size="lg"
+      href={whatsappUrl}
+      class="w-full sm:w-auto"
+      data-track="whatsapp_click"
+      data-track-source={source}
+    >
+      {ctaText}
+    </Button>
+    <p class="text-fluid-xs text-neutral-400 mt-5">
+      Atendimento humano e sem compromisso — a conversa abre no WhatsApp com sua mensagem pronta.
+    </p>
+  </div>
+</div>

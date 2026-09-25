@@ -2,7 +2,7 @@
 import Layout from '@layouts/Layout.astro';
 import { siteConfig } from '@types';
 import Hero from '@components/sections/Hero.astro';
-import LeadForm from '@components/forms/LeadForm.astro';
+import WhatsAppCtaCard from '@components/sections/WhatsAppCtaCard.astro';
 import Container from '@components/ui/Container.astro';
 import Section from '@components/ui/Section.astro';
 import Card from '@components/ui/Card.astro';
@@ -58,17 +58,16 @@ const contatoJsonLd = [
     <Container>
       <div class="grid lg:grid-cols-2 gap-fluid-10">
         <div>
-          <h2 id="form-title" class="text-fluid-2xl font-heading font-semibold text-neutral-900 mb-4">Envie sua mensagem</h2>
-          <p class="text-fluid-base text-neutral-600 mb-8">Preencha o formulário e retornamos por e-mail e WhatsApp. Todos os campos com * são obrigatórios.</p>
+          <h2 id="form-title" class="text-fluid-2xl font-heading font-semibold text-white mb-4">Fale com a gente</h2>
+          <p class="text-fluid-base text-neutral-300 mb-8">Toda a conversa acontece no WhatsApp: clique, escreva sua mensagem e retornamos no mesmo canal.</p>
         </div>
         <div>
-          <LeadForm
+          <WhatsAppCtaCard
             source="contato"
-            title=""
-            subtitle=""
-            submitText="Enviar Mensagem"
-            fields={['name', 'email', 'phone', 'subject', 'message']}
-            successMessage="Sua mensagem foi enviada! Retornaremos por e-mail e WhatsApp em breve."
+            title="Enviar mensagem pelo WhatsApp"
+            subtitle="Dúvida, agendamento, parceria ou orçamento — respondemos em horário comercial."
+            ctaText="Abrir Conversa no WhatsApp"
+            message="Olá! Vim pelo site da VicentBOX. Gostaria de falar sobre: "
           />
         </div>
       </div>
@@ -87,8 +86,8 @@ const contatoJsonLd = [
           <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4">
             <MapPin class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Endereço</h3>
-          <address class="not-italic text-fluid-base text-neutral-600 leading-relaxed">
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">Endereço</h3>
+          <address class="not-italic text-fluid-base text-neutral-300 leading-relaxed">
             <p>{siteConfig.address.street}</p>
             <p>{siteConfig.address.neighborhood}</p>
             <p>{siteConfig.address.city} - {siteConfig.address.state}</p>
@@ -98,7 +97,7 @@ const contatoJsonLd = [
             href={siteConfig.googleBusinessProfile}
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-4 inline-flex items-center gap-1 text-fluid-sm text-primary-700 hover:underline"
+            class="mt-4 inline-flex items-center gap-1 text-fluid-sm text-accent-400 hover:underline"
             data-track="cta_click"
             data-track-source="gbp_profile"
           >
@@ -111,9 +110,9 @@ const contatoJsonLd = [
           <div class="icon-wrapper icon-wrapper-secondary mx-auto mb-4">
             <Phone class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">WhatsApp</h3>
-          <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="text-fluid-xl font-heading font-semibold text-neutral-900 block mb-2">{siteConfig.phoneFormatted}</a>
-          <p class="text-fluid-base text-neutral-600 mb-4">Resposta em minutos no horário comercial</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">WhatsApp</h3>
+          <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="text-fluid-xl font-heading font-semibold text-white block mb-2">{siteConfig.phoneFormatted}</a>
+          <p class="text-fluid-base text-neutral-300 mb-4">Resposta em minutos no horário comercial</p>
           <Button
             variant="whatsapp"
             href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent('Olá! Vim pelo site da VicentBOX. Gostaria de mais informações.')}`}
@@ -128,9 +127,9 @@ const contatoJsonLd = [
           <div class="icon-wrapper icon-wrapper-accent mx-auto mb-4">
             <Mail class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">E-mail</h3>
-          <a href={`mailto:${siteConfig.email}`} class="text-fluid-base text-neutral-900 block mb-4">{siteConfig.email}</a>
-          <p class="text-fluid-base text-neutral-600 mb-4">Para dúvidas detalhadas, envio de documentos, parcerias B2B</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">E-mail</h3>
+          <a href={`mailto:${siteConfig.email}`} class="text-fluid-base text-white block mb-4">{siteConfig.email}</a>
+          <p class="text-fluid-base text-neutral-300 mb-4">Para dúvidas detalhadas, envio de documentos, parcerias B2B</p>
           <Button
             variant="outline"
             href={`mailto:${siteConfig.email}?subject=Contato via Site - VicentBOX`}
@@ -145,13 +144,13 @@ const contatoJsonLd = [
           <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4">
             <Clock class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Horários de Atendimento</h3>
-          <div class="space-y-2 text-fluid-base text-neutral-600">
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">Horários de Atendimento</h3>
+          <div class="space-y-2 text-fluid-base text-neutral-300">
             <p><strong>Seg, Qua e Sex:</strong> 7h às 18h</p>
             <p><strong>Ter e Qui:</strong> 7h às 21h</p>
             <p><strong>Demais dias:</strong> sob consulta</p>
           </div>
-          <p class="text-fluid-sm text-neutral-500 mt-4">Fora do horário? Deixe mensagem no WhatsApp que retornamos no próximo dia útil.</p>
+          <p class="text-fluid-sm text-neutral-400 mt-4">Fora do horário? Deixe mensagem no WhatsApp que retornamos no próximo dia útil.</p>
         </Card>
       </div>
     </Container>
@@ -163,7 +162,7 @@ const contatoJsonLd = [
         <h2 id="mapa-title" class="heading-section-title">Como chegar</h2>
         <p class="heading-section-subtitle">Endereço do studio VicentBOX — abra o perfil oficial no Google</p>
       </header>
-      <div class="rounded-2xl overflow-hidden border border-neutral-200 shadow-card">
+      <div class="rounded-2xl overflow-hidden border border-white/10 shadow-card">
         <iframe
           src={`https://www.google.com/maps?cid=6061027470552195231&output=embed`}
           title={`Mapa da VicentBOX — ${siteConfig.address.full}`}

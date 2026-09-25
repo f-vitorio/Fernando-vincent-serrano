@@ -29,8 +29,12 @@ const isDark = background === 'primary-600' || background === 'primary-700';
 const variant = isDark && ctaVariant === 'outline' ? 'primary' : ctaVariant;
 ---
 
-<Section background={background} class={className} aria-labelledby="cta-title">
-  <Container class="text-center">
+<Section
+  background={background}
+  class={`${className} ${isDark ? 'pattern-dots' : ''}`}
+  aria-labelledby="cta-title"
+>
+  <Container class="relative z-10 text-center">
     <h2 id="cta-title" class="text-fluid-2xl md:text-fluid-3xl font-heading font-bold mb-3 text-balance">{title}</h2>
     {subtitle && <p class="text-fluid-base md:text-fluid-lg mb-7 max-w-2xl mx-auto opacity-90">{subtitle}</p>}
     <Button

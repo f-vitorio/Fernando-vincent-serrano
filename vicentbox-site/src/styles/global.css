@@ -13,7 +13,7 @@
 
 @layer base {
   * {
-    @apply border-neutral-200;
+    @apply border-white/10;
   }
 
   html {
@@ -28,14 +28,14 @@
   }
 
   body {
-    @apply font-body text-neutral-700 antialiased;
-    background-color: #FDFCFA;
+    @apply font-body text-neutral-200 antialiased;
+    background-color: #260d2e;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
 
-  /* headings/p herdam a cor do contexto (claro em fundo escuro, escuro em fundo claro) */
+  /* headings herdam branco por padrão (tema roxo); utilitários explícitos vencem */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-semibold tracking-tight;
+    @apply font-heading font-semibold tracking-tight text-white;
   }
 
   h1 { @apply text-fluid-3xl; }
@@ -58,16 +58,16 @@
 
   /* Links dentro de texto corrido ganham sublinhado */
   p a, li a, dd a, address a {
-    @apply text-primary-700 underline underline-offset-2 hover:text-primary-800;
+    @apply text-accent-400 underline underline-offset-2 hover:text-accent-300;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
-    ring-offset-color: #FDFCFA;
+    @apply outline-none ring-2 ring-accent-400 ring-offset-2;
+    ring-offset-color: #260d2e;
   }
 
   ::selection {
-    @apply bg-primary-100 text-primary-900;
+    @apply bg-accent-400 text-primary-950;
   }
 
   img {
@@ -95,23 +95,23 @@
   }
 
   .btn-primary {
-    @apply btn bg-accent-700 text-white hover:bg-accent-800 active:bg-accent-900
-           shadow-cta hover:shadow-cta-hover focus-visible:ring-accent-500;
+    @apply btn bg-accent-400 text-primary-950 hover:bg-accent-500 active:bg-accent-600
+           shadow-cta hover:shadow-cta-hover focus-visible:ring-primary-600;
   }
 
   .btn-secondary {
-    @apply btn bg-primary-700 text-white hover:bg-primary-800 active:bg-primary-900
-           shadow-card hover:shadow-card-hover focus-visible:ring-primary-500;
+    @apply btn bg-white text-primary-950 hover:bg-neutral-100 active:bg-neutral-200
+           shadow-card hover:shadow-card-hover focus-visible:ring-white;
   }
 
   .btn-outline {
-    @apply btn border-2 border-primary-700 text-primary-700 hover:bg-primary-50
-           active:bg-primary-100 focus-visible:ring-primary-500;
+    @apply btn border-2 border-accent-400 text-accent-400 hover:bg-accent-400/10
+           active:bg-accent-400/20 focus-visible:ring-accent-400;
   }
 
   .btn-ghost {
-    @apply btn text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200
-           focus-visible:ring-neutral-500;
+    @apply btn text-neutral-200 hover:bg-white/10 active:bg-white/20
+           focus-visible:ring-white;
   }
 
   .btn-whatsapp {
@@ -128,16 +128,16 @@
   }
 
   .input {
-    @apply w-full px-4 py-3 bg-white border border-neutral-300 rounded-lg
-           text-fluid-base text-neutral-900 placeholder:text-neutral-400
+    @apply w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg
+           text-fluid-base text-white placeholder:text-neutral-400
            transition-all duration-fast
-           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none
-           disabled:bg-neutral-100 disabled:cursor-not-allowed
+           focus:border-accent-400 focus:ring-2 focus:ring-accent-400/30 focus:outline-none
+           disabled:bg-white/5 disabled:cursor-not-allowed
            invalid:border-red-500 invalid:focus:border-red-500 invalid:focus:ring-red-500/20;
   }
 
   .label {
-    @apply block text-fluid-sm font-medium text-neutral-700 mb-1.5;
+    @apply block text-fluid-sm font-medium text-neutral-200 mb-1.5;
   }
 
   .form-group {
@@ -145,7 +145,7 @@
   }
 
   .card {
-    @apply bg-white rounded-xl border border-neutral-200
+    @apply bg-white/5 rounded-xl border border-white/10
            transition-all duration-normal;
   }
 
@@ -158,19 +158,19 @@
   }
 
   .badge-primary {
-    @apply badge bg-primary-100 text-primary-800;
+    @apply badge bg-accent-400 text-primary-950;
   }
 
   .badge-secondary {
-    @apply badge bg-secondary-100 text-secondary-800;
+    @apply badge bg-secondary-500/15 text-secondary-300;
   }
 
   .badge-accent {
-    @apply badge bg-accent-100 text-accent-800;
+    @apply badge bg-accent-400/15 text-accent-300;
   }
 
   .badge-neutral {
-    @apply badge bg-neutral-100 text-neutral-700;
+    @apply badge bg-white/10 text-neutral-200;
   }
 
   .icon-wrapper {
@@ -178,15 +178,15 @@
   }
 
   .icon-wrapper-primary {
-    @apply icon-wrapper bg-primary-100 text-primary-700;
+    @apply icon-wrapper bg-accent-400/15 text-accent-400;
   }
 
   .icon-wrapper-secondary {
-    @apply icon-wrapper bg-secondary-100 text-secondary-700;
+    @apply icon-wrapper bg-secondary-500/15 text-secondary-400;
   }
 
   .icon-wrapper-accent {
-    @apply icon-wrapper bg-accent-100 text-accent-700;
+    @apply icon-wrapper bg-accent-400 text-primary-950;
   }
 
   .heading-section {
@@ -198,19 +198,19 @@
   }
 
   .heading-section-subtitle {
-    @apply text-fluid-base text-neutral-600;
+    @apply text-fluid-base text-neutral-300;
   }
 
   /* Placeholder ilustrado para imagens pendentes (não parece "quebrado") */
   .img-placeholder {
-    @apply relative overflow-hidden bg-gradient-to-br from-primary-50 via-neutral-50 to-accent-50 border border-neutral-200;
+    @apply relative overflow-hidden bg-gradient-to-br from-primary-900 via-primary-950 to-primary-900 border border-white/10;
   }
 
   .img-placeholder::before {
     content: '';
     @apply absolute inset-0 opacity-40;
-    background-image: radial-gradient(circle at 20% 20%, rgb(13 148 136 / 0.12) 0, transparent 45%),
-                      radial-gradient(circle at 80% 70%, rgb(234 88 12 / 0.10) 0, transparent 45%);
+    background-image: radial-gradient(circle at 20% 20%, rgb(188 124 207 / 0.25) 0, transparent 45%),
+                      radial-gradient(circle at 80% 70%, rgb(255 232 79 / 0.30) 0, transparent 45%);
   }
 
   /* Entradas suaves — desligadas quando o usuário pede menos movimento */
@@ -235,6 +235,233 @@
   .stagger-1 { animation-delay: 80ms; }
   .stagger-2 { animation-delay: 160ms; }
   .stagger-3 { animation-delay: 240ms; }
+
+  /* Numeral decorativo da seção (decoração, não copy) */
+  .section {
+    position: relative;
+    overflow-x: clip;
+  }
+
+  .section-num {
+    position: absolute;
+    top: clamp(1rem, 3vw, 2.5rem);
+    right: clamp(0.75rem, 4vw, 3.5rem);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(255 232 79 / 0.35);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  /* Fita rolante (marquee) */
+  .marquee {
+    position: relative;
+    overflow: hidden;
+    background: #ffe84f;
+    padding: 0.85rem 0;
+  }
+
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: marquee-rola 38s linear infinite;
+  }
+
+  .marquee__group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .marquee__group span {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(0.85rem, 0.8rem + 0.4vw, 1.1rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #260d2e;
+  }
+
+  .marquee__group i {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: #6b277e;
+    opacity: 0.65;
+    flex: none;
+  }
+
+  @keyframes marquee-rola {
+    to { transform: translateX(-50%); }
+  }
+
+  /* Textura de pontilhado (estilo editorial) */
+  .pattern-dots {
+    position: relative;
+  }
+
+  .pattern-dots::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgb(255 255 255 / 0.16) 1px, transparent 1.1px);
+    background-size: 6px 6px;
+    opacity: 0.35;
+  }
+
+  /* Fala central — aspas gigantes como arquitetura */
+  .quote-mark {
+    position: absolute;
+    left: 50%;
+    top: -0.15em;
+    transform: translateX(-50%);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 800;
+    line-height: 1;
+    font-size: clamp(8rem, 4rem + 14vw, 18rem);
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(255 232 79 / 0.4);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .quote-text {
+    position: relative;
+    z-index: 1;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.4rem, 1rem + 2.2vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    text-wrap: balance;
+  }
+
+  .quote-text em {
+    font-style: normal;
+    color: #ffe84f;
+  }
+
+  .quote-who {
+    position: relative;
+    z-index: 1;
+    margin-top: 1.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.65);
+  }
+
+  /* =========================================================
+     ANIMAÇÕES DE SCROLL (motion.ts)
+     O conteúdo só fica oculto com a classe .js no <html>,
+     adicionada por script inline antes da renderização.
+     ========================================================= */
+  .js .reveal,
+  .js .heading-section,
+  .js .quote-text {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+
+  .js .reveal.is-in,
+  .js .heading-section.is-in,
+  .js .quote-text.is-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--d, 0) * 80ms);
+  }
+
+  /* Brilho que segue o mouse nos cards */
+  .card-hover {
+    position: relative;
+  }
+
+  .card-hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      340px circle at var(--mx, 50%) var(--my, 0%),
+      rgb(255 232 79 / 0.1),
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .card-hover:hover::after {
+    opacity: 1;
+  }
+
+  /* Botões: leve elevação + varredura de brilho no hover */
+  .btn {
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 0.35s cubic-bezier(0.33, 1.15, 0.55, 1),
+      background-color 0.3s ease,
+      box-shadow 0.35s ease;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 30%,
+      rgb(255 255 255 / 0.35) 50%,
+      transparent 70%
+    );
+    transform: translateX(-130%);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn:hover::before {
+    transform: translateX(130%);
+  }
+
+  .btn:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  /* Barra de progresso de leitura (injetada pelo motion.ts) */
+  .progresso {
+    position: fixed;
+    inset: 0 0 auto;
+    height: 3px;
+    z-index: 95;
+    pointer-events: none;
+  }
+
+  .progresso i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #6b277e, #ffe84f);
+    transition: width 0.1s linear;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -244,6 +471,21 @@
   .stagger-2,
   .stagger-3 {
     animation: none !important;
+  }
+
+  .marquee__track {
+    animation: none !important;
+  }
+
+  .js .reveal,
+  .js .heading-section,
+  .js .quote-text {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .progresso {
+    display: none;
   }
 
   *,

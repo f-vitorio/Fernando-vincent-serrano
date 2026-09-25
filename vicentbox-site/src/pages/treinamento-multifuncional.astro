@@ -8,7 +8,7 @@ import Offer from '@components/sections/Offer.astro';
 import FAQ from '@components/sections/FAQ.astro';
 import CTA from '@components/sections/CTA.astro';
 import Methodology from '@components/sections/Methodology.astro';
-import LeadForm from '@components/forms/LeadForm.astro';
+import WhatsAppCtaCard from '@components/sections/WhatsAppCtaCard.astro';
 import Dumbbell from '@components/ui/icons/Dumbbell.astro';
 import ShieldCheck from '@components/ui/icons/ShieldCheck.astro';
 import Running from '@components/ui/icons/Running.astro';
@@ -75,7 +75,7 @@ const faqJsonLd = generateFAQPageJSONLD(faqTreinamento);
         icon: 'shield-check',
         title: '1. Avaliação Antes de Começar',
         desc: 'Anamnese, testes de movimento e definição de objetivos claros antes do primeiro treino.',
-        details: ['Histórico de saúde e restrições', 'Testes de movimento', 'Definição de objetivos', 'Valor informado no agendamento'],
+        details: ['Histórico de saúde e restrições', 'Testes de movimento', 'Definição de objetivos', 'Avaliação gratuita (inclusa na mensalidade)'],
       },
       {
         icon: 'dumbbell',
@@ -154,13 +154,12 @@ const faqJsonLd = generateFAQPageJSONLD(faqTreinamento);
     faqs={faqTreinamento}
   />
 
-  <LeadForm
+  <WhatsAppCtaCard
     source="treinamento"
     title="Agende sua avaliação"
-    subtitle="Vamos conversar, avaliar seu caso e entender se o método faz sentido para você."
-    submitText="Agendar pelo WhatsApp"
-    fields={['name', 'phone', 'objective', 'preferredTime']}
-    successMessage="A conversa no WhatsApp será aberta com seus dados pré-preenchidos. É só enviar!"
+    subtitle="Vamos conversar, avaliar seu caso e entender se o método faz sentido para você. Avaliação sem custo, inclusa na mensalidade."
+    ctaText="Agendar pelo WhatsApp"
+    message="Olá! Vim pelo site da VicentBOX. Quero agendar a avaliação do Treinamento Multifuncional."
   />
 
   <Section id="relacionados" background="neutral-50" aria-labelledby="relacionados-title">
@@ -171,16 +170,16 @@ const faqJsonLd = generateFAQPageJSONLD(faqTreinamento);
       </header>
       <ul class="grid sm:grid-cols-3 gap-4 text-fluid-sm">
         <li class="card">
-          <a href="/grupo-corrida" class="font-semibold text-primary-700 hover:underline">Grupo de Corrida em Maringá</a>
-          <p class="text-neutral-600 mt-1">Presencial 3x/semana ou consultoria online de corrida.</p>
+          <a href="/grupo-corrida" class="font-semibold text-accent-400 hover:underline">Grupo de Corrida em Maringá</a>
+          <p class="text-neutral-300 mt-1">Presencial 3x/semana ou consultoria online de corrida.</p>
         </li>
         <li class="card">
-          <a href="/consultoria-online" class="font-semibold text-primary-700 hover:underline">Consultoria Online</a>
-          <p class="text-neutral-600 mt-1">Treino personalizado no app por R$ 39,90/mês.</p>
+          <a href="/consultoria-online" class="font-semibold text-accent-400 hover:underline">Consultoria Online</a>
+          <p class="text-neutral-300 mt-1">Treino personalizado no app por R$ 39,90/mês.</p>
         </li>
         <li class="card">
-          <a href="/servicos" class="font-semibold text-primary-700 hover:underline">Todos os serviços</a>
-          <p class="text-neutral-600 mt-1">Alongamento, relaxamento, desafio 15 dias e palestras.</p>
+          <a href="/servicos" class="font-semibold text-accent-400 hover:underline">Todos os serviços</a>
+          <p class="text-neutral-300 mt-1">Alongamento, relaxamento, desafio 15 dias e palestras.</p>
         </li>
       </ul>
     </Container>

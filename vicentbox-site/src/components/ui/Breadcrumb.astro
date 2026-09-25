@@ -8,18 +8,18 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<nav aria-label="Trilha de navegação" class="bg-white border-b border-neutral-100">
+<nav aria-label="Trilha de navegação" class="bg-primary-950 border-b border-white/5">
   <Container class="py-3">
-    <ol class="flex flex-wrap items-center gap-1 text-fluid-xs text-neutral-500">
+    <ol class="flex flex-wrap items-center gap-1 text-fluid-xs text-neutral-400">
       {items.map((item, i) => (
         <li class="flex items-center gap-1">
           {i > 0 && <span aria-hidden="true" class="text-neutral-300">/</span>}
           {i < items.length - 1 ? (
-            <a href={item.url} class="hover:text-primary-600 underline-offset-2 hover:underline">
+            <a href={item.url} class="hover:text-accent-400 underline-offset-2 hover:underline">
               {item.name}
             </a>
           ) : (
-            <span aria-current="page" class="text-neutral-700 font-medium">
+            <span aria-current="page" class="text-neutral-200 font-medium">
               {item.name}
             </span>
           )}

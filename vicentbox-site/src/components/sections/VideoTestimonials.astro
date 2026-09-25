@@ -1,0 +1,109 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import YouTube from '../ui/icons/YouTube.astro';
+import { siteConfig } from '../../types';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  number?: string;
+  class?: string;
+}
+
+const {
+  title = 'Depoimentos em vídeo',
+  subtitle = 'Quem já treinou aqui conta a própria experiência',
+  number,
+  class: className = '',
+} = Astro.props;
+
+/*
+ * Vídeos dos depoimentos.
+ * Para publicar um vídeo específico, trocar `href` pela URL dele
+ * (ex.: https://www.youtube.com/watch?v=XXXXXXXXXXX).
+ * Enquanto não houver vídeos publicados, todos os cards levam ao
+ * canal oficial do Fernando.
+ */
+const videos = [
+  {
+    title: 'Resultado depois de 12 semanas de treino',
+    author: 'Aluna VicentBOX',
+    thumb: '/images/terapia-manual.jpg',
+    href: siteConfig.social.youtube,
+  },
+  {
+    title: 'Voltar a se movimentar depois dos 40',
+    author: 'Aluna VicentBOX',
+    thumb: '/images/treinamento-multifuncional.jpg',
+    href: siteConfig.social.youtube,
+  },
+  {
+    title: 'Como funciona o treino em turma de até 3 pessoas',
+    author: 'Aluno VicentBOX',
+    thumb: '/images/grupo-corrida.jpg',
+    href: siteConfig.social.youtube,
+  },
+];
+---
+
+<Section id="depoimentos-video" background="neutral-50" number={number} class={className} aria-labelledby="video-testimonials-title">
+  <Container>
+    <header class="heading-section">
+      <h2 id="video-testimonials-title" class="heading-section-title">{title}</h2>
+      {subtitle && <p class="heading-section-subtitle">{subtitle}</p>}
+    </header>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {videos.map((video) => (
+        <article class="card card-hover overflow-hidden flex flex-col reveal">
+          <a
+            href={video.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group block relative aspect-[3/2] overflow-hidden bg-primary-900"
+            data-track="cta_click"
+            data-track-source="depoimento_video"
+            aria-label={`Assistir: ${video.title} (abre em nova aba)`}
+          >
+            <picture>
+              <source srcset={video.thumb.replace(/\.jpg$/, '.webp')} type="image/webp" />
+              <img
+                src={video.thumb}
+                alt=""
+                width="1400"
+                height="933"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </picture>
+            <span class="absolute inset-0 bg-gradient-to-t from-primary-950/85 via-primary-950/20 to-transparent" aria-hidden="true"></span>
+            <span
+              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-accent-400 text-primary-950 flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110"
+              aria-hidden="true"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 translate-x-0.5"><path d="M8 5v14l11-7z" /></svg>
+            </span>
+          </a>
+
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-heading font-semibold text-white mb-1">{video.title}</h3>
+            <p class="text-fluid-sm text-neutral-400 mb-4">{video.author}</p>
+            <a
+              href={video.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-accent-400 font-medium text-fluid-sm hover:underline mt-auto"
+              data-track="cta_click"
+              data-track-source="depoimento_video_link"
+            >
+              <YouTube class="w-4 h-4" />
+              Assistir no YouTube
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </Container>
+</Section>

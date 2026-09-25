@@ -1,0 +1,60 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  number?: string;
+  class?: string;
+}
+
+const {
+  title = 'Quem treina com a gente',
+  subtitle = 'Turmas de até 3 pessoas, terapia manual em toda aula e acompanhamento de perto',
+  number,
+  class: className = '',
+} = Astro.props;
+
+/*
+ * Galeria de fotos.
+ * Substituir pelas fotos dos alunos assim que o cliente enviar
+ * (mesmos nomes de arquivo ou atualizar o array abaixo).
+ */
+const photos = [
+  { src: '/images/treinamento-multifuncional.jpg', alt: 'Aluna em treino multifuncional com acompanhamento do personal' },
+  { src: '/images/terapia-manual.jpg', alt: 'Terapia manual aplicada ao final da aula' },
+  { src: '/images/alongamento.jpg', alt: 'Alongamento guiado no studio' },
+  { src: '/images/grupo-corrida.jpg', alt: 'Grupo de corrida VicentBOX em atividade ao ar livre' },
+  { src: '/images/sessoes-avulsas.jpg', alt: 'Sessão de treino personalizado' },
+  { src: '/images/studio.jpg', alt: 'Ambiente do studio VicentBOX em Maringá' },
+];
+---
+
+<Section id="galeria" background="white" number={number} class={className} aria-labelledby="gallery-title">
+  <Container>
+    <header class="heading-section">
+      <h2 id="gallery-title" class="heading-section-title">{title}</h2>
+      {subtitle && <p class="heading-section-subtitle">{subtitle}</p>}
+    </header>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+      {photos.map((photo) => (
+        <figure class="relative aspect-[3/2] rounded-xl overflow-hidden border border-white/10 bg-primary-900 reveal">
+          <picture>
+            <source srcset={photo.src.replace(/\.jpg$/, '.webp')} type="image/webp" />
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              width="1400"
+              height="933"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </picture>
+        </figure>
+      ))}
+    </div>
+  </Container>
+</Section>

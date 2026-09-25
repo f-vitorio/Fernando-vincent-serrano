@@ -16,10 +16,10 @@ const isHorizontal = layout === 'horizontal';
 ---
 
 {isHorizontal ? (
-  <Card padding="none" class="card-hover overflow-hidden">
+  <Card padding="none" class="card-hover overflow-hidden reveal">
     <div class="grid md:grid-cols-2 lg:grid-cols-5">
       {service.image && (
-        <div class="aspect-[16/10] md:aspect-auto md:min-h-[16rem] bg-neutral-100 overflow-hidden lg:col-span-2" aria-hidden="true">
+        <div class="aspect-[16/10] md:aspect-auto md:min-h-[16rem] bg-primary-900 overflow-hidden lg:col-span-2" aria-hidden="true">
           <picture>
             <source srcset={service.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
             <img
@@ -40,20 +40,20 @@ const isHorizontal = layout === 'horizontal';
             <slot name={service.icon} />
           </div>
           <div class="min-w-0">
-            <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900">{service.name}</h3>
-            <p class="text-fluid-base text-neutral-600 mt-2">{service.shortDescription}</p>
+            <h3 class="text-fluid-lg font-heading font-semibold text-white">{service.name}</h3>
+            <p class="text-fluid-base text-neutral-300 mt-2">{service.shortDescription}</p>
           </div>
         </div>
 
         <div class="mb-4">
-          <p class="text-fluid-xl font-heading font-bold text-primary-700">{service.price}</p>
-          {service.priceDetails && <p class="text-fluid-sm text-neutral-500 mt-1">{service.priceDetails}</p>}
+          <p class="text-fluid-xl font-heading font-bold text-accent-400">{service.price}</p>
+          {service.priceDetails && <p class="text-fluid-sm text-neutral-400 mt-1">{service.priceDetails}</p>}
         </div>
 
         <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-6 flex-1" role="list">
           {service.features.slice(0, 6).map((feature, i) => (
-            <li key={i} class="flex items-start gap-2 text-fluid-sm text-neutral-700" role="listitem">
-              <svg class="w-4 h-4 text-secondary-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <li key={i} class="flex items-start gap-2 text-fluid-sm text-neutral-200" role="listitem">
+              <svg class="w-4 h-4 text-secondary-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
               </svg>
               {feature}
@@ -61,7 +61,7 @@ const isHorizontal = layout === 'horizontal';
           ))}
         </ul>
 
-        <div class="pt-4 border-t border-neutral-100">
+        <div class="pt-4 border-t border-white/5">
           {isComingSoon ? (
             <Button variant="outline" class="sm:w-auto" disabled>
               <Badge variant="neutral" class="mr-2">Em breve</Badge>
@@ -83,9 +83,12 @@ const isHorizontal = layout === 'horizontal';
     </div>
   </Card>
 ) : (
-  <Card padding="none" class="card-hover h-full flex flex-col overflow-hidden">
+  <Card padding="none" class="card-hover h-full flex flex-col overflow-hidden relative">
+    {service.priority && (
+      <span class="absolute top-3 right-3 z-10 badge badge-accent shadow-sm">Mais procurado</span>
+    )}
     {service.image && (
-      <div class="aspect-[16/10] bg-neutral-100 overflow-hidden flex-shrink-0" aria-hidden="true">
+      <div class="aspect-[16/10] bg-primary-900 overflow-hidden flex-shrink-0" aria-hidden="true">
         <picture>
           <source srcset={service.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
           <img
@@ -101,35 +104,37 @@ const isHorizontal = layout === 'horizontal';
       </div>
     )}
     <div class="p-6 flex flex-col flex-1">
-      <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4" aria-hidden="true">
-        <slot name={service.icon} />
+      <div class="flex items-center gap-3 mb-3">
+        <div class="icon-wrapper icon-wrapper-primary flex-shrink-0" aria-hidden="true">
+          <slot name={service.icon} />
+        </div>
+        <h3 class="text-fluid-lg font-heading font-semibold text-white leading-snug">{service.name}</h3>
       </div>
 
-      <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2 text-center min-h-[2.75rem] flex items-center justify-center">{service.name}</h3>
-      <p class="text-fluid-base text-neutral-600 mb-4 text-center min-h-[7rem]">{service.shortDescription}</p>
+      <p class="text-fluid-sm text-neutral-300 mb-4">{service.shortDescription}</p>
 
-      <div class="text-center mb-4 min-h-[8rem] flex flex-col justify-start">
-        <p class="text-fluid-xl font-heading font-bold text-primary-700">{service.price}</p>
-        {service.priceDetails && <p class="text-fluid-sm text-neutral-500 mt-1">{service.priceDetails}</p>}
+      <div class="mb-4">
+        <p class="text-fluid-lg font-heading font-bold text-accent-400">{service.price}</p>
+        {service.priceDetails && <p class="text-fluid-xs text-neutral-400 mt-0.5">{service.priceDetails}</p>}
       </div>
 
-      <ul class="space-y-2 mb-6 flex-1" role="list">
-        {service.features.slice(0, 4).map((feature, i) => (
-          <li key={i} class="flex items-center gap-2 text-fluid-sm text-neutral-700" role="listitem">
-            <svg class="w-4 h-4 text-secondary-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+      <ul class="space-y-1.5 mb-5 flex-1" role="list">
+        {service.features.slice(0, 3).map((feature, i) => (
+          <li key={i} class="flex items-start gap-2 text-fluid-sm text-neutral-200" role="listitem">
+            <svg class="w-4 h-4 text-secondary-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
             </svg>
             {feature}
           </li>
         ))}
-        {service.features.length > 4 && (
-          <li class="text-fluid-sm text-primary-600 font-medium flex items-center gap-1" role="listitem">
-            <span>+{service.features.length - 4} mais benefícios</span>
+        {service.features.length > 3 && (
+          <li class="text-fluid-sm text-accent-400 font-medium" role="listitem">
+            +{service.features.length - 3} benefícios
           </li>
         )}
       </ul>
 
-      <div class="pt-4 mt-auto border-t border-neutral-100">
+      <div class="pt-4 mt-auto border-t border-white/5">
         {isComingSoon ? (
           <Button variant="outline" class="w-full" disabled>
             <Badge variant="neutral" class="mr-2">Em breve</Badge>

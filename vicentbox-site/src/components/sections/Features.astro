@@ -1,12 +1,12 @@
 ---
-import { siteConfig } from '../../types';
+import { siteConfig, type FeatureItem } from '../../types';
 import Container from '../ui/Container.astro';
 import Section from '../ui/Section.astro';
 
 interface Props {
   title?: string;
   subtitle?: string;
-  features: Array<{ icon: string; title: string; desc: string }>;
+  features: FeatureItem[];
   class?: string;
 }
 
@@ -22,12 +22,26 @@ const { title = 'Por que funciona', subtitle, features, class: className = '' } 
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {features.map((feature, i) => (
-        <article key={i} class="card card-hover p-6 animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
-          <div class="icon-wrapper icon-wrapper-primary mb-4" aria-hidden="true">
-            <slot name={feature.icon} />
-          </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">{feature.title}</h3>
-          <p class="text-fluid-base text-neutral-600">{feature.desc}</p>
+        <article key={i} class="card card-hover p-6 reveal">
+          {feature.image ? (
+            <div class="icon-wrapper overflow-hidden p-0 mb-4" aria-hidden="true">
+              <img
+                src={feature.image}
+                alt=""
+                width="44"
+                height="44"
+                class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ) : (
+            <div class="icon-wrapper icon-wrapper-primary mb-4" aria-hidden="true">
+              <slot name={feature.icon} />
+            </div>
+          )}
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">{feature.title}</h3>
+          <p class="text-fluid-base text-neutral-300">{feature.desc}</p>
         </article>
       ))}
     </div>

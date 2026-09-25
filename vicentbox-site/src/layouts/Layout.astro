@@ -9,7 +9,6 @@ import {
   generatePersonJSONLD,
   generateWebPageJSONLD,
 } from '../utils/jsonld';
-import { initTracking, trackPageView } from '../utils/tracking';
 import '../styles/global.css';
 
 interface Props {
@@ -64,7 +63,10 @@ const structuredData = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#0f766e" />
+    <meta name="theme-color" content="#6b277e" />
+
+    {/* Marca .js antes da renderização: sem ela nada fica oculto aguardando animação */}
+    <script is:inline>document.documentElement.classList.add('js');</script>
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -99,11 +101,87 @@ const structuredData = [
       <script type="application/ld+json" set:html={JSON.stringify(data)} />
     ))}
 
-    <script is:inline>
-      {initTracking.toString()}
-      initTracking();
-      {trackPageView.toString()}
-      trackPageView('{title}');
+    <script is:inline define:vars={{
+      trackingConfig: {
+        ga4Id: siteConfig.ga4Id,
+        gtmId: siteConfig.gtmId,
+        adsId: siteConfig.googleAdsConversionId,
+        adsLabel: siteConfig.googleAdsConversionLabel,
+        metaPixelId: siteConfig.metaPixelId,
+      },
+      pageTitle: title,
+    }}>
+      // --- Tracking self-contained (initTracking + trackPageView + listeners) ---
+      window.dataLayer = window.dataLayer || [];
+
+      window.__trackEvent = function (event, params) {
+        params = params || {};
+        if (window.gtag) window.gtag('event', event, params);
+        if (window.fbq) {
+          var fbMap = { generate_lead: 'Lead', contact: 'Contact', view_item: 'ViewContent', whatsapp_click: 'Contact' };
+          window.fbq('track', fbMap[event] || event, params);
+        }
+        // Google Ads — conversão apenas no lead real (evita duplicidade)
+        if (event === 'generate_lead' && trackingConfig.adsId && trackingConfig.adsLabel && window.gtag) {
+          window.gtag('event', 'conversion', {
+            send_to: trackingConfig.adsId + '/' + trackingConfig.adsLabel,
+            value: params.value || 1.0,
+            currency: 'BRL',
+            transaction_id: 'lead_' + Date.now(),
+          });
+        }
+      };
+      window.trackWhatsAppClick = function (source) {
+        window.__trackEvent('contact', { method: 'whatsapp', source: source });
+      };
+      window.trackFormSubmit = function (formType, value) {
+        window.__trackEvent('generate_lead', { form_type: formType, value: value, currency: 'BRL' });
+      };
+
+      if (trackingConfig.ga4Id || trackingConfig.gtmId || trackingConfig.adsId) {
+        window.gtag = function () { window.dataLayer.push(arguments); };
+      }
+
+      if (trackingConfig.ga4Id) {
+        var gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + trackingConfig.ga4Id;
+        document.head.appendChild(gtagScript);
+        window.gtag('js', new Date());
+        window.gtag('config', trackingConfig.ga4Id);
+      }
+
+      if (trackingConfig.gtmId) {
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var gtmScript = document.createElement('script');
+        gtmScript.async = true;
+        gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=' + trackingConfig.gtmId;
+        document.head.appendChild(gtmScript);
+      }
+
+      if (trackingConfig.metaPixelId) {
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        window.fbq('init', trackingConfig.metaPixelId);
+        window.fbq('track', 'PageView');
+      }
+
+      if (trackingConfig.adsId && window.gtag) {
+        window.gtag('config', 'AW-' + trackingConfig.adsId, { send_page_view: false });
+      }
+
+      // page_view manual só quando não há GA4 (o config do gtag já envia o automático)
+      if (!trackingConfig.ga4Id && window.gtag) {
+        window.gtag('event', 'page_view', {
+          page_title: pageTitle,
+          page_location: window.location.href,
+        });
+      }
 
       // Listener delegado: dispara eventos de [data-track] em qualquer clique
       document.addEventListener('click', function (e) {
@@ -122,5 +200,8 @@ const structuredData = [
     </main>
     <Footer />
     <WhatsAppFloat />
+    <script>
+      import '../scripts/motion';
+    </script>
   </body>
 </html>

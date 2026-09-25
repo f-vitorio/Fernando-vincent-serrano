@@ -5,6 +5,7 @@ interface Props {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   background?: 'white' | 'neutral-50' | 'primary-50' | 'secondary-50' | 'accent-50' | 'neutral-900' | 'primary-600' | 'primary-700' | 'primary-900';
   id?: string;
+  number?: string;
   ariaLabel?: string;
   'aria-labelledby'?: string;
 }
@@ -15,6 +16,7 @@ const {
   size = 'md',
   background = 'white',
   id,
+  number,
   ariaLabel,
   'aria-labelledby': ariaLabelledby,
 } = Astro.props;
@@ -27,15 +29,15 @@ const sizeClasses = {
 };
 
 const backgroundClasses = {
-  white: 'bg-white',
-  'neutral-50': 'bg-neutral-50',
-  'primary-50': 'bg-primary-50',
-  'secondary-50': 'bg-secondary-50',
-  'accent-50': 'bg-accent-50',
-  'neutral-900': 'bg-neutral-900 text-neutral-100',
-  'primary-600': 'bg-primary-700 text-white [&_p]:text-primary-50 [&_.heading-section-subtitle]:text-primary-100',
-  'primary-700': 'bg-primary-800 text-white [&_p]:text-primary-50 [&_.heading-section-subtitle]:text-primary-100',
-  'primary-900': 'bg-primary-900 text-neutral-100',
+  white: 'bg-primary-950',
+  'neutral-50': 'bg-primary-900',
+  'primary-50': 'bg-primary-900',
+  'secondary-50': 'bg-primary-900',
+  'accent-50': 'bg-accent-400/10',
+  'neutral-900': 'bg-primary-950',
+  'primary-600': 'bg-primary-600 text-white [&_p]:text-primary-50 [&_.heading-section-subtitle]:text-primary-100',
+  'primary-700': 'bg-primary-700 text-white [&_p]:text-primary-50 [&_.heading-section-subtitle]:text-primary-100',
+  'primary-900': 'bg-primary-900',
 };
 
 const classes = `${sizeClasses[size]} ${backgroundClasses[background]} ${className}`;
@@ -47,5 +49,6 @@ const classes = `${sizeClasses[size]} ${backgroundClasses[background]} ${classNa
   aria-label={ariaLabel}
   aria-labelledby={ariaLabelledby}
 >
+  {number && <span class="section-num" aria-hidden="true">{number}</span>}
   <slot>{children}</slot>
 </section>

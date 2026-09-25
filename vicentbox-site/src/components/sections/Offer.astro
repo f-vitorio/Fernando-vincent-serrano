@@ -41,19 +41,19 @@ const { title = 'Escolha seu plano', subtitle, plans, class: className = '' } = 
               <span class="badge badge-primary px-3 py-1 text-fluid-sm">Mais Popular</span>
             </div>
           )}
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-1">{plan.name}</h3>
-          {plan.period && <p class="text-fluid-sm text-neutral-500 mb-4">{plan.period}</p>}
-          <div class="text-fluid-4xl font-heading font-bold text-primary-700 mb-4">{plan.price}</div>
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-1">{plan.name}</h3>
+          {plan.period && <p class="text-fluid-sm text-neutral-400 mb-4">{plan.period}</p>}
+          <div class="text-fluid-4xl font-heading font-bold text-accent-400 mb-4">{plan.price}</div>
           {plan.guarantee && (
-            <p class="text-fluid-sm text-secondary-700 bg-secondary-50 px-3 py-2 rounded-lg mb-6 flex items-center gap-2">
+            <p class="text-fluid-sm text-secondary-400 bg-secondary-500/10 px-3 py-2 rounded-lg mb-6 flex items-center gap-2">
               <CheckCircle class="w-4 h-4 flex-shrink-0" aria-hidden="true" />
               {plan.guarantee}
             </p>
           )}
           <ul class="space-y-3 mb-6 flex-1" role="list">
             {plan.features.map((feature, j) => (
-              <li key={j} class="flex items-start gap-3 text-fluid-base text-neutral-700" role="listitem">
-                <CheckCircle class="w-5 h-5 text-secondary-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <li key={j} class="flex items-start gap-3 text-fluid-base text-neutral-200" role="listitem">
+                <CheckCircle class="w-5 h-5 text-secondary-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
                 {feature}
               </li>
             ))}

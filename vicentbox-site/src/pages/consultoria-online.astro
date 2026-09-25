@@ -6,7 +6,7 @@ import Features from '@components/sections/Features.astro';
 import Offer from '@components/sections/Offer.astro';
 import FAQ from '@components/sections/FAQ.astro';
 import CTA from '@components/sections/CTA.astro';
-import LeadForm from '@components/forms/LeadForm.astro';
+import WhatsAppCtaCard from '@components/sections/WhatsAppCtaCard.astro';
 import Container from '@components/ui/Container.astro';
 import Section from '@components/ui/Section.astro';
 import Smartphone from '@components/ui/icons/Smartphone.astro';
@@ -112,15 +112,14 @@ const faqJsonLd = generateFAQPageJSONLD(faqConsultoria);
     faqs={faqConsultoria}
   />
 
-  <section id="formulario" class="section bg-white" aria-labelledby="form-title">
+  <section id="formulario" class="section bg-primary-950" aria-labelledby="form-title">
     <Container>
-      <LeadForm
+      <WhatsAppCtaCard
         source="consultoria"
         title="Comece sua consultoria hoje"
-        subtitle="Preencha o formulário e entraremos em contato para montar seu treino personalizado."
-        submitText="Quero começar por E-mail"
-        fields={['name', 'email', 'phone', 'objective', 'injuries']}
-        successMessage="Recebemos seus dados. Em breve entramos em contato para continuar."
+        subtitle="Chame no WhatsApp e montamos juntos seu treino personalizado no app."
+        ctaText="Começar pelo WhatsApp"
+        message="Olá! Vim pelo site da VicentBOX. Quero começar a Consultoria Online."
       />
     </Container>
   </section>
@@ -133,16 +132,16 @@ const faqJsonLd = generateFAQPageJSONLD(faqConsultoria);
       </header>
       <ul class="grid sm:grid-cols-3 gap-4 text-fluid-sm">
         <li class="card">
-          <a href="/treinamento-multifuncional" class="font-semibold text-primary-700 hover:underline">Treinamento Multifuncional</a>
-          <p class="text-neutral-600 mt-1">Turmas de até 3 com terapia manual ao final da aula.</p>
+          <a href="/treinamento-multifuncional" class="font-semibold text-accent-400 hover:underline">Treinamento Multifuncional</a>
+          <p class="text-neutral-300 mt-1">Turmas de até 3 com terapia manual ao final da aula.</p>
         </li>
         <li class="card">
-          <a href="/grupo-corrida" class="font-semibold text-primary-700 hover:underline">Grupo de Corrida</a>
-          <p class="text-neutral-600 mt-1">Corrida de rua presencial ou online em Maringá.</p>
+          <a href="/grupo-corrida" class="font-semibold text-accent-400 hover:underline">Grupo de Corrida</a>
+          <p class="text-neutral-300 mt-1">Corrida de rua presencial ou online em Maringá.</p>
         </li>
         <li class="card">
-          <a href="/servicos" class="font-semibold text-primary-700 hover:underline">Todos os serviços</a>
-          <p class="text-neutral-600 mt-1">Alongamento, relaxamento, desafio 15 dias e palestras.</p>
+          <a href="/servicos" class="font-semibold text-accent-400 hover:underline">Todos os serviços</a>
+          <p class="text-neutral-300 mt-1">Alongamento, relaxamento, desafio 15 dias e palestras.</p>
         </li>
       </ul>
     </Container>

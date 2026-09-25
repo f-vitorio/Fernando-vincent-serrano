@@ -2,10 +2,14 @@
 import Layout from '@layouts/Layout.astro';
 import { services, faqHome, problemsTreinamento, benefitsTreinamento } from '@types';
 import Hero from '@components/sections/Hero.astro';
+import Marquee from '@components/sections/Marquee.astro';
 import Problems from '@components/sections/Problems.astro';
 import ValueProps from '@components/sections/ValueProps.astro';
+import Quote from '@components/sections/Quote.astro';
 import ServiceCard from '@components/sections/ServiceCard.astro';
 import SocialProof from '@components/sections/SocialProof.astro';
+import PhotoGallery from '@components/sections/PhotoGallery.astro';
+import CtaHub from '@components/sections/CtaHub.astro';
 import CTA from '@components/sections/CTA.astro';
 import FAQ from '@components/sections/FAQ.astro';
 import Dumbbell from '@components/ui/icons/Dumbbell.astro';
@@ -51,6 +55,7 @@ const homeJsonLd = [
   <!-- PAS · Hero: Problema + alívio imediato + solução -->
   <Hero
     title="Personal Trainer em Maringá para sair das dores e voltar a se movimentar"
+    highlight="sair das dores"
     subtitle="Dores no corpo, cansaço, fadiga e sobrepeso derrubam sua energia e a vontade de ser ativa de novo. Aqui você treina em turmas de até 3 pessoas, com terapia manual ao final de toda aula e acompanhamento de perto — feito para mulheres 40+ que querem cuidar da saúde com segurança."
     ctaText="Falar no WhatsApp"
     ctaHref={waAvaliacao}
@@ -67,8 +72,23 @@ const homeJsonLd = [
     ]}
   />
 
+  <!-- Fita rolante: pilares do método em movimento -->
+  <Marquee
+    items={[
+      'Avaliação grátis',
+      'Turmas de até 3 pessoas',
+      'Terapia manual em toda aula',
+      '19 anos de experiência',
+      'Maringá/PR',
+      'Projeto social Sports Tea',
+      'Especialização USP HC em andamento',
+      'Mulheres 40+',
+    ]}
+  />
+
   <!-- PAS · Agitação: espelha as dores reais do público -->
   <Problems
+    number="01"
     title="Se você se reconhece aqui, não está sozinha"
     subtitle="São exatamente os problemas que mais chegam até a VicentBOX — e o ponto de partida do nosso trabalho"
     problems={[
@@ -81,32 +101,23 @@ const homeJsonLd = [
     ]}
   />
 
-  <!-- Passo de conversão logo após a agitação -->
-  <Section background="white" class="py-0" aria-label="Chamada para agendar avaliação">
-    <Container class="text-center pb-fluid-8">
-      <a
-        href={waAvaliacao}
-        class="btn btn-whatsapp btn-lg"
-        data-track="cta_click"
-        data-track-source="after_problems"
-      >
-        Falar no WhatsApp e agendar avaliação
-      </a>
-      <p class="text-fluid-sm text-neutral-500 mt-3">
-        Avaliação com valor informado no agendamento · Sem compromisso de contratar plano
-      </p>
-    </Container>
-  </Section>
+  <!-- Bloco dos 5 CTAs (caminhos do cliente) logo após a agitação -->
+  <CtaHub number="02" />
 
   <!-- PAS · Solução + mecanismo -->
-  <ValueProps>
+  <ValueProps number="03">
     <HeartPulse slot="heart-pulse" class="w-6 h-6" />
     <Sparkles slot="sparkles" class="w-6 h-6" />
     <ShieldCheck slot="shield-check" class="w-6 h-6" />
   </ValueProps>
 
+  <!-- Fala central do método -->
+  <Quote
+    quote="Treino de verdade depois dos 40 não é sobre aparecer — é sobre **voltar a se movimentar** com segurança e sem dor."
+  />
+
   <!-- PAS · Desejo: o que muda no dia a dia -->
-  <Section id="beneficios" background="neutral-50" aria-labelledby="beneficios-title">
+  <Section id="beneficios" background="neutral-50" number="04" aria-labelledby="beneficios-title">
     <Container>
       <header class="heading-section">
         <h2 id="beneficios-title" class="heading-section-title">O que muda quando o treino é feito para você</h2>
@@ -116,14 +127,28 @@ const homeJsonLd = [
         {benefitsTreinamento.map((benefit, i) => {
           const Icon = benefitIcons[benefit.icon] || CheckCircle;
           return (
-            <Card key={i} class="card-hover p-6 h-full animate-slide-up" style={`animation-delay: ${(i + 1) * 60}ms`}>
+            <Card key={i} class="card-hover p-6 h-full reveal">
               <div class="flex items-start gap-4">
-                <div class="icon-wrapper icon-wrapper-primary flex-shrink-0" aria-hidden="true">
-                  <Icon class="w-6 h-6" />
-                </div>
+                {benefit.image ? (
+                  <div class="icon-wrapper overflow-hidden p-0 flex-shrink-0" aria-hidden="true">
+                    <img
+                      src={benefit.image}
+                      alt=""
+                      width="44"
+                      height="44"
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ) : (
+                  <div class="icon-wrapper icon-wrapper-primary flex-shrink-0" aria-hidden="true">
+                    <Icon class="w-6 h-6" />
+                  </div>
+                )}
                 <div>
-                  <h3 class="font-heading font-semibold text-neutral-900 mb-1">{benefit.title}</h3>
-                  <p class="text-fluid-base text-neutral-600">{benefit.desc}</p>
+                  <h3 class="font-heading font-semibold text-white mb-1">{benefit.title}</h3>
+                  <p class="text-fluid-base text-neutral-300">{benefit.desc}</p>
                 </div>
               </div>
             </Card>
@@ -139,7 +164,8 @@ const homeJsonLd = [
   </Section>
 
   <!-- Oferta / caminhos (AIDA micro: interesse → ação) -->
-  <section id="servicos-destaque" class="section bg-white" aria-labelledby="servicos-title">
+  <section id="servicos-destaque" class="section bg-primary-950" aria-labelledby="servicos-title">
+    <span class="section-num" aria-hidden="true">05</span>
     <Container class="px-4 sm:px-6 lg:px-8">
       <header class="heading-section">
         <h2 id="servicos-title" class="heading-section-title">Escolha o caminho da sua avaliação</h2>
@@ -164,6 +190,7 @@ const homeJsonLd = [
 
   <!-- Prova social mais cedo no funil -->
   <SocialProof
+    number="06"
     title="Quem já treina aqui avalia no Google"
     subtitle="Avaliações reais de quem buscou saúde e acompanhamento com a VicentBOX"
     testimonials={[
@@ -191,7 +218,11 @@ const homeJsonLd = [
     ]}
   />
 
+  <!-- Fotos dos treinos e do studio -->
+  <PhotoGallery number="07" />
+
   <FAQ
+    number="08"
     title="Dúvidas frequentes antes de agendar"
     subtitle="Preços, horários, avaliação e para quem é o método"
     faqs={faqHome}

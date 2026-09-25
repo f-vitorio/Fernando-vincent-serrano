@@ -8,10 +8,11 @@ import HeartPulse from '../ui/icons/HeartPulse.astro';
 import Sparkles from '../ui/icons/Sparkles.astro';
 
 interface Props {
+  number?: string;
   class?: string;
 }
 
-const { class: className = '' } = Astro.props;
+const { number, class: className = '' } = Astro.props;
 
 const valueProps = [
   {
@@ -32,7 +33,7 @@ const valueProps = [
 ];
 ---
 
-<Section id="diferenciais" class={className} aria-labelledby="value-props-title">
+<Section id="diferenciais" number={number} class={className} aria-labelledby="value-props-title">
   <Container>
     <header class="heading-section">
       <h2 id="value-props-title" class="heading-section-title">A solução para treinar sem se machucar e sem virar mais um número</h2>
@@ -41,12 +42,12 @@ const valueProps = [
 
     <div class="grid md:grid-cols-3 gap-6 items-stretch">
       {valueProps.map((prop, i) => (
-        <Card key={i} class="card-hover p-6 flex flex-col h-full text-center animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
+        <Card key={i} class="card-hover p-6 flex flex-col h-full text-center reveal">
           <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4" aria-hidden="true">
             <slot name={prop.icon} />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">{prop.title}</h3>
-          <p class="text-fluid-base text-neutral-600">{prop.desc}</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">{prop.title}</h3>
+          <p class="text-fluid-base text-neutral-300">{prop.desc}</p>
         </Card>
       ))}
     </div>

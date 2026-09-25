@@ -139,6 +139,105 @@ export const siteConfig: SiteConfig = {
   googleSiteVerification: import.meta.env.GOOGLE_SITE_VERIFICATION,
 };
 
+// --- Bloco de CTAs da home (5 caminhos) --------------------------------
+// Troque o valor aqui quando o cliente enviar o link definitivo:
+// consultoria (início do mês), loja e formulário do evento Conexão Vitalidade.
+const waLink = (message: string) =>
+  `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+export const ctaHubLinks = {
+  // Link direto do WhatsApp do Personal (informado pelo cliente)
+  treinar: 'https://wa.me/message/RHXN5DFAAP2MN1',
+  // PENDENTE: link da consultoria online (cliente envia no início do mês)
+  consultoria: waLink(
+    'Olá! Vim pelo site da VicentBOX. Tenho interesse na Consultoria Online. Gostaria de mais informações.'
+  ),
+  // PENDENTE: link da loja (cliente ainda vai criar)
+  comprar: waLink(
+    'Olá! Vim pelo site da VicentBOX. Tenho interesse nos produtos e no Desafio 15 Dias. Gostaria de mais informações.'
+  ),
+  // Link direto do WhatsApp do Personal (palestras)
+  contratar: 'https://wa.me/message/RHXN5DFAAP2MN1',
+  // PENDENTE: formulário de inscrição do evento (cliente envia na próxima semana)
+  inscreva: waLink(
+    'Olá! Vim pelo site da VicentBOX. Quero me inscrever no evento Conexão Vitalidade.'
+  ),
+  // Canal do podcast VicentBOX Cast no YouTube
+  assistir: siteConfig.social.youtube,
+};
+
+export interface CtaHubItem {
+  id: string;
+  title: string;
+  desc: string;
+  chips: string[];
+  image: string;
+  imageAlt: string;
+  label: string;
+  href: string;
+  trackSource: string;
+  secondary?: { label: string; href: string; trackSource: string };
+}
+
+export const ctaHubItems: CtaHubItem[] = [
+  {
+    id: 'treinar',
+    title: 'Personal, consultoria e projeto social',
+    desc: 'Treino com o Fernando, consultoria online no app e o projeto social gratuito Sports Tea.',
+    chips: ['Com Personal', 'Consultoria online', 'Sports Tea (grátis)'],
+    image: '/images/icone-atividade.jpg',
+    imageAlt: 'Ícone VicentBOX: pessoa em movimento — treinar',
+    label: 'QUERO TREINAR',
+    href: ctaHubLinks.treinar,
+    trackSource: 'cta_hub_treinar',
+    secondary: { label: 'Consultoria online', href: ctaHubLinks.consultoria, trackSource: 'cta_hub_consultoria' },
+  },
+  {
+    id: 'comprar',
+    title: 'Produtos e Desafio 15 Dias',
+    desc: 'Loja de produtos VicentBOX e o desafio de 15 dias para começar a se movimentar agora.',
+    chips: ['Loja de produtos', 'Desafio 15 Dias'],
+    image: '/images/promo-desafio-15-dias.jpg',
+    imageAlt: 'Promoção do Desafio 15 Dias da VicentBOX',
+    label: 'QUERO COMPRAR',
+    href: ctaHubLinks.comprar,
+    trackSource: 'cta_hub_comprar',
+  },
+  {
+    id: 'contratar',
+    title: 'Palestras e ações de saúde',
+    desc: 'Palestras, eventos e ações de exercício físico para empresas, escolas e grupos.',
+    chips: ['Empresas e grupos', 'Conteúdo de movimento'],
+    image: '/images/icone-palestra.jpg',
+    imageAlt: 'Ícone VicentBOX: palestra de saúde',
+    label: 'QUERO CONTRATAR',
+    href: ctaHubLinks.contratar,
+    trackSource: 'cta_hub_contratar',
+  },
+  {
+    id: 'inscreva',
+    title: 'Evento Conexão Vitalidade',
+    desc: 'Inscrições para o evento Conexão Vitalidade — encontro de saúde, movimento e qualidade de vida.',
+    chips: ['Inscrição pelo formulário'],
+    image: '/images/logo-conexao-vitalidade.jpg',
+    imageAlt: 'Logo do evento Conexão Vitalidade',
+    label: 'INSCREVA-SE',
+    href: ctaHubLinks.inscreva,
+    trackSource: 'cta_hub_inscricao',
+  },
+  {
+    id: 'assistir',
+    title: 'VicentBOX Cast',
+    desc: 'Podcast sobre treino, saúde e performance — assista no canal do YouTube.',
+    chips: ['Episódios no YouTube'],
+    image: '/images/logo-vicentbox-cast.jpg',
+    imageAlt: 'Logo do podcast VicentBOX Cast',
+    label: 'QUERO ASSISTIR',
+    href: ctaHubLinks.assistir,
+    trackSource: 'cta_hub_podcast',
+  },
+];
+
 export const services: Service[] = [
   {
     id: 'treinamento-multifuncional',
@@ -290,8 +389,8 @@ export const services: Service[] = [
       'Orçamento via WhatsApp ou formulário',
     ],
     icon: 'users',
-    image: '/images/palestras-saude.jpg',
-    imageAlt: 'Palestra de saúde e exercício físico com público em ambiente de treino',
+    image: '/images/icone-palestra.jpg',
+    imageAlt: 'Ícone VicentBOX: palestrante em ação de saúde — Palestras e Ações de Saúde',
     ctaText: 'Solicitar Orçamento',
     ctaType: 'whatsapp',
     ctaUrl: 'https://wa.me/5544999218147?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20VicentBOX.%20Gostaria%20de%20um%20or%C3%A7amento%20de%20Palestras%20e%20A%C3%A7%C3%B5es%20de%20Sa%C3%BAde.',
@@ -306,11 +405,11 @@ export const faqHome: FAQItem[] = [
   },
   {
     question: 'Quanto custa o personal trainer na VicentBOX?',
-    answer: 'Treinamento Multifuncional (turmas de até 3 pessoas): R$ 400/mês com 2x por semana ou R$ 250/mês com 1x por semana. Grupo de Corrida presencial: R$ 100/mês; online: R$ 50/mês. Consultoria online no app: R$ 39,90/mês. Avaliação com valor informado no agendamento pelo WhatsApp.',
+    answer: 'Treinamento Multifuncional (turmas de até 3 pessoas): R$ 400/mês com 2x por semana ou R$ 250/mês com 1x por semana. Grupo de Corrida presencial: R$ 100/mês; online: R$ 50/mês. Consultoria online no app: R$ 39,90/mês. A avaliação inicial é gratuita e está inclusa na mensalidade.',
   },
   {
     question: 'Como funciona a avaliação inicial?',
-    answer: 'Agendamos uma avaliação para anamnese, testes de movimento, análise postural e definição de objetivos. A avaliação não é gratuita — os valores são informados no agendamento pelo WhatsApp. Sem compromisso de contratação de plano.',
+    answer: 'Agendamos uma avaliação para anamnese, testes de movimento, análise postural e definição de objetivos. A avaliação é gratuita e está inclusa na mensalidade. Sem compromisso de contratação de plano.',
   },
   {
     question: 'Para quem é o treinamento personalizado? Atende iniciantes e 40+?',
@@ -345,7 +444,7 @@ export const faqTreinamento: FAQItem[] = [
   },
   {
     question: 'Como funciona a avaliação inicial?',
-    answer: 'Agendamos uma sessão para anamnese, testes de movimento, análise postural e definição de objetivos. A avaliação tem valor informado no agendamento (não é gratuita) e sem compromisso de contratação de plano.',
+    answer: 'Agendamos uma sessão para anamnese, testes de movimento, análise postural e definição de objetivos. A avaliação é gratuita e está inclusa na mensalidade, sem compromisso de contratação de plano.',
   },
 ];
 
@@ -403,13 +502,20 @@ export const problemsTreinamento = [
   'Falta de acompanhamento próximo e plano claro de ação',
 ];
 
-export const benefitsTreinamento = [
+export interface FeatureItem {
+  icon: string;
+  title: string;
+  desc: string;
+  image?: string;
+}
+
+export const benefitsTreinamento: FeatureItem[] = [
   { icon: 'shield-check', title: 'Alívio das Dores', desc: 'Foco em reduzir dores corporais com exercícios adaptados ao seu quadro' },
-  { icon: 'posture', title: 'Mais Mobilidade', desc: 'Exercícios personalizados para voltar a se movimentar com segurança' },
+  { icon: 'posture', title: 'Mais Mobilidade', desc: 'Exercícios personalizados para voltar a se movimentar com segurança', image: '/images/icone-atividade.jpg' },
   { icon: 'dumbbell', title: 'Força para o Dia a Dia', desc: 'Ganho de força para atividades do dia a dia: carregar, levantar, brincar com netos' },
   { icon: 'user-check', title: 'Acompanhamento Próximo', desc: 'Turmas de até 3 pessoas — o professor corrige cada repetição' },
   { icon: 'users', title: 'Atenção Humanizada', desc: 'Grupo pequeno, mesmo objetivo, zero julgamento. Você não é "mais um número"' },
-  { icon: 'heart-pulse', title: 'Terapia Manual em Toda Aula', desc: '5 minutos de terapia manual ao final de toda sessão, conforme o diferencial da VicentBOX' },
+  { icon: 'heart-pulse', title: 'Terapia Manual em Toda Aula', desc: '5 minutos de terapia manual ao final de toda sessão, conforme o diferencial da VicentBOX', image: '/images/icone-coracao.jpg' },
 ];
 
 export const benefitsCorrida = [
@@ -421,9 +527,9 @@ export const benefitsCorrida = [
   { icon: 'smartphone', title: 'Acompanhamento Contínuo', desc: 'Acompanhamento do treino presencial ou online, conforme o formato escolhido' },
 ];
 
-export const featuresConsultoria = [
+export const featuresConsultoria: FeatureItem[] = [
   { icon: 'video', title: 'Treino Personalizado', desc: 'Treino montado para o seu objetivo, no celular — onde e quando quiser' },
-  { icon: 'map-pin', title: 'Adaptado ao Local', desc: 'O treino se adapta ao local onde você treina (academia, casa, parque)' },
+  { icon: 'map-pin', title: 'Adaptado ao Local', desc: 'O treino se adapta ao local onde você treina (academia, casa, parque)', image: '/images/icone-folha.jpg' },
   { icon: 'message-circle', title: 'Acompanhamento do Professor', desc: 'Suporte direto com o professor para dúvidas, adaptações e motivação' },
   { icon: 'users', title: 'Assinatura Simples', desc: 'R$ 39,90/mês — consultoria online completa, sem contratos complexos' },
   { icon: 'dumbbell', title: 'Onde e Quando Quizer', desc: 'Academia, casa, hotel, parque. Treino personalizado no celular' },

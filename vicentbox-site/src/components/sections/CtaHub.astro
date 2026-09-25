@@ -1,0 +1,80 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import { ctaHubItems } from '../../types';
+
+interface Props {
+  number?: string;
+  class?: string;
+}
+
+const { number, class: className = '' } = Astro.props;
+
+const isExternal = (href: string) => href.startsWith('http');
+---
+
+<Section id="caminhos" background="neutral-50" number={number} class={className} aria-labelledby="cta-hub-title">
+  <Container>
+    <header class="heading-section">
+      <h2 id="cta-hub-title" class="heading-section-title">Escolha o seu caminho</h2>
+      <p class="heading-section-subtitle">
+        Treinar, comprar, contratar, participar ou acompanhar — cada caminho tem um botão
+      </p>
+    </header>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {ctaHubItems.map((item, i) => (
+        <article
+          class="card card-hover p-6 flex flex-col h-full reveal"
+        >
+          <picture class="block w-14 h-14 rounded-xl overflow-hidden border border-white/10 mb-4 flex-shrink-0">
+            <source srcset={item.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+            <img
+              src={item.image}
+              alt={item.imageAlt}
+              width="56"
+              height="56"
+              class="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+
+          <h3 class="font-heading font-semibold text-white mb-1">{item.title}</h3>
+          <p class="text-fluid-sm text-neutral-300 mb-3">{item.desc}</p>
+
+          <ul class="flex flex-wrap gap-1.5 mb-5" role="list">
+            {item.chips.map((chip) => (
+              <li class="badge badge-primary">{chip}</li>
+            ))}
+          </ul>
+
+          <div class="mt-auto flex flex-col gap-2">
+            <a
+              href={item.href}
+              class="btn btn-primary w-full"
+              data-track="cta_click"
+              data-track-source={item.trackSource}
+              target={isExternal(item.href) ? '_blank' : undefined}
+              rel={isExternal(item.href) ? 'noopener noreferrer' : undefined}
+            >
+              {item.label}
+            </a>
+            {item.secondary && (
+              <a
+                href={item.secondary.href}
+                class="btn btn-outline btn-sm w-full"
+                data-track="cta_click"
+                data-track-source={item.secondary.trackSource}
+                target={isExternal(item.secondary.href) ? '_blank' : undefined}
+                rel={isExternal(item.secondary.href) ? 'noopener noreferrer' : undefined}
+              >
+                {item.secondary.label}
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </Container>
+</Section>

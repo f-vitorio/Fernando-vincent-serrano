@@ -1,0 +1,34 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+
+interface Props {
+  quote: string;
+  attribution?: string;
+  role?: string;
+  class?: string;
+}
+
+const {
+  quote,
+  attribution = 'Fernando Serrano Vicentin',
+  role = 'Método VicentBOX · Maringá/PR',
+  class: className = '',
+} = Astro.props;
+
+// Trecho entre ** fica em destaque (amarelo)
+const segments = quote.split('**');
+---
+
+<Section
+  class={`relative pattern-dots bg-gradient-to-br from-primary-900 via-primary-950 to-primary-900 ${className}`}
+  aria-label="Fala do método VicentBOX"
+>
+  <Container class="relative z-10 text-center max-w-4xl">
+    <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+    <blockquote class="quote-text">
+      {segments.map((segment, i) => (i % 2 === 1 ? <em>{segment}</em> : segment))}
+    </blockquote>
+    <p class="quote-who">{attribution} · {role}</p>
+  </Container>
+</Section>

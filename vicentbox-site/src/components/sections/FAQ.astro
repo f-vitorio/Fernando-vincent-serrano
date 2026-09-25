@@ -7,15 +7,16 @@ interface Props {
   title?: string;
   subtitle?: string;
   faqs: Array<{ question: string; answer: string }>;
+  number?: string;
   class?: string;
 }
 
-const { title = 'Dúvidas frequentes', subtitle, faqs, class: className = '' } = Astro.props;
+const { title = 'Dúvidas frequentes', subtitle, faqs, number, class: className = '' } = Astro.props;
 
 const faqJsonLd = generateFAQPageJSONLD(faqs);
 ---
 
-<Section id="faq" background="neutral-50" class={className} aria-labelledby="faq-title">
+<Section id="faq" background="neutral-50" number={number} class={className} aria-labelledby="faq-title">
   <Container>
     <header class="heading-section">
       <h2 id="faq-title" class="heading-section-title">{title}</h2>
@@ -24,7 +25,7 @@ const faqJsonLd = generateFAQPageJSONLD(faqs);
 
     <dl class="max-w-3xl mx-auto space-y-4" role="list">
       {faqs.map((faq, i) => (
-        <div key={i} class="bg-white rounded-xl border border-neutral-200 overflow-hidden animate-fade-in" style={`animation-delay: ${(i + 1) * 50}ms`} role="listitem">
+        <div key={i} class="bg-white/5 rounded-xl border border-white/10 overflow-hidden reveal" role="listitem">
           <button
             type="button"
             id={`faq-question-${i}`}
@@ -33,12 +34,12 @@ const faqJsonLd = generateFAQPageJSONLD(faqs);
             aria-controls={`faq-answer-${i}`}
             data-faq-question
           >
-            <span class="text-fluid-base font-medium text-neutral-900 pr-4">{faq.question}</span>
+            <span class="text-fluid-base font-medium text-white pr-4">{faq.question}</span>
             <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform duration-fast" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          <dd id={`faq-answer-${i}`} class="px-6 pb-4 text-fluid-base text-neutral-600 hidden" role="region" aria-labelledby={`faq-question-${i}`}>
+          <dd id={`faq-answer-${i}`} class="px-6 pb-4 text-fluid-base text-neutral-300 hidden" role="region" aria-labelledby={`faq-question-${i}`}>
             {faq.answer}
           </dd>
         </div>

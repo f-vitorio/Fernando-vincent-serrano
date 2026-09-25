@@ -3,7 +3,7 @@
 Site institucional e de conversão da VicentBOX — Studio de treinamento personalizado em Maringá/PR.
 
 **Desenvolvido com:** Astro 5 + Tailwind CSS 4 + TypeScript (strict)
-**Deploy:** Static Site Generation (SSG) → pasta `dist/` pronta para Hostinger, Cloudflare Pages, Netlify, Vercel.
+**Deploy:** Static Site Generation (SSG) → GitHub Actions builda `dist/` e publica no GitHub Pages (domínio `vicentboxmga.com.br` a configurar).
 
 ---
 
@@ -44,8 +44,7 @@ src/
 │   ├── consultoria-online.astro       # LP 3 (Prioridade)
 │   ├── studio.astro                   # Galeria placeholder
 │   ├── sobre.astro                    # Sobre Fernando + metodologia
-│   ├── contato.astro                  # Contato + formulário geral
-│   ├── obrigado.astro                 # Pós-conversão dinâmica
+│   ├── contato.astro                  # Contato (WhatsApp)
 │   └── 404.astro                      # Not found
 ├── styles/
 │   └── global.css       # Tailwind + design tokens + utilities
@@ -65,24 +64,23 @@ src/
 |------|------|-----|----------|
 | `/` | Home | WhatsApp | `wa.me` |
 | `/servicos` | Hub | → LPs | Internal |
-| `/treinamento-multifuncional` | LP 1 | WhatsApp | `wa.me` + `/obrigado` |
-| `/grupo-corrida` | LP 2 | WhatsApp | `wa.me` + `/obrigado` |
-| `/consultoria-online` | LP 3 | Email (Formspree) | `/obrigado` |
+| `/treinamento-multifuncional` | LP 1 | WhatsApp | `wa.me` |
+| `/grupo-corrida` | LP 2 | WhatsApp | `wa.me` |
+| `/consultoria-online` | LP 3 | WhatsApp | `wa.me` |
 | `/studio` | Gallery | WhatsApp | `wa.me` |
 | `/sobre` | Authority | WhatsApp | `wa.me` |
-| `/contato` | Contact | Email + WhatsApp | `/obrigado` |
-| `/obrigado` | Thank You | Dynamic | Context-aware |
+| `/contato` | Contact | WhatsApp | `wa.me` |
 
 ---
 
 ## 📦 Key Features
 
-- **Zero JS by default** — Astro islands only for forms/tracking
+- **Zero JS by default** — Astro islands only for tracking
 - **WCAG 2.1 AA** — Semantic HTML, ARIA, focus states, 4.5:1 contrast
 - **Core Web Vitals optimized** — LCP < 2.5s, CLS < 0.1, TBT < 200ms
 - **SEO Technical** — sitemap.xml, robots.txt, canonical, hreflang, JSON-LD
 - **Tracking Ready** — GA4 + GTM + Meta Pixel + Google Ads (dataLayer)
-- **Forms** — WhatsApp deep-links (instant) + Formspree (email)
+- **CTAs** — todos os CTAs abrem WhatsApp com mensagem pré-preenchida (sem formulários)
 - **Self-hosted fonts** — Inter + Plus Jakarta Sans via @fontsource
 - **Fluid typography/spacing** — `clamp()` based design tokens
 
@@ -98,21 +96,13 @@ Copy `.env.example` to `.env` and fill:
 cp .env.example .env
 ```
 
-Required for tracking/forms:
+Required for tracking:
 - `GA4_MEASUREMENT_ID` — G-XXXXXXXXXX
 - `GTM_CONTAINER_ID` — GTM-XXXXXXX
 - `META_PIXEL_ID` — Pixel ID
 - `GOOGLE_ADS_CONVERSION_ID` + `GOOGLE_ADS_CONVERSION_LABEL`
-- `FORMSPREE_ENDPOINT` — https://formspree.io/f/xxxxxxxx
 
-### 2. Formspree Setup
-
-1. Create account at [formspree.io](https://formspree.io)
-2. Create new form → get endpoint `https://formspree.io/f/xxxxxxxx`
-3. Add to `.env` as `FORMSPREE_ENDPOINT`
-4. Configure email notifications to `vicentbox71@gmail.com`
-
-### 3. WhatsApp Number
+### 2. WhatsApp Number
 
 Configured in `src/types/index.ts`:
 ```typescript
@@ -235,9 +225,12 @@ npx @lhci/cli autorun
 4. Environment variables: Add all from `.env`
 5. Custom domain: `vicentboxmga.com.br` → DNS → Cloudflare
 
-### Netlify / Vercel
+### GitHub Pages (deploy atual)
 
-Same as Cloudflare Pages — zero config needed for Astro SSG.
+1. Workflow `.github/workflows/deploy.yml` builda `vicentbox-site/` a cada push em `main`
+2. Habilitar Pages: Settings → Pages → Source: "GitHub Actions"
+3. Descomentar o job `deploy` no workflow
+4. Domínio `vicentboxmga.com.br` → DNS para o GitHub Pages quando for publicar
 
 ---
 
@@ -250,9 +243,7 @@ Same as Cloudflare Pages — zero config needed for Astro SSG.
 - [ ] Set up Google Business Profile (GBP)
 - [ ] Submit sitemap to Google Search Console
 - [ ] Configure GA4/GTM/Meta/Ads with real IDs
-- [ ] Set up Formspree endpoint
-- [ ] Test all forms end-to-end
-- [ ] Add hCaptcha/Turnstile to forms (spam protection)
+- [ ] Testar todos os CTAs de WhatsApp end-to-end
 - [ ] Create blog structure (MDX) for SEO articles
 - [ ] Set up monitoring (uptime, errors)
 

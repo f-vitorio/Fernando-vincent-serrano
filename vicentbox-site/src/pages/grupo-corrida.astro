@@ -6,7 +6,7 @@ import Features from '@components/sections/Features.astro';
 import Offer from '@components/sections/Offer.astro';
 import FAQ from '@components/sections/FAQ.astro';
 import CTA from '@components/sections/CTA.astro';
-import LeadForm from '@components/forms/LeadForm.astro';
+import WhatsAppCtaCard from '@components/sections/WhatsAppCtaCard.astro';
 import ShieldCheck from '@components/ui/icons/ShieldCheck.astro';
 import Users from '@components/ui/icons/Users.astro';
 import Target from '@components/ui/icons/Target.astro';
@@ -58,6 +58,29 @@ const faqJsonLd = generateFAQPageJSONLD(faqCorrida);
       { value: 'R$ 100', label: 'Presencial/mês' },
     ]}
   />
+
+  <!-- Marca do produto -->
+  <Section size="sm" background="white" ariaLabel="Marca VicentBOX running">
+    <Container>
+      <figure class="max-w-xs mx-auto text-center">
+        <picture>
+          <source srcset="/images/logo-vicentbox-running.webp" type="image/webp" />
+          <img
+            src="/images/logo-vicentbox-running.jpg"
+            alt="Logo VicentBOX running"
+            width="472"
+            height="472"
+            class="w-full rounded-xl"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <figcaption class="mt-3 text-fluid-sm text-neutral-400">
+          O grupo de corrida é um produto da marca VicentBOX running
+        </figcaption>
+      </figure>
+    </Container>
+  </Section>
 
   <Features
     title="Por que o Grupo de Corrida VicentBOX funciona"
@@ -115,13 +138,12 @@ const faqJsonLd = generateFAQPageJSONLD(faqCorrida);
     faqs={faqCorrida}
   />
 
-  <LeadForm
+  <WhatsAppCtaCard
     source="corrida"
     title="Pronto para calçar o tênis?"
-    subtitle="Preencha e entraremos em contato para definir seu nível, objetivo e melhor formato."
-    submitText="Entrar no Grupo pelo WhatsApp"
-    fields={['name', 'phone', 'objective', 'preferredTime']}
-    successMessage="A conversa no WhatsApp será aberta com seus dados pré-preenchidos. É só enviar!"
+    subtitle="Chame no WhatsApp e definimos juntos seu nível, objetivo e melhor formato de treino."
+    ctaText="Entrar no Grupo pelo WhatsApp"
+    message="Olá! Vim pelo site da VicentBOX. Quero entrar no Grupo de Corrida. Pode me passar os detalhes?"
   />
 
   <Section id="relacionados" background="neutral-50" aria-labelledby="relacionados-title">
@@ -132,16 +154,16 @@ const faqJsonLd = generateFAQPageJSONLD(faqCorrida);
       </header>
       <ul class="grid sm:grid-cols-3 gap-4 text-fluid-sm">
         <li class="card">
-          <a href="/treinamento-multifuncional" class="font-semibold text-primary-700 hover:underline">Treinamento Multifuncional</a>
-          <p class="text-neutral-600 mt-1">Turmas de até 3 com terapia manual em Maringá.</p>
+          <a href="/treinamento-multifuncional" class="font-semibold text-accent-400 hover:underline">Treinamento Multifuncional</a>
+          <p class="text-neutral-300 mt-1">Turmas de até 3 com terapia manual em Maringá.</p>
         </li>
         <li class="card">
-          <a href="/consultoria-online" class="font-semibold text-primary-700 hover:underline">Consultoria Online</a>
-          <p class="text-neutral-600 mt-1">Treino no app por R$ 39,90/mês.</p>
+          <a href="/consultoria-online" class="font-semibold text-accent-400 hover:underline">Consultoria Online</a>
+          <p class="text-neutral-300 mt-1">Treino no app por R$ 39,90/mês.</p>
         </li>
         <li class="card">
-          <a href="/servicos" class="font-semibold text-primary-700 hover:underline">Todos os serviços</a>
-          <p class="text-neutral-600 mt-1">Alongamento, relaxamento, desafio 15 dias e palestras.</p>
+          <a href="/servicos" class="font-semibold text-accent-400 hover:underline">Todos os serviços</a>
+          <p class="text-neutral-300 mt-1">Alongamento, relaxamento, desafio 15 dias e palestras.</p>
         </li>
       </ul>
     </Container>

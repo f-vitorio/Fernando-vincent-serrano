@@ -56,7 +56,7 @@ const galleryItems = [
     ]}
   />
 
-  <Section id="galeria" background="white" aria-labelledby="galeria-title">
+  <Section id="galeria" background="white" number="01" aria-labelledby="galeria-title">
     <Container>
       <header class="heading-section">
         <h2 id="galeria-title" class="heading-section-title">Galeria do Espaço</h2>
@@ -67,8 +67,7 @@ const galleryItems = [
         {galleryItems.map((item, i) => (
           <figure
             key={item.label}
-            class="relative aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200 animate-fade-in"
-            style={`animation-delay: ${(i + 1) * 50}ms`}
+            class="relative aspect-[4/3] rounded-xl overflow-hidden bg-primary-900 border border-white/10 reveal"
             role="listitem"
           >
             <picture>
@@ -91,7 +90,7 @@ const galleryItems = [
       </div>
 
       <div class="text-center mt-8">
-        <p class="text-fluid-base text-neutral-600 mb-4">Quer ver ao vivo antes de decidir?</p>
+        <p class="text-fluid-base text-neutral-300 mb-4">Quer ver ao vivo antes de decidir?</p>
         <Button
           variant="whatsapp"
           size="lg"
@@ -105,7 +104,7 @@ const galleryItems = [
     </Container>
   </Section>
 
-  <Section id="areas" background="neutral-50" aria-labelledby="areas-title">
+  <Section id="areas" background="neutral-50" number="02" aria-labelledby="areas-title">
     <Container>
       <header class="heading-section">
         <h2 id="areas-title" class="heading-section-title">Áreas do Studio</h2>
@@ -113,33 +112,33 @@ const galleryItems = [
       </header>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-        <Card class="card-hover p-6 text-center h-full flex flex-col">
+        <Card class="card-hover p-6 text-center h-full flex flex-col reveal">
           <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4">
             <Dumbbell class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Área de Treino</h3>
-          <p class="text-fluid-base text-neutral-600">Halteres, kettlebells, elásticos, bolas, colchonetes — tudo para treino funcional completo.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">Área de Treino</h3>
+          <p class="text-fluid-base text-neutral-300">Halteres, kettlebells, elásticos, bolas, colchonetes — tudo para treino funcional completo.</p>
         </Card>
-        <Card class="card-hover p-6 text-center h-full flex flex-col">
+        <Card class="card-hover p-6 text-center h-full flex flex-col reveal">
           <div class="icon-wrapper icon-wrapper-secondary mx-auto mb-4">
             <Sparkles class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Terapia Manual</h3>
-          <p class="text-fluid-base text-neutral-600">5 minutos de terapia manual ao final de toda aula, conforme o diferencial da VicentBOX.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">Terapia Manual</h3>
+          <p class="text-fluid-base text-neutral-300">5 minutos de terapia manual ao final de toda aula, conforme o diferencial da VicentBOX.</p>
         </Card>
-        <Card class="card-hover p-6 text-center h-full flex flex-col">
+        <Card class="card-hover p-6 text-center h-full flex flex-col reveal">
           <div class="icon-wrapper icon-wrapper-accent mx-auto mb-4">
             <Users class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Aulas em Grupo</h3>
-          <p class="text-fluid-base text-neutral-600">Turmas de até 3 (multifuncional), 6 (alongamento) e 50 (grupo de corrida); 1 no relaxamento individual.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">Aulas em Grupo</h3>
+          <p class="text-fluid-base text-neutral-300">Turmas de até 3 (multifuncional), 6 (alongamento) e 50 (grupo de corrida); 1 no relaxamento individual.</p>
         </Card>
-        <Card class="card-hover p-6 text-center h-full flex flex-col">
+        <Card class="card-hover p-6 text-center h-full flex flex-col reveal">
           <div class="icon-wrapper icon-wrapper-primary mx-auto mb-4">
             <Refresh class="w-6 h-6" />
           </div>
-          <h3 class="text-fluid-lg font-heading font-semibold text-neutral-900 mb-2">Avaliação</h3>
-          <p class="text-fluid-base text-neutral-600">Avaliação antes de começar o treinamento, com definição de objetivos. Valor informado no agendamento.</p>
+          <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">Avaliação</h3>
+          <p class="text-fluid-base text-neutral-300">Avaliação antes de começar o treinamento, com definição de objetivos. Avaliação gratuita, inclusa na mensalidade.</p>
         </Card>
       </div>
     </Container>

@@ -4,21 +4,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Saúde / acolhedor: verde-teal
+        // Marca VicentBOX — roxo #6b277e (600 = cor oficial)
         primary: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
-          950: '#042f2e',
+          50: '#faf5fc',
+          100: '#f3e5f8',
+          200: '#e7cbf0',
+          300: '#d4a6e3',
+          400: '#bc7ccf',
+          500: '#a151b8',
+          600: '#6b277e',
+          700: '#5a2169',
+          800: '#4a1b58',
+          900: '#3b1647',
+          950: '#260d2e',
         },
-        // Sucesso / confirmação
+        // Sucesso / confirmação / WhatsApp
         secondary: {
           50: '#f0fdf4',
           100: '#dcfce7',
@@ -32,19 +32,19 @@ export default {
           900: '#14532d',
           950: '#052e16',
         },
-        // CTA quente / acolhedor: laranja-âmbar
+        // Marca VicentBOX — amarelo #ffe84f (400 = cor oficial)
         accent: {
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#f97316',
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
-          950: '#431407',
+          50: '#fffdf0',
+          100: '#fffdc4',
+          200: '#fff98a',
+          300: '#fff157',
+          400: '#ffe84f',
+          500: '#f7dc1d',
+          600: '#dcbd07',
+          700: '#a58907',
+          800: '#82700a',
+          900: '#6b5b0c',
+          950: '#453604',
         },
         // Neutros quentes (estilo stone)
         neutral: {
@@ -108,10 +108,10 @@ export default {
         },
       },
       boxShadow: {
-        'card': '0 1px 3px 0 rgb(28 25 23 / 0.06), 0 1px 2px -1px rgb(28 25 23 / 0.06)',
-        'card-hover': '0 10px 15px -3px rgb(28 25 23 / 0.08), 0 4px 6px -4px rgb(28 25 23 / 0.06)',
-        'cta': '0 4px 14px 0 rgb(234 88 12 / 0.35)',
-        'cta-hover': '0 6px 20px 0 rgb(234 88 12 / 0.45)',
+        'card': '0 1px 3px 0 rgb(38 13 46 / 0.55), 0 1px 2px -1px rgb(38 13 46 / 0.45)',
+        'card-hover': '0 12px 24px -8px rgb(38 13 46 / 0.65), 0 6px 12px -6px rgb(38 13 46 / 0.5)',
+        'cta': '0 4px 14px 0 rgb(255 232 79 / 0.35)',
+        'cta-hover': '0 6px 24px 0 rgb(255 232 79 / 0.5)',
       },
       transitionDuration: {
         'fast': '150ms',

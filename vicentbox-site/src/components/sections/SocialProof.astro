@@ -10,6 +10,7 @@ interface Props {
   subtitle?: string;
   testimonials?: Array<{ name: string; role?: string; content: string; avatar?: string; result?: string; rating?: number }>;
   showGbpLink?: boolean;
+  number?: string;
   class?: string;
 }
 
@@ -18,6 +19,7 @@ const {
   subtitle = 'Avaliações e fotos no perfil oficial do Google Business',
   testimonials = [],
   showGbpLink = true,
+  number,
   class: className = '',
 } = Astro.props;
 
@@ -26,7 +28,7 @@ const showSection = hasTestimonials || showGbpLink;
 ---
 
 {showSection && (
-  <Section id="depoimentos" background="neutral-50" class={className} aria-labelledby="social-proof-title">
+  <Section id="depoimentos" background="neutral-50" number={number} class={className} aria-labelledby="social-proof-title">
     <Container>
       <header class="heading-section">
         <h2 id="social-proof-title" class="heading-section-title">{title}</h2>
@@ -36,8 +38,8 @@ const showSection = hasTestimonials || showGbpLink;
       {hasTestimonials && (
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {testimonials.map((testimonial, i) => (
-          <Card key={i} class="card-hover p-6 flex flex-col animate-slide-up" style={`animation-delay: ${(i + 1) * 100}ms`}>
-            <div class="flex items-center gap-1 text-accent-600 mb-3" aria-label="5 de 5 estrelas">
+          <Card key={i} class="card-hover p-6 flex flex-col reveal">
+            <div class="flex items-center gap-1 text-accent-400 mb-3" aria-label="5 de 5 estrelas">
               {Array.from({ length: testimonial.rating ?? 5 }).map(() => (
                 <Star class="w-4 h-4" />
               ))}
@@ -45,19 +47,19 @@ const showSection = hasTestimonials || showGbpLink;
             {testimonial.result && (
               <div class="badge badge-secondary mb-3 self-start">{testimonial.result}</div>
             )}
-            <p class="text-fluid-base text-neutral-700 mb-4 leading-relaxed flex-1">
+            <p class="text-fluid-base text-neutral-200 mb-4 leading-relaxed flex-1">
               &ldquo;{testimonial.content}&rdquo;
             </p>
-            <div class="flex items-center gap-3 pt-4 border-t border-neutral-200 mt-auto">
+            <div class="flex items-center gap-3 pt-4 border-t border-white/10 mt-auto">
               <div
-                class="w-10 h-10 rounded-full bg-primary-100 text-primary-700 font-heading font-semibold text-fluid-sm flex items-center justify-center flex-shrink-0"
+                class="w-10 h-10 rounded-full bg-accent-400 text-primary-950 font-heading font-semibold text-fluid-sm flex items-center justify-center flex-shrink-0"
                 aria-hidden="true"
               >
                 {testimonial.name.charAt(0)}
               </div>
               <div>
-                <p class="font-medium text-neutral-900">{testimonial.name}</p>
-                {testimonial.role && <p class="text-fluid-sm text-neutral-500">{testimonial.role}</p>}
+                <p class="font-medium text-white">{testimonial.name}</p>
+                {testimonial.role && <p class="text-fluid-sm text-neutral-400">{testimonial.role}</p>}
               </div>
             </div>
           </Card>
@@ -67,7 +69,7 @@ const showSection = hasTestimonials || showGbpLink;
 
       {showGbpLink && (
         <div class={hasTestimonials ? 'mt-8 text-center' : 'text-center'}>
-          <p class="text-fluid-sm text-neutral-600 mb-3">
+          <p class="text-fluid-sm text-neutral-300 mb-3">
             Avaliações de quem já treinou com a gente no perfil oficial do Google
           </p>
           <a

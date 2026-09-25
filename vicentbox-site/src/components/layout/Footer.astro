@@ -31,13 +31,13 @@ const socials = [
 ];
 ---
 
-<footer class="bg-neutral-900 text-neutral-300 border-t-2 border-accent-600" role="contentinfo">
+<footer class="bg-primary-900 text-neutral-300 border-t-2 border-accent-400" role="contentinfo">
   <div class="container-custom py-fluid-12 md:py-fluid-16">
     <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
       <!-- Coluna 1: marca + CTA + redes -->
       <div class="lg:pr-4">
         <a href="/" class="inline-flex items-center gap-2 mb-4" aria-label={`${siteConfig.name} - Início`}>
-          <span class="font-heading font-bold text-2xl text-white">Vicent<span class="text-accent-500">BOX</span></span>
+          <span class="font-heading font-bold text-2xl text-white">Vicent<span class="text-accent-400">BOX</span></span>
         </a>
         <p class="text-fluid-sm text-neutral-400 leading-relaxed mb-5 max-w-sm">
           Personal trainer em Maringá para saúde e qualidade de vida aos 40+.
@@ -48,7 +48,7 @@ const socials = [
           href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent('Olá! Vim pelo site da VicentBOX. Gostaria de agendar uma avaliação.')}`}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#15803d] text-white text-fluid-sm font-medium hover:bg-[#166534] transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#15803d] focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#15803d] text-white text-fluid-sm font-medium hover:bg-[#166534] transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#15803d] focus-visible:ring-offset-2 focus-visible:ring-offset-primary-900"
           data-track="whatsapp_click"
           data-track-source="footer"
         >
@@ -63,7 +63,7 @@ const socials = [
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-white transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+              class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 text-neutral-400 hover:bg-white/20 hover:text-white transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
             >
               <Icon class="w-5 h-5" />
             </a>
@@ -85,7 +85,7 @@ const socials = [
 
       <!-- Coluna 2: navegação -->
       <div class="lg:px-4">
-        <h3 class="text-fluid-sm font-heading font-semibold uppercase tracking-wider text-neutral-500 mb-4">Navegação</h3>
+        <h3 class="text-fluid-sm font-heading font-semibold uppercase tracking-wider text-neutral-400 mb-4">Navegação</h3>
         <nav aria-label="Serviços" class="mb-6">
           <ul class="space-y-2.5">
             {serviceLinks.map((link) => (
@@ -118,7 +118,7 @@ const socials = [
 
       <!-- Coluna 3: contato (NAP) -->
       <div class="lg:pl-4">
-        <h3 class="text-fluid-sm font-heading font-semibold uppercase tracking-wider text-neutral-500 mb-4">Contato</h3>
+        <h3 class="text-fluid-sm font-heading font-semibold uppercase tracking-wider text-neutral-400 mb-4">Contato</h3>
         <address class="not-italic space-y-3.5 text-fluid-sm">
           <a
             href={siteConfig.googleBusinessProfile}
@@ -161,18 +161,46 @@ const socials = [
             <div>
               <p class="text-neutral-300">{siteConfig.businessHours.weekdays}</p>
               <p class="text-neutral-300">{siteConfig.businessHours.weekdaysAlt}</p>
-              <p class="text-neutral-500">Demais dias: sob consulta</p>
+              <p class="text-neutral-400">Demais dias: sob consulta</p>
             </div>
           </div>
         </address>
       </div>
     </div>
 
-    <div class="mt-10 pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p class="text-fluid-xs text-neutral-500">
+    <!-- Marcas & projetos do grupo -->
+    <div class="mt-10 pt-6 border-t border-white/10">
+      <h3 class="text-fluid-xs font-heading font-semibold uppercase tracking-wider text-neutral-400 mb-4">Marcas & projetos</h3>
+      <ul class="flex flex-wrap gap-3" role="list">
+        {[
+          { image: '/images/logo-vicentbox-cast.jpg', alt: 'VicentBOX Cast' },
+          { image: '/images/logo-sports-tea.jpg', alt: 'Sports tea' },
+          { image: '/images/logo-conexao-vitalidade.jpg', alt: 'Conexão Vitalidade' },
+          { image: '/images/brand-palette.jpg', alt: 'Paleta de cores VicentBOX: roxo, amarelo e branco' },
+        ].map((brand) => (
+          <li key={brand.image}>
+            <picture class="block w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden border border-white/10">
+              <source srcset={brand.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+              <img
+                src={brand.image}
+                alt={brand.alt}
+                width="96"
+                height="96"
+                class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-fluid-xs text-neutral-400">
         © {new Date().getFullYear()} {siteConfig.name} — Maringá/PR. Todos os direitos reservados.
       </p>
-      <p class="text-fluid-xs text-neutral-500">
+      <p class="text-fluid-xs text-neutral-400">
         {siteConfig.address.full}
       </p>
     </div>
