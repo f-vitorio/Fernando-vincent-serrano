@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fernando-vincent-serrano",
+  "compatibility_date": "2026-09-25",
+  "assets": {
+    "directory": "./vicentbox-site/dist",
+    "not_found_handling": "404-page"
+  }
+}
