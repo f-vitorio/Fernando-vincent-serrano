@@ -1,2 +1,8 @@
 # Local Netlify folder
 .netlify
+
+# Credenciais/evidencias Registro.br — nao versionar (scripts com senha hardcoded + perfis de navegador)
+registro-br-evidencias/
+
+# Logs de build temporarios
+*.build.log
