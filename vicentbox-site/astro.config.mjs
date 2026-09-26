@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://vicentboxmga.com.br',
+  site: 'https://vicentbox.com.br',
   output: 'static',
   integrations: [
     tailwind(),
@@ -22,7 +22,7 @@ export default defineConfig({
           allow: '/',
         },
       ],
-      sitemap: 'https://vicentboxmga.com.br/sitemap-index.xml',
+      sitemap: 'https://vicentbox.com.br/sitemap-index.xml',
     }),
   ],
   compressHTML: true,

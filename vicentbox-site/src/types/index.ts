@@ -102,7 +102,7 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   name: 'VicentBOX',
-  url: 'https://vicentboxmga.com.br',
+  url: 'https://vicentbox.com.br',
   phone: '5544999218147',
   phoneFormatted: '(44) 99921-8147',
   whatsappNumber: '5544999218147',

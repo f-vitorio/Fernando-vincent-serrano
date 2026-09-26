@@ -3,7 +3,7 @@
 Site institucional e de conversão da VicentBOX — Studio de treinamento personalizado em Maringá/PR.
 
 **Desenvolvido com:** Astro 5 + Tailwind CSS 4 + TypeScript (strict)
-**Deploy:** Static Site Generation (SSG) → GitHub Actions builda `dist/` e publica no GitHub Pages (domínio `vicentboxmga.com.br` a configurar).
+**Deploy:** Static Site Generation (SSG) → GitHub Actions builda `dist/` e publica no GitHub Pages (domínio `vicentbox.com.br` a configurar).
 
 ---
 
@@ -223,14 +223,14 @@ npx @lhci/cli autorun
 2. Build command: `npm run build`
 3. Build output directory: `dist`
 4. Environment variables: Add all from `.env`
-5. Custom domain: `vicentboxmga.com.br` → DNS → Cloudflare
+5. Custom domain: `vicentbox.com.br` → DNS → Cloudflare
 
 ### GitHub Pages (deploy atual)
 
 1. Workflow `.github/workflows/deploy.yml` builda `vicentbox-site/` a cada push em `main`
 2. Habilitar Pages: Settings → Pages → Source: "GitHub Actions"
 3. Descomentar o job `deploy` no workflow
-4. Domínio `vicentboxmga.com.br` → DNS para o GitHub Pages quando for publicar
+4. Domínio `vicentbox.com.br` → DNS para o GitHub Pages quando for publicar
 
 ---
 

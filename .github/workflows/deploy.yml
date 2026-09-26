@@ -43,7 +43,7 @@ jobs:
   # PUBLICAÇÃO: descomentar este job e habilitar Pages no repo
   # (Settings → Pages → Source: "GitHub Actions").
   # O site ficará em f-vitorio.github.io/Fernando-vincent-serrano/
-  # ou no domínio vicentboxmga.com.br quando o DNS apontar para o GitHub.
+  # ou no domínio vicentbox.com.br quando o DNS apontar para o GitHub.
   #
   # deploy:
   #   needs: build
