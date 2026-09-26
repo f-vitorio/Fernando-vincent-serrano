@@ -130,8 +130,8 @@ export const siteConfig: SiteConfig = {
     saturday: 'Sábado: sob consulta',
     sunday: 'Domingo: sob consulta',
   } as SiteConfig['businessHours'],
-  ga4Id: import.meta.env.GA4_MEASUREMENT_ID,
-  gtmId: import.meta.env.GTM_CONTAINER_ID,
+  ga4Id: import.meta.env.GA4_MEASUREMENT_ID || 'G-5VEQ2PVBCV',
+  gtmId: import.meta.env.GTM_CONTAINER_ID || 'GTM-WLWW5J4W',
   metaPixelId: import.meta.env.META_PIXEL_ID,
   googleAdsConversionId: import.meta.env.GOOGLE_ADS_CONVERSION_ID,
   googleAdsConversionLabel: import.meta.env.GOOGLE_ADS_CONVERSION_LABEL,
@@ -141,7 +141,7 @@ export const siteConfig: SiteConfig = {
 
 // --- Bloco de CTAs da home (5 caminhos) --------------------------------
 // Troque o valor aqui quando o cliente enviar o link definitivo:
-// consultoria (início do mês), loja e formulário do evento Conexão Vitalidade.
+// consultoria (início do mês) e loja — pendentes de link definitivo do cliente.
 const waLink = (message: string) =>
   `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
 
@@ -158,7 +158,7 @@ export const ctaHubLinks = {
   ),
   // Link direto do WhatsApp do Personal (palestras)
   contratar: 'https://wa.me/message/RHXN5DFAAP2MN1',
-  // PENDENTE: formulário de inscrição do evento (cliente envia na próxima semana)
+  // Inscrição do evento pelo WhatsApp (sem formulário no site)
   inscreva: waLink(
     'Olá! Vim pelo site da VicentBOX. Quero me inscrever no evento Conexão Vitalidade.'
   ),
@@ -218,7 +218,7 @@ export const ctaHubItems: CtaHubItem[] = [
     id: 'inscreva',
     title: 'Evento Conexão Vitalidade',
     desc: 'Inscrições para o evento Conexão Vitalidade — encontro de saúde, movimento e qualidade de vida.',
-    chips: ['Inscrição pelo formulário'],
+    chips: ['Inscrição pelo WhatsApp'],
     image: '/images/logo-conexao-vitalidade.jpg',
     imageAlt: 'Logo do evento Conexão Vitalidade',
     label: 'INSCREVA-SE',
@@ -386,7 +386,7 @@ export const services: Service[] = [
       'R$ 500 por hora',
       'Conteúdo de movimento e qualidade de vida',
       'Para empresas e grupos',
-      'Orçamento via WhatsApp ou formulário',
+      'Orçamento pelo WhatsApp',
     ],
     icon: 'users',
     image: '/images/icone-palestra.jpg',

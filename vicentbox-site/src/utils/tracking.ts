@@ -97,7 +97,7 @@ export function trackEvent({ event, parameters }: TrackingEventParams): void {
     window.fbq('track', fbEvent, parameters);
   }
 
-  // Google Ads Conversion — apenas no lead real do formulário (evita duplicidade)
+  // Google Ads Conversion — apenas no lead real (evita duplicidade)
   if (siteConfig.googleAdsConversionId && siteConfig.googleAdsConversionLabel && window.gtag) {
     if (event === 'generate_lead') {
       window.gtag('event', 'conversion', {
