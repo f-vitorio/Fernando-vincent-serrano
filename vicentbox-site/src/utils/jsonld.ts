@@ -165,7 +165,7 @@ const catalogOffers = [
     name: 'Palestras e Ações de Saúde',
     description: 'Palestras, eventos e ações de saúde e exercício físico para empresas e grupos. Orçamento via WhatsApp.',
     url: `${siteConfig.url}/servicos`,
-    image: `${siteConfig.url}/images/icone-palestra.jpg`,
+    image: `${siteConfig.url}/images/galeria-palestra.jpg`,
     price: '500.00',
     priceSpecification: [
       {
