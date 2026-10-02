@@ -226,7 +226,7 @@ export function generatePersonJSONLD() {
     description:
       'Personal trainer em Maringá com 19 anos de experiência. Fundador da VicentBOX. Finalizando especialização em Educação Física na Saúde em Ambiente Hospitalar pela Escola de Medicina da USP — Hospital das Clínicas.',
     url: `${siteConfig.url}/sobre`,
-    image: `${siteConfig.url}/images/sobre-fernando.jpg`,
+    image: `${siteConfig.url}/images/fernando-retrato.jpg`,
     worksFor: {
       '@type': 'Organization',
       name: siteConfig.name,
@@ -294,9 +294,9 @@ export function generateLocalBusinessJSONLD() {
     currenciesAccepted: 'BRL',
     image: [
       `${siteConfig.url}/og-default.jpg`,
-      `${siteConfig.url}/images/hero-personal-trainer.jpg`,
+      `${siteConfig.url}/images/fernando-serrano.jpg`,
       `${siteConfig.url}/images/studio.jpg`,
-      `${siteConfig.url}/images/sobre-fernando.jpg`,
+      `${siteConfig.url}/images/fernando-retrato.jpg`,
     ],
     logo: `${siteConfig.url}/favicon.svg`,
     founder: generatePersonJSONLD(),
@@ -520,7 +520,7 @@ export function generateAboutPageJSONLD(options: { name: string; description?: s
     mainEntity: generatePersonJSONLD(),
     primaryImageOfPage: {
       '@type': 'ImageObject',
-      url: `${siteConfig.url}/images/sobre-fernando.jpg`,
+      url: `${siteConfig.url}/images/fernando-retrato.jpg`,
     },
   };
 }
