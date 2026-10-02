@@ -53,7 +53,7 @@ const catalogOffers = [
     name: 'Treinamento Multifuncional',
     description:
       'Treinamento personalizado em turmas de até 3 pessoas, com avaliação inicial e terapia manual de 5 minutos ao final de toda aula. Foco em dores, cansaço, fadiga e sobrepeso.',
-    url: `${siteConfig.url}/treinamento-multifuncional`,
+    url: `${siteConfig.url}/treinamento-multifuncional/`,
     image: `${siteConfig.url}/images/treinamento-multifuncional.jpg`,
     price: '250.00',
     priceSpecification: [
@@ -77,7 +77,7 @@ const catalogOffers = [
     name: 'Grupo de Corrida',
     description:
       'Grupo de corrida de rua presencial 3x por semana (até 50 alunos) ou consultoria online de corrida, com acompanhamento do treino.',
-    url: `${siteConfig.url}/grupo-corrida`,
+    url: `${siteConfig.url}/grupo-corrida/`,
     image: `${siteConfig.url}/images/grupo-corrida.jpg`,
     price: '50.00',
     priceSpecification: [
@@ -101,7 +101,7 @@ const catalogOffers = [
     name: 'Consultoria Online / App',
     description:
       'App de consultoria online com treino personalizado no celular, onde e quando quiser, com acompanhamento pelo professor.',
-    url: `${siteConfig.url}/consultoria-online`,
+    url: `${siteConfig.url}/consultoria-online/`,
     image: `${siteConfig.url}/images/consultoria-online.jpg`,
     price: '39.90',
     priceSpecification: [
@@ -117,7 +117,7 @@ const catalogOffers = [
   {
     name: 'Desafio 15 Dias',
     description: 'Protocolo de perda de peso da VicentBOX com acompanhamento em 15 dias. Valor via WhatsApp.',
-    url: `${siteConfig.url}/servicos`,
+    url: `${siteConfig.url}/servicos/`,
     image: `${siteConfig.url}/images/desafio-15-dias.jpg`,
     price: undefined as string | undefined,
     priceSpecification: undefined,
@@ -125,7 +125,7 @@ const catalogOffers = [
   {
     name: 'Alongamento em Grupo',
     description: 'Sessão de alongamento em grupo de até 6 alunos por hora, no studio em Maringá.',
-    url: `${siteConfig.url}/servicos`,
+    url: `${siteConfig.url}/servicos/`,
     image: `${siteConfig.url}/images/alongamento.jpg`,
     price: '120.00',
     priceSpecification: [
@@ -148,7 +148,7 @@ const catalogOffers = [
   {
     name: 'Relaxamento Individual',
     description: 'Sessão de relaxamento individual, 1 aluno por hora, no studio VicentBOX.',
-    url: `${siteConfig.url}/servicos`,
+    url: `${siteConfig.url}/servicos/`,
     image: `${siteConfig.url}/images/terapia-manual.jpg`,
     price: '150.00',
     priceSpecification: [
@@ -164,7 +164,7 @@ const catalogOffers = [
   {
     name: 'Palestras e Ações de Saúde',
     description: 'Palestras, eventos e ações de saúde e exercício físico para empresas e grupos. Orçamento via WhatsApp.',
-    url: `${siteConfig.url}/servicos`,
+    url: `${siteConfig.url}/servicos/`,
     image: `${siteConfig.url}/images/galeria-palestra.jpg`,
     price: '500.00',
     priceSpecification: [
@@ -225,7 +225,7 @@ export function generatePersonJSONLD() {
     jobTitle: 'Personal Trainer',
     description:
       'Personal trainer em Maringá com 19 anos de experiência. Fundador da VicentBOX. Finalizando especialização em Educação Física na Saúde em Ambiente Hospitalar pela Escola de Medicina da USP — Hospital das Clínicas.',
-    url: `${siteConfig.url}/sobre`,
+    url: `${siteConfig.url}/sobre/`,
     image: `${siteConfig.url}/images/fernando-retrato.jpg`,
     worksFor: {
       '@type': 'Organization',
@@ -337,7 +337,7 @@ export function generateServicesItemListJSONLD() {
         name: service.name,
         description: service.shortDescription,
         url: service.ctaUrl.startsWith('http')
-          ? `${siteConfig.url}/servicos`
+          ? `${siteConfig.url}/servicos/`
           : `${siteConfig.url}${service.ctaUrl.startsWith('/') ? '' : '/'}${service.ctaUrl}`,
         image: service.image ? `${siteConfig.url}${service.image}` : undefined,
         provider: providerRef,
@@ -348,7 +348,7 @@ export function generateServicesItemListJSONLD() {
           priceCurrency: 'BRL',
           availability: 'https://schema.org/InStock',
           url: service.ctaUrl.startsWith('http')
-            ? `${siteConfig.url}/servicos`
+            ? `${siteConfig.url}/servicos/`
             : `${siteConfig.url}${service.ctaUrl.startsWith('/') ? '' : '/'}${service.ctaUrl}`,
           ...(service.priceDetails || service.price
             ? { description: [service.price, service.priceDetails].filter(Boolean).join(' — ') }

@@ -18,31 +18,30 @@ import HeartPulse from '@components/ui/icons/HeartPulse.astro';
 import Container from '@components/ui/Container.astro';
 import Section from '@components/ui/Section.astro';
 import Breadcrumb from '@components/ui/Breadcrumb.astro';
-import { generateServiceJSONLD, generateBreadcrumbListJSONLD, generateFAQPageJSONLD } from '@utils/jsonld';
+import { generateServiceJSONLD, generateBreadcrumbListJSONLD } from '@utils/jsonld';
 
 const breadcrumbItems = [
   { name: 'Início', url: '/' },
-  { name: 'Serviços', url: '/servicos' },
-  { name: 'Treinamento Multifuncional', url: '/treinamento-multifuncional' },
+  { name: 'Serviços', url: '/servicos/' },
+  { name: 'Treinamento Multifuncional', url: '/treinamento-multifuncional/' },
 ];
 
 const service = {
   name: 'Treinamento Multifuncional',
   description: 'Reduza dores, melhore a postura e volte a se movimentar com segurança em turmas de até 3 pessoas com terapia manual de 5 minutos ao final da aula.',
   price: '250',
-  url: '/treinamento-multifuncional',
+  url: '/treinamento-multifuncional/',
   image: '/images/treinamento-multifuncional.jpg',
 };
 
 const serviceJsonLd = generateServiceJSONLD(service);
 const breadcrumbJsonLd = generateBreadcrumbListJSONLD(breadcrumbItems);
-const faqJsonLd = generateFAQPageJSONLD(faqTreinamento);
 ---
 
 <Layout
   title="Treinamento Multifuncional em Maringá | Turmas de até 3 | VicentBOX"
   description="Treinamento multifuncional em Maringá: turmas de até 3, terapia manual 5 min e foco em dores 40+. 2x/sem R$400 | 1x/sem R$250."
-  jsonLd={[serviceJsonLd, breadcrumbJsonLd, faqJsonLd]}
+  jsonLd={[serviceJsonLd, breadcrumbJsonLd]}
 >
   <Breadcrumb items={breadcrumbItems} />
   <Hero
@@ -170,15 +169,15 @@ const faqJsonLd = generateFAQPageJSONLD(faqTreinamento);
       </header>
       <ul class="grid sm:grid-cols-3 gap-4 text-fluid-sm">
         <li class="card">
-          <a href="/grupo-corrida" class="font-semibold text-accent-400 hover:underline">Grupo de Corrida em Maringá</a>
+          <a href="/grupo-corrida/" class="font-semibold text-accent-400 hover:underline">Grupo de Corrida em Maringá</a>
           <p class="text-neutral-300 mt-1">Presencial 3x/semana ou consultoria online de corrida.</p>
         </li>
         <li class="card">
-          <a href="/consultoria-online" class="font-semibold text-accent-400 hover:underline">Consultoria Online</a>
+          <a href="/consultoria-online/" class="font-semibold text-accent-400 hover:underline">Consultoria Online</a>
           <p class="text-neutral-300 mt-1">Treino personalizado no app por R$ 39,90/mês.</p>
         </li>
         <li class="card">
-          <a href="/servicos" class="font-semibold text-accent-400 hover:underline">Todos os serviços</a>
+          <a href="/servicos/" class="font-semibold text-accent-400 hover:underline">Todos os serviços</a>
           <p class="text-neutral-300 mt-1">Alongamento, relaxamento, desafio 15 dias e palestras.</p>
         </li>
       </ul>

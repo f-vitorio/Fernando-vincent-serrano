@@ -25,9 +25,7 @@ import Container from '@components/ui/Container.astro';
 import Section from '@components/ui/Section.astro';
 import Card from '../components/ui/Card.astro';
 import {
-  generateBreadcrumbListJSONLD,
   generateHomeReviewsJSONLD,
-  generateFAQPageJSONLD,
 } from '@utils/jsonld';
 
 const waAvaliacao = 'https://wa.me/5544999218147?text=Olá! Vim pelo site da VicentBOX. Quero agendar uma avaliação com o personal trainer.';
@@ -41,8 +39,6 @@ const benefitIcons: Record<string, any> = {
 };
 
 const homeJsonLd = [
-  generateBreadcrumbListJSONLD([{ name: 'Início', url: '/' }]),
-  generateFAQPageJSONLD(faqHome),
   ...generateHomeReviewsJSONLD(),
 ];
 ---
@@ -51,6 +47,7 @@ const homeJsonLd = [
   title="Personal Trainer em Maringá | Saia das Dores 40+"
   description="Personal trainer em Maringá para mulheres 40+ com dores, cansaço e sobrepeso: turmas de até 3, terapia manual e avaliação gratuita. Agende pelo WhatsApp."
   jsonLd={homeJsonLd}
+  ogImage="/og-home.jpg"
   includePerson
 >
   <!-- PAS · Hero: Problema + alívio imediato + solução -->
@@ -181,7 +178,7 @@ const homeJsonLd = [
         ))}
       </div>
       <div class="text-center mt-8">
-        <a href="/servicos" class="btn btn-outline" data-track="cta_click" data-track-source="ver_todos_servicos">
+        <a href="/servicos/" class="btn btn-outline" data-track="cta_click" data-track-source="ver_todos_servicos">
           Ver todos os serviços →
         </a>
       </div>

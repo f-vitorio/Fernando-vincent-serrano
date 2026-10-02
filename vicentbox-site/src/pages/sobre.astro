@@ -25,7 +25,7 @@ import {
 
 const breadcrumbItems = [
   { name: 'Início', url: '/' },
-  { name: 'Sobre', url: '/sobre' },
+  { name: 'Sobre', url: '/sobre/' },
 ];
 
 const sobreJsonLd = [
@@ -33,7 +33,7 @@ const sobreJsonLd = [
     name: 'Sobre Fernando Serrano Vicentin — Personal Trainer em Maringá',
     description:
       'Fernando Serrano Vicentin, personal trainer em Maringá: 19 anos de experiência, fundador da VicentBOX, especialização USP HC em andamento.',
-    url: '/sobre',
+    url: '/sobre/',
   }),
   generateBreadcrumbListJSONLD(breadcrumbItems),
 ];
@@ -43,6 +43,7 @@ const sobreJsonLd = [
   title="Sobre Fernando Serrano Vicentin | Personal Trainer VicentBOX"
   description="Conheça Fernando Serrano Vicentin, personal trainer em Maringá: 19 anos de experiência, fundador da VicentBOX e especialização USP HC em andamento."
   jsonLd={sobreJsonLd}
+  ogImage="/og-sobre.jpg"
   includePerson
 >
   <Breadcrumb items={breadcrumbItems} />

@@ -17,19 +17,19 @@ import Users from '@components/ui/icons/Users.astro';
 import Dumbbell from '@components/ui/icons/Dumbbell.astro';
 import ShieldCheck from '@components/ui/icons/ShieldCheck.astro';
 import Breadcrumb from '@components/ui/Breadcrumb.astro';
-import { generateServiceJSONLD, generateProductJSONLD, generateBreadcrumbListJSONLD, generateFAQPageJSONLD } from '@utils/jsonld';
+import { generateServiceJSONLD, generateProductJSONLD, generateBreadcrumbListJSONLD } from '@utils/jsonld';
 
 const breadcrumbItems = [
   { name: 'Início', url: '/' },
-  { name: 'Serviços', url: '/servicos' },
-  { name: 'Consultoria Online', url: '/consultoria-online' },
+  { name: 'Serviços', url: '/servicos/' },
+  { name: 'Consultoria Online', url: '/consultoria-online/' },
 ];
 
 const service = {
   name: 'Consultoria Online / App',
   description: 'App de consultoria online com treino personalizado adaptado ao local onde você treina, com acompanhamento pelo professor.',
   price: '39.90',
-  url: '/consultoria-online',
+  url: '/consultoria-online/',
   image: '/images/consultoria-online.jpg',
 };
 
@@ -37,27 +37,26 @@ const product = {
   name: 'Consultoria Online / App VicentBOX',
   description: 'App de consultoria online por R$39,90/mês: treino personalizado no celular, adaptado ao local de treino, com acompanhamento do professor.',
   price: 39.90,
-  url: '/consultoria-online',
+  url: '/consultoria-online/',
   image: '/images/consultoria-online.jpg',
 };
 
 const serviceJsonLd = generateServiceJSONLD(service);
 const productJsonLd = generateProductJSONLD(product);
 const breadcrumbJsonLd = generateBreadcrumbListJSONLD(breadcrumbItems);
-const faqJsonLd = generateFAQPageJSONLD(faqConsultoria);
 ---
 
 <Layout
   title="Consultoria Online de Treino | App R$39,90/mês | VicentBOX"
   description="Consultoria online por R$39,90/mês: treino personalizado no celular, onde e quando quiser, com acompanhamento do professor."
-  jsonLd={[serviceJsonLd, productJsonLd, breadcrumbJsonLd, faqJsonLd]}
+  jsonLd={[serviceJsonLd, productJsonLd, breadcrumbJsonLd]}
 >
   <Breadcrumb items={breadcrumbItems} />
   <Hero
     title="Consultoria Online de Treino Personalizado"
     subtitle="App de consultoria online por R$39,90/mês com treino personalizado no celular e acompanhamento pelo professor."
     ctaText="Começar Agora"
-    ctaHref="/consultoria-online#formulario"
+    ctaHref="#formulario"
     ctaVariant="primary"
     ctaTrackSource="hero"
     badge="R$39,90/mês | Treino personalizado | Acompanhamento do professor"
@@ -114,6 +113,7 @@ const faqJsonLd = generateFAQPageJSONLD(faqConsultoria);
 
   <section id="formulario" class="section bg-primary-950" aria-labelledby="form-title">
     <Container>
+      <h2 id="form-title" class="sr-only">Comece sua consultoria hoje</h2>
       <WhatsAppCtaCard
         source="consultoria"
         title="Comece sua consultoria hoje"
@@ -132,15 +132,15 @@ const faqJsonLd = generateFAQPageJSONLD(faqConsultoria);
       </header>
       <ul class="grid sm:grid-cols-3 gap-4 text-fluid-sm">
         <li class="card">
-          <a href="/treinamento-multifuncional" class="font-semibold text-accent-400 hover:underline">Treinamento Multifuncional</a>
+          <a href="/treinamento-multifuncional/" class="font-semibold text-accent-400 hover:underline">Treinamento Multifuncional</a>
           <p class="text-neutral-300 mt-1">Turmas de até 3 com terapia manual ao final da aula.</p>
         </li>
         <li class="card">
-          <a href="/grupo-corrida" class="font-semibold text-accent-400 hover:underline">Grupo de Corrida</a>
+          <a href="/grupo-corrida/" class="font-semibold text-accent-400 hover:underline">Grupo de Corrida</a>
           <p class="text-neutral-300 mt-1">Corrida de rua presencial ou online em Maringá.</p>
         </li>
         <li class="card">
-          <a href="/servicos" class="font-semibold text-accent-400 hover:underline">Todos os serviços</a>
+          <a href="/servicos/" class="font-semibold text-accent-400 hover:underline">Todos os serviços</a>
           <p class="text-neutral-300 mt-1">Alongamento, relaxamento, desafio 15 dias e palestras.</p>
         </li>
       </ul>

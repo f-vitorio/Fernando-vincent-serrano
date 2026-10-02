@@ -20,7 +20,7 @@ import {
 
 const breadcrumbItems = [
   { name: 'Início', url: '/' },
-  { name: 'Serviços', url: '/servicos' },
+  { name: 'Serviços', url: '/servicos/' },
 ];
 
 // Ordem inteligente: mais procurados primeiro, cada serviço aparece 1 única vez
@@ -35,7 +35,7 @@ const chooser = [
     title: 'Sinto dores e quero acompanhamento de perto',
     desc: 'Treinamento em turmas de até 3, com avaliação inicial e terapia manual em toda aula.',
     serviceName: 'Treinamento Multifuncional',
-    href: '/treinamento-multifuncional',
+    href: '/treinamento-multifuncional/',
     icon: 'dumbbell',
   },
   {
@@ -51,7 +51,7 @@ const chooser = [
     title: 'Quero correr em grupo, no meu nível',
     desc: 'Corrida de rua 3x/semana presencial ou consultoria online, do iniciante ao experiente.',
     serviceName: 'Grupo de Corrida',
-    href: '/grupo-corrida',
+    href: '/grupo-corrida/',
     icon: 'running',
   },
   {
@@ -59,7 +59,7 @@ const chooser = [
     title: 'Prefiro treinar onde estiver, no meu ritmo',
     desc: 'Treino personalizado no app por R$ 39,90/mês, com acompanhamento do professor.',
     serviceName: 'Consultoria Online',
-    href: '/consultoria-online',
+    href: '/consultoria-online/',
     icon: 'smartphone',
   },
 ];
@@ -74,6 +74,7 @@ const servicesJsonLd = [
   title="Serviços VicentBOX em Maringá | Treino, Corrida e Consultoria"
   description="Conheça os 7 serviços da VicentBOX em Maringá: treinamento multifuncional, grupo de corrida, consultoria online, desafio, alongamento e palestras."
   jsonLd={servicesJsonLd}
+  ogImage="/og-servicos.jpg"
 >
   <Breadcrumb items={breadcrumbItems} />
   <section class="section bg-primary-900" aria-labelledby="servicos-title">

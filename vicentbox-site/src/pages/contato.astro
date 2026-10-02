@@ -19,7 +19,7 @@ import {
 
 const breadcrumbItems = [
   { name: 'Início', url: '/' },
-  { name: 'Contato', url: '/contato' },
+  { name: 'Contato', url: '/contato/' },
 ];
 
 const contatoJsonLd = [
@@ -27,7 +27,7 @@ const contatoJsonLd = [
     name: 'Contato — VicentBOX Personal Trainer em Maringá',
     description:
       'WhatsApp (44) 99921-8147, e-mail e endereço do studio VicentBOX em Maringá/PR. Horários de atendimento e localização.',
-    url: '/contato',
+    url: '/contato/',
   }),
   generateBreadcrumbListJSONLD(breadcrumbItems),
 ];
@@ -37,6 +37,7 @@ const contatoJsonLd = [
   title="Contato VicentBOX | WhatsApp e Endereço em Maringá"
   description="Fale com a VicentBOX em Maringá: WhatsApp (44) 99921-8147, e-mail e endereço na Rua Néo Alves Martins 2447. Horários de atendimento."
   jsonLd={contatoJsonLd}
+  ogImage="/og-contato.jpg"
 >
   <Breadcrumb items={breadcrumbItems} />
   <Hero
@@ -112,7 +113,7 @@ const contatoJsonLd = [
           </div>
           <h3 class="text-fluid-lg font-heading font-semibold text-white mb-2">WhatsApp</h3>
           <a href={`https://wa.me/${siteConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="text-fluid-xl font-heading font-semibold text-white block mb-2">{siteConfig.phoneFormatted}</a>
-          <p class="text-fluid-base text-neutral-300 mb-4">Resposta em minutos no horário comercial</p>
+          <p class="text-fluid-base text-neutral-300 mb-4">Retornamos em horário comercial</p>
           <Button
             variant="whatsapp"
             href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent('Olá! Vim pelo site da VicentBOX. Gostaria de mais informações.')}`}

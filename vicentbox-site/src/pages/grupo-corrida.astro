@@ -16,31 +16,30 @@ import GraduationCap from '@components/ui/icons/GraduationCap.astro';
 import Breadcrumb from '@components/ui/Breadcrumb.astro';
 import Container from '@components/ui/Container.astro';
 import Section from '@components/ui/Section.astro';
-import { generateServiceJSONLD, generateBreadcrumbListJSONLD, generateFAQPageJSONLD } from '@utils/jsonld';
+import { generateServiceJSONLD, generateBreadcrumbListJSONLD } from '@utils/jsonld';
 
 const breadcrumbItems = [
   { name: 'Início', url: '/' },
-  { name: 'Serviços', url: '/servicos' },
-  { name: 'Grupo de Corrida', url: '/grupo-corrida' },
+  { name: 'Serviços', url: '/servicos/' },
+  { name: 'Grupo de Corrida', url: '/grupo-corrida/' },
 ];
 
 const service = {
   name: 'Grupo de Corrida',
   description: 'Corrida de rua presencial 3x/semana (até 50 alunos) ou consultoria online de corrida, com acompanhamento do treino.',
   price: '100',
-  url: '/grupo-corrida',
+  url: '/grupo-corrida/',
   image: '/images/grupo-corrida.jpg',
 };
 
 const serviceJsonLd = generateServiceJSONLD(service);
 const breadcrumbJsonLd = generateBreadcrumbListJSONLD(breadcrumbItems);
-const faqJsonLd = generateFAQPageJSONLD(faqCorrida);
 ---
 
 <Layout
   title="Grupo de Corrida em Maringá | Presencial e Online | VicentBOX"
   description="Grupo de corrida em Maringá: presencial 3x/semana R$100/mês ou consultoria online R$50/mês. Acompanhamento para diferentes níveis."
-  jsonLd={[serviceJsonLd, breadcrumbJsonLd, faqJsonLd]}
+  jsonLd={[serviceJsonLd, breadcrumbJsonLd]}
 >
   <Breadcrumb items={breadcrumbItems} />
   <Hero
@@ -154,15 +153,15 @@ const faqJsonLd = generateFAQPageJSONLD(faqCorrida);
       </header>
       <ul class="grid sm:grid-cols-3 gap-4 text-fluid-sm">
         <li class="card">
-          <a href="/treinamento-multifuncional" class="font-semibold text-accent-400 hover:underline">Treinamento Multifuncional</a>
+          <a href="/treinamento-multifuncional/" class="font-semibold text-accent-400 hover:underline">Treinamento Multifuncional</a>
           <p class="text-neutral-300 mt-1">Turmas de até 3 com terapia manual em Maringá.</p>
         </li>
         <li class="card">
-          <a href="/consultoria-online" class="font-semibold text-accent-400 hover:underline">Consultoria Online</a>
+          <a href="/consultoria-online/" class="font-semibold text-accent-400 hover:underline">Consultoria Online</a>
           <p class="text-neutral-300 mt-1">Treino no app por R$ 39,90/mês.</p>
         </li>
         <li class="card">
-          <a href="/servicos" class="font-semibold text-accent-400 hover:underline">Todos os serviços</a>
+          <a href="/servicos/" class="font-semibold text-accent-400 hover:underline">Todos os serviços</a>
           <p class="text-neutral-300 mt-1">Alongamento, relaxamento, desafio 15 dias e palestras.</p>
         </li>
       </ul>

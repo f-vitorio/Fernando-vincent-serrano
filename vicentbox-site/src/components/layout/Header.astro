@@ -4,14 +4,14 @@ import Container from '../ui/Container.astro';
 
 const path = Astro.url.pathname;
 const links = [
-  { href: '/servicos', label: 'Serviços' },
-  { href: '/sobre', label: 'Sobre' },
-  { href: '/galeria', label: 'Galeria' },
-  { href: '/contato', label: 'Contato' },
+  { href: '/servicos/', label: 'Serviços' },
+  { href: '/sobre/', label: 'Sobre' },
+  { href: '/galeria/', label: 'Galeria' },
+  { href: '/contato/', label: 'Contato' },
 ];
 
-const isActive = (href: string) =>
-  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+const normPath = (u: string) => (u.length > 1 && u.endsWith('/') ? u.slice(0, -1) : u);
+const isActive = (href: string) => normPath(href) === normPath(path);
 
 const waHref = `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent('Olá! Vim pelo site da VicentBOX. Gostaria de mais informações.')}`;
 ---
