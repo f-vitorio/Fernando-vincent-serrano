@@ -184,7 +184,7 @@ export const ctaHubItems: CtaHubItem[] = [
     id: 'treinar',
     title: 'Personal, consultoria e projeto social',
     desc: 'Treino com o Fernando, consultoria online no app e o projeto social gratuito Sports Tea.',
-    chips: ['Com Personal', 'Consultoria online', 'Sports Tea (grátis)'],
+    chips: ['Avaliação gratuita', 'Com Personal', 'Consultoria online'],
     image: '/images/icone-atividade.jpg',
     imageAlt: 'Ícone VicentBOX: pessoa em movimento — treinar',
     label: 'QUERO TREINAR',
@@ -405,11 +405,11 @@ export const faqHome: FAQItem[] = [
   },
   {
     question: 'Quanto custa o personal trainer na VicentBOX?',
-    answer: 'Treinamento Multifuncional (turmas de até 3 pessoas): R$ 400/mês com 2x por semana ou R$ 250/mês com 1x por semana. Grupo de Corrida presencial: R$ 100/mês; online: R$ 50/mês. Consultoria online no app: R$ 39,90/mês. A avaliação inicial é gratuita e está inclusa na mensalidade.',
+    answer: 'Treinamento Multifuncional (turmas de até 3 pessoas): R$ 400/mês com 2x por semana ou R$ 250/mês com 1x por semana. Grupo de Corrida presencial: R$ 100/mês; online: R$ 50/mês. Consultoria online no app: R$ 39,90/mês. A avaliação inicial é gratuita e sem compromisso de contratação.',
   },
   {
     question: 'Como funciona a avaliação inicial?',
-    answer: 'Agendamos uma avaliação para anamnese, testes de movimento, análise postural e definição de objetivos. A avaliação é gratuita e está inclusa na mensalidade. Sem compromisso de contratação de plano.',
+    answer: 'Agendamos uma avaliação para anamnese, testes de movimento, análise postural e definição de objetivos. A avaliação é gratuita e sem compromisso de contratação de plano.',
   },
   {
     question: 'Para quem é o treinamento personalizado? Atende iniciantes e 40+?',
@@ -444,7 +444,7 @@ export const faqTreinamento: FAQItem[] = [
   },
   {
     question: 'Como funciona a avaliação inicial?',
-    answer: 'Agendamos uma sessão para anamnese, testes de movimento, análise postural e definição de objetivos. A avaliação é gratuita e está inclusa na mensalidade, sem compromisso de contratação de plano.',
+    answer: 'Agendamos uma sessão para anamnese, testes de movimento, análise postural e definição de objetivos. A avaliação é gratuita e sem compromisso de contratação de plano.',
   },
 ];
 

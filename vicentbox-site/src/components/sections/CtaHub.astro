@@ -18,15 +18,20 @@ const isExternal = (href: string) => href.startsWith('http');
     <header class="heading-section">
       <h2 id="cta-hub-title" class="heading-section-title">Escolha o seu caminho</h2>
       <p class="heading-section-subtitle">
-        Treinar, comprar, contratar, participar ou acompanhar — cada caminho tem um botão
+        O caminho principal é a avaliação gratuita — os outros estão aqui para quem já sabe o
+        que procura
       </p>
     </header>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {ctaHubItems.map((item, i) => (
         <article
-          class="card card-hover p-6 flex flex-col h-full reveal"
+          class:list={[
+            'card card-hover p-6 flex flex-col h-full reveal',
+            i === 0 && 'sm:col-span-2 ring-1 ring-primary-500/40',
+          ]}
         >
+          {i === 0 && <span class="badge badge-primary self-start mb-3">Comece por aqui</span>}
           <picture class="block w-14 h-14 rounded-xl overflow-hidden border border-white/10 mb-4 flex-shrink-0">
             <source srcset={item.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
             <img
@@ -52,7 +57,7 @@ const isExternal = (href: string) => href.startsWith('http');
           <div class="mt-auto flex flex-col gap-2">
             <a
               href={item.href}
-              class="btn btn-primary w-full"
+              class:list={['w-full', i === 0 ? 'btn btn-primary' : 'btn btn-outline']}
               data-track="cta_click"
               data-track-source={item.trackSource}
               target={isExternal(item.href) ? '_blank' : undefined}
