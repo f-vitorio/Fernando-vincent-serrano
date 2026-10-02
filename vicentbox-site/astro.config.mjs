@@ -12,6 +12,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   site: 'https://vicentbox.com.br',
   output: 'static',
+  redirects: {
+    '/studio': '/galeria',
+  },
   integrations: [
     tailwind(),
     sitemap(),
