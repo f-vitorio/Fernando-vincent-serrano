@@ -128,15 +128,18 @@ const homeJsonLd = [
               <div class="flex items-start gap-4">
                 {benefit.image ? (
                   <div class="icon-wrapper overflow-hidden p-0 flex-shrink-0" aria-hidden="true">
-                    <img
-                      src={benefit.image}
-                      alt=""
-                      width="44"
-                      height="44"
-                      class="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    <picture>
+                      <source srcset={benefit.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+                      <img
+                        src={benefit.image}
+                        alt=""
+                        width="44"
+                        height="44"
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </picture>
                   </div>
                 ) : (
                   <div class="icon-wrapper icon-wrapper-primary flex-shrink-0" aria-hidden="true">

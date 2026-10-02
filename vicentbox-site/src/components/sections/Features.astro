@@ -25,15 +25,18 @@ const { title = 'Por que funciona', subtitle, features, class: className = '' } 
         <article key={i} class="card card-hover p-6 reveal">
           {feature.image ? (
             <div class="icon-wrapper overflow-hidden p-0 mb-4" aria-hidden="true">
-              <img
-                src={feature.image}
-                alt=""
-                width="44"
-                height="44"
-                class="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+              <picture>
+                <source srcset={feature.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+                <img
+                  src={feature.image}
+                  alt=""
+                  width="44"
+                  height="44"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </div>
           ) : (
             <div class="icon-wrapper icon-wrapper-primary mb-4" aria-hidden="true">
