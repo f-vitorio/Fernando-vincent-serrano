@@ -8,6 +8,7 @@ import ValueProps from '@components/sections/ValueProps.astro';
 import Quote from '@components/sections/Quote.astro';
 import ServiceCard from '@components/sections/ServiceCard.astro';
 import SocialProof from '@components/sections/SocialProof.astro';
+import VideoTestimonials from '@components/sections/VideoTestimonials.astro';
 import PhotoGallery from '@components/sections/PhotoGallery.astro';
 import CtaHub from '@components/sections/CtaHub.astro';
 import CTA from '@components/sections/CTA.astro';
@@ -218,11 +219,14 @@ const homeJsonLd = [
     ]}
   />
 
+  <!-- Depoimentos em vídeo: reforça a prova social com o rosto dos alunos -->
+  <VideoTestimonials number="07" />
+
   <!-- Fotos dos treinos e do studio -->
-  <PhotoGallery number="07" />
+  <PhotoGallery number="08" />
 
   <FAQ
-    number="08"
+    number="09"
     title="Dúvidas frequentes antes de agendar"
     subtitle="Preços, horários, avaliação e para quem é o método"
     faqs={faqHome}

@@ -2,7 +2,6 @@
 import Container from '../ui/Container.astro';
 import Section from '../ui/Section.astro';
 import YouTube from '../ui/icons/YouTube.astro';
-import { siteConfig } from '../../types';
 
 interface Props {
   title?: string;
@@ -19,30 +18,26 @@ const {
 } = Astro.props;
 
 /*
- * Vídeos dos depoimentos.
- * Para publicar um vídeo específico, trocar `href` pela URL dele
- * (ex.: https://www.youtube.com/watch?v=XXXXXXXXXXX).
- * Enquanto não houver vídeos publicados, todos os cards levam ao
- * canal oficial do Fernando.
+ * Depoimentos reais dos alunos no YouTube (canal VicentBOX).
  */
 const videos = [
   {
-    title: 'Resultado depois de 12 semanas de treino',
+    title: 'Depoimento da Sirlei',
     author: 'Aluna VicentBOX',
-    thumb: '/images/terapia-manual.jpg',
-    href: siteConfig.social.youtube,
+    thumb: '/images/depoimento-sirlei.jpg',
+    href: 'https://www.youtube.com/watch?v=UAh29D9gfVc',
   },
   {
-    title: 'Voltar a se movimentar depois dos 40',
-    author: 'Aluna VicentBOX',
-    thumb: '/images/treinamento-multifuncional.jpg',
-    href: siteConfig.social.youtube,
-  },
-  {
-    title: 'Como funciona o treino em turma de até 3 pessoas',
+    title: 'Depoimento do Cícero',
     author: 'Aluno VicentBOX',
-    thumb: '/images/grupo-corrida.jpg',
-    href: siteConfig.social.youtube,
+    thumb: '/images/depoimento-cicero.jpg',
+    href: 'https://www.youtube.com/watch?v=86NpdoooWzg',
+  },
+  {
+    title: 'Depoimento do Hugo',
+    author: 'Aluno VicentBOX',
+    thumb: '/images/depoimento-hugo.jpg',
+    href: 'https://www.youtube.com/watch?v=P2O3Y0aAZ_o',
   },
 ];
 ---
@@ -71,8 +66,8 @@ const videos = [
               <img
                 src={video.thumb}
                 alt=""
-                width="1400"
-                height="933"
+                width="1280"
+                height="720"
                 loading="lazy"
                 decoding="async"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
